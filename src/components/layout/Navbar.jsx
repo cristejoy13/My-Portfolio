@@ -40,7 +40,7 @@ export default function Navbar() {
 
   return (
     <header
-      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-400 ${
+      className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled
           ? 'bg-white/85 backdrop-blur-lg border-b border-rose-100 shadow-sm py-3'
           : 'py-5 bg-transparent'
@@ -82,9 +82,11 @@ export default function Navbar() {
 
         {/* Mobile hamburger */}
         <button
-          className="md:hidden p-2 text-rose-600 focus:outline-none"
+          className="md:hidden min-w-11 min-h-11 p-2 text-rose-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 rounded-full"
           onClick={() => setMobileOpen(!mobileOpen)}
-          aria-label="Toggle navigation"
+          aria-label={mobileOpen ? 'Close navigation' : 'Open navigation'}
+          aria-expanded={mobileOpen}
+          aria-controls="mobile-navigation"
         >
           <div
             className={`w-5 h-0.5 bg-current mb-1.5 transition-transform duration-300 origin-center ${
@@ -107,7 +109,9 @@ export default function Navbar() {
       {/* Mobile dropdown */}
       <AnimatePresence>
         {mobileOpen && (
-          <motion.div
+          <motion.nav
+            id="mobile-navigation"
+            aria-label="Mobile navigation"
             initial={{ opacity: 0, height: 0 }}
             animate={{ opacity: 1, height: 'auto' }}
             exit={{ opacity: 0, height: 0 }}
@@ -126,13 +130,14 @@ export default function Navbar() {
                       ? 'text-rose-600 bg-blush-50'
                       : 'text-rose-500 hover:bg-blush-50'
                   }`}
+                  aria-current={isActive ? 'page' : undefined}
                 >
                   {isActive && <RoseBud size={10} />}
                   {link.label}
                 </a>
               )
             })}
-          </motion.div>
+          </motion.nav>
         )}
       </AnimatePresence>
     </header>

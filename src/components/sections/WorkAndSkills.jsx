@@ -1,13 +1,38 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ScrollReveal from '../ui/ScrollReveal'
 import PortfolioLightbox from '../ui/PortfolioLightbox'
 import FloralDivider from '../../assets/svgs/FloralDivider'
 import { experiences } from '../../data/experienceData'
 
+function useModalFocus(onClose) {
+  const dialogRef = useRef(null)
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    const handleEscape = event => {
+      if (event.key === 'Escape') onClose()
+    }
+
+    document.body.style.overflow = 'hidden'
+    dialogRef.current?.focus()
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = previousOverflow
+      previouslyFocused?.focus?.()
+    }
+  }, [onClose])
+
+  return dialogRef
+}
+
 /* ── Video Gallery Modal ─────────────────────────────────────── */
 function VideoModal({ videos, siteLink, onClose }) {
   const [active, setActive] = useState(null)
+  const dialogRef = useModalFocus(onClose)
 
   return (
     <motion.div
@@ -18,7 +43,13 @@ function VideoModal({ videos, siteLink, onClose }) {
       onClick={() => { if (!active) onClose() }}
     >
       <motion.div
+        ref={dialogRef}
+        tabIndex={-1}
         className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-label="Best of Cebu video work"
+        onKeyDown={event => { if (event.key === 'Escape') onClose() }}
         initial={{ scale: 0.88, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.88, y: 20 }}
@@ -30,7 +61,8 @@ function VideoModal({ videos, siteLink, onClose }) {
             {active && (
               <button
                 onClick={() => setActive(null)}
-                className="w-8 h-8 bg-rose-100 hover:bg-rose-200 rounded-full flex items-center justify-center text-rose-600 text-sm transition-colors"
+                aria-label="Return to video gallery"
+                className="w-11 h-11 bg-rose-100 hover:bg-rose-200 rounded-full flex items-center justify-center text-rose-600 text-sm transition-colors"
               >
                 ←
               </button>
@@ -45,19 +77,21 @@ function VideoModal({ videos, siteLink, onClose }) {
             </div>
           </div>
           <div className="flex items-center gap-2">
-            {!active && (
+            {!active && siteLink && (
               <a
                 href={siteLink}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="text-rose-500 text-xs font-semibold hover:text-rose-700 transition-colors border border-rose-200 px-3 py-1 rounded-full"
+                aria-label="Visit the Best of Cebu website"
+                className="inline-flex min-h-11 items-center text-rose-600 text-xs font-semibold hover:text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 transition-colors border border-rose-200 px-4 py-2 rounded-full"
               >
-                Visit site →
+                Visit website ↗
               </a>
             )}
             <button
               onClick={onClose}
-              className="w-8 h-8 bg-rose-100 hover:bg-rose-200 rounded-full flex items-center justify-center text-rose-500 text-sm transition-colors"
+              aria-label="Close video gallery"
+              className="w-11 h-11 bg-rose-100 hover:bg-rose-200 rounded-full flex items-center justify-center text-rose-500 text-sm transition-colors"
             >
               ✕
             </button>
@@ -129,6 +163,7 @@ function VideoModal({ videos, siteLink, onClose }) {
 /* ── COE Certificate Modal ───────────────────────────────────── */
 function COECertificate({ onClose }) {
   const coeSrc = `${import.meta.env.BASE_URL}certificates/vcustomer-coe.jpg`
+  const dialogRef = useModalFocus(onClose)
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm overflow-y-auto"
@@ -138,7 +173,13 @@ function COECertificate({ onClose }) {
       onClick={onClose}
     >
       <motion.div
+        ref={dialogRef}
+        tabIndex={-1}
         className="relative w-full max-w-2xl my-4"
+        role="dialog"
+        aria-modal="true"
+        aria-label="vCUSTOMER Philippines certificate of employment"
+        onKeyDown={event => { if (event.key === 'Escape') onClose() }}
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
@@ -147,7 +188,8 @@ function COECertificate({ onClose }) {
       >
         <button
           onClick={onClose}
-          className="absolute -top-3 -right-3 z-10 w-9 h-9 bg-white hover:bg-rose-50 rounded-full flex items-center justify-center text-slate-600 text-sm shadow-lg transition-colors"
+          aria-label="Close certificate"
+          className="absolute -top-3 -right-3 z-10 w-11 h-11 bg-white hover:bg-rose-50 rounded-full flex items-center justify-center text-slate-600 text-sm shadow-lg transition-colors"
         >
           ✕
         </button>
@@ -163,6 +205,7 @@ function COECertificate({ onClose }) {
 
 /* ── External Site Preview Modal ────────────────────────────── */
 function ExternalPreviewModal({ exp, onClose }) {
+  const dialogRef = useModalFocus(onClose)
   return (
     <motion.div
       className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
@@ -172,7 +215,13 @@ function ExternalPreviewModal({ exp, onClose }) {
       onClick={onClose}
     >
       <motion.div
+        ref={dialogRef}
+        tabIndex={-1}
         className="bg-white rounded-3xl w-full max-w-sm overflow-hidden shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${exp.company} project preview`}
+        onKeyDown={event => { if (event.key === 'Escape') onClose() }}
         initial={{ scale: 0.88, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.88, y: 20 }}
@@ -190,7 +239,8 @@ function ExternalPreviewModal({ exp, onClose }) {
           </div>
           <button
             onClick={onClose}
-            className="absolute top-3 right-3 w-7 h-7 bg-white/15 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-colors backdrop-blur-sm"
+            aria-label={`Close ${exp.company} preview`}
+            className="absolute top-3 right-3 w-11 h-11 bg-white/15 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-colors backdrop-blur-sm"
           >
             ✕
           </button>
@@ -212,6 +262,68 @@ function ExternalPreviewModal({ exp, onClose }) {
   )
 }
 
+/* ── Experience Details Modal ──────────────────────────────── */
+function ExperienceDetailsModal({ exp, onClose }) {
+  const dialogRef = useModalFocus(onClose)
+
+  return (
+    <motion.div
+      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      onClick={onClose}
+    >
+      <motion.div
+        ref={dialogRef}
+        tabIndex={-1}
+        className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl"
+        role="dialog"
+        aria-modal="true"
+        aria-label={`${exp.company} responsibilities`}
+        onKeyDown={event => { if (event.key === 'Escape') onClose() }}
+        initial={{ scale: 0.88, y: 20 }}
+        animate={{ scale: 1, y: 0 }}
+        exit={{ scale: 0.88, y: 20 }}
+        transition={{ type: 'spring', stiffness: 300, damping: 26 }}
+        onClick={event => event.stopPropagation()}
+      >
+        <div className="relative h-40 overflow-hidden">
+          <img src={exp.image} alt="" className="w-full h-full object-cover" />
+          <div className={`absolute inset-0 bg-gradient-to-t ${exp.gradient}`} />
+          <div className="absolute bottom-4 left-5 right-16">
+            <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-3 py-1 rounded-full border border-white/30">
+              {exp.badge}
+            </span>
+            <h3 className="font-display text-white text-2xl italic font-bold mt-2">{exp.company}</h3>
+            <p className="text-white/85 text-xs mt-1">{exp.role} · {exp.period}</p>
+          </div>
+          <button
+            type="button"
+            onClick={onClose}
+            aria-label={`Close ${exp.company} responsibilities`}
+            className="absolute top-3 right-3 w-11 h-11 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-colors backdrop-blur-sm"
+          >
+            ✕
+          </button>
+        </div>
+
+        <div className="p-6">
+          <p className="font-body text-rose-700 text-sm leading-relaxed mb-5">{exp.description}</p>
+          <ul className="space-y-3">
+            {exp.responsibilities.map(responsibility => (
+              <li key={responsibility} className="flex gap-3 font-body text-sm leading-relaxed text-rose-700">
+                <span className="mt-2 w-1.5 h-1.5 rounded-full bg-rose-400 flex-shrink-0" aria-hidden="true" />
+                <span>{responsibility}</span>
+              </li>
+            ))}
+          </ul>
+        </div>
+      </motion.div>
+    </motion.div>
+  )
+}
+
 /* ── Sub-section label ───────────────────────────────────────── */
 function SubLabel({ children }) {
   return (
@@ -225,13 +337,90 @@ function SubLabel({ children }) {
   )
 }
 
+const tools = [
+  'Canva',
+  'CapCut',
+  'ChatGPT',
+  'Claude',
+  'VS Code',
+  'Codex',
+  'Google Sheets / Excel',
+  'Facebook',
+  'Instagram',
+  'TikTok',
+  'YouTube',
+]
+
+const strengths = [
+  'Creative Thinking',
+  'Client Communication',
+  'Organized',
+  'Active Listening',
+  'Adaptability',
+]
+
+function ExperienceCard({ exp, onClick }) {
+  const isInteractive = Boolean(exp.linkType)
+  const Card = isInteractive ? motion.button : motion.article
+  const actionProps = isInteractive
+    ? {
+        type: 'button',
+        onClick,
+        'aria-label': `${exp.cta?.replace(' →', '') || 'Open details'} for ${exp.company}`,
+      }
+    : {}
+
+  return (
+    <Card
+      {...actionProps}
+      className={`relative w-full rounded-2xl overflow-hidden group shadow-glass text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${
+        isInteractive ? 'cursor-pointer' : 'cursor-default'
+      }`}
+      style={{ aspectRatio: '4/3' }}
+      whileHover={isInteractive ? { y: -5, scale: 1.02 } : undefined}
+      transition={{ duration: 0.25 }}
+    >
+      <img
+        src={exp.image}
+        alt=""
+        className={`w-full h-full object-cover transition-transform duration-500 ${isInteractive ? 'group-hover:scale-105' : ''}`}
+        loading="lazy"
+      />
+      <div className={`absolute inset-0 bg-gradient-to-t ${exp.gradient}`} />
+
+      <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">
+        <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full border border-white/25 leading-none">
+          {exp.badge}
+        </span>
+        <span className="bg-black/30 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full leading-none">
+          {exp.period}
+        </span>
+      </div>
+
+      <div className="absolute bottom-0 left-0 right-0 p-4">
+        <h3 className="font-display text-white text-lg font-bold leading-tight">{exp.company}</h3>
+        <p className="text-white/80 text-xs mt-1 leading-snug">{exp.role}</p>
+        {exp.note && (
+          <p className="text-amber-200 text-xs italic mt-1">{exp.note}</p>
+        )}
+        {isInteractive && exp.cta && (
+          <p className="text-white text-xs font-semibold mt-2">{exp.cta}</p>
+        )}
+      </div>
+    </Card>
+  )
+}
+
 /* ── Combined Work & Skills Section ─────────────────────────── */
 export default function WorkAndSkills() {
   const [coeOpen, setCoeOpen]           = useState(false)
   const [videoExp, setVideoExp]         = useState(null)
   const [previewExp, setPreviewExp]     = useState(null)
+  const [detailsExp, setDetailsExp]     = useState(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxSlides, setLightboxSlides] = useState([])
+  const workExperience = experiences.filter(exp => exp.linkType !== 'external')
+  const webApplications = experiences.filter(exp => exp.linkType === 'external')
 
   function handleExpClick(exp) {
     if (exp.linkType === 'external') {
@@ -240,6 +429,8 @@ export default function WorkAndSkills() {
       setVideoExp(exp)
     } else if (exp.linkType === 'coe') {
       setCoeOpen(true)
+    } else if (exp.linkType === 'details') {
+      setDetailsExp(exp)
     } else if (exp.linkType === 'gallery' && exp.gallery) {
       setLightboxSlides(exp.gallery)
       setLightboxOpen(true)
@@ -258,66 +449,41 @@ export default function WorkAndSkills() {
           </p>
           <h2 className="section-title mb-3">Skills &amp; Experience</h2>
           <FloralDivider className="mx-auto mb-3" />
-          <p className="font-body text-rose-400 text-sm italic">
-            Tap any card to explore — videos, certificates, and more.
+          <p className="font-body text-rose-600 text-sm">
+            Explore selected work through videos, certificates, and live web applications.
           </p>
         </ScrollReveal>
 
         {/* ── Experience cards ── */}
         <SubLabel>Experience</SubLabel>
-        <div className="grid grid-cols-2 md:grid-cols-5 gap-3 mb-12">
-          {experiences.map((exp, i) => (
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 max-w-4xl mx-auto">
+          {workExperience.map((exp, i) => (
             <ScrollReveal key={exp.id} delay={i * 0.08}>
-              <motion.div
-                className="relative rounded-2xl overflow-hidden cursor-pointer group shadow-glass"
-                style={{ aspectRatio: '4/3' }}
-                whileHover={{ y: -5, scale: 1.02 }}
-                transition={{ duration: 0.25 }}
-                onClick={() => handleExpClick(exp)}
-              >
-                <img
-                  src={exp.image}
-                  alt={exp.company}
-                  className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className={`absolute inset-0 bg-gradient-to-t ${exp.gradient}`} />
+              <ExperienceCard exp={exp} onClick={() => handleExpClick(exp)} />
+            </ScrollReveal>
+          ))}
+        </div>
 
-                <div className="absolute top-2.5 left-2.5 right-2.5 flex items-start justify-between gap-1">
-                  <span className="bg-white/15 backdrop-blur-sm text-white text-[10px] font-semibold px-2.5 py-1 rounded-full border border-white/25 leading-none">
-                    {exp.badge}
-                  </span>
-                  <span className="bg-black/25 backdrop-blur-sm text-white/90 text-[10px] px-2 py-1 rounded-full leading-none">
-                    {exp.period}
-                  </span>
-                </div>
-
-                <div className="absolute bottom-0 left-0 right-0 p-3">
-                  <h3 className="font-display text-white text-sm font-bold leading-tight">{exp.company}</h3>
-                  <p className="text-white/75 text-[11px] mt-0.5 leading-snug">{exp.role}</p>
-                  {exp.note && (
-                    <p className="text-amber-300 text-[10px] italic mt-0.5">{exp.note}</p>
-                  )}
-                  <p className="text-white/0 group-hover:text-white/90 text-[10px] font-semibold mt-1.5 transition-colors duration-200">
-                    {exp.cta}
-                  </p>
-                </div>
-              </motion.div>
+        <SubLabel>Web Applications</SubLabel>
+        <div className="grid sm:grid-cols-2 gap-4 mb-12 max-w-2xl mx-auto">
+          {webApplications.map((exp, i) => (
+            <ScrollReveal key={exp.id} delay={i * 0.08}>
+              <ExperienceCard exp={exp} onClick={() => handleExpClick(exp)} />
             </ScrollReveal>
           ))}
         </div>
 
         {/* ── Skills & Expertise pills ── */}
-        <SubLabel>Skills &amp; Expertise</SubLabel>
+        <SubLabel>Tools &amp; Strengths</SubLabel>
         <ScrollReveal>
-          <div className="bg-white/70 backdrop-blur-sm border border-rose-100 rounded-3xl shadow-glass p-6 md:p-8 max-w-3xl mx-auto">
+          <div className="bg-white/70 backdrop-blur-sm border border-rose-100 rounded-3xl shadow-glass p-6 max-w-3xl mx-auto">
             <div className="flex flex-col md:flex-row gap-0">
 
               {/* Tools — left */}
               <div className="flex-1 text-center px-4 pb-6 md:pb-0">
                 <p className="font-body text-xs font-semibold text-rose-400 uppercase tracking-widest mb-4">🛠 Tools &amp; Software</p>
                 <div className="flex flex-wrap gap-2 justify-center">
-                  {['Canva', 'Adobe Firefly', 'CapCut', 'Midjourney', 'ChatGPT', 'Gemini', 'Claude', 'VS Code', 'Codex', 'Antigravity', 'HTML', 'Google Workspace', 'Google Sheets / Excel', 'Meta Business Suite', 'Facebook', 'Instagram', 'TikTok', 'YouTube', 'Notion', 'Trello', 'Figma'].map(tool => (
+                  {tools.map(tool => (
                     <span key={tool} className="bg-gradient-to-r from-blush-100 to-rose-100 text-rose-700 border border-rose-200 text-xs font-medium px-3 py-1.5 rounded-full font-body">
                       {tool}
                     </span>
@@ -333,7 +499,7 @@ export default function WorkAndSkills() {
               <div className="flex-1 text-center px-4">
                 <p className="font-body text-xs font-semibold text-rose-400 uppercase tracking-widest mb-4">🌸 Strengths</p>
                 <div className="flex flex-wrap gap-2 justify-center">
-                  {['Creative Thinking', 'Attention to Detail', 'Time Management', 'Team Collaboration', 'Client Communication', 'Adaptability', 'Active Listening', 'Fast Learner', 'Organized'].map(s => (
+                  {strengths.map(s => (
                     <span key={s} className="bg-gradient-to-r from-blush-100 to-rose-100 text-rose-700 border border-rose-200 text-xs font-medium px-3 py-1.5 rounded-full font-body">
                       {s}
                     </span>
@@ -363,6 +529,10 @@ export default function WorkAndSkills() {
 
       <AnimatePresence>
         {previewExp && <ExternalPreviewModal exp={previewExp} onClose={() => setPreviewExp(null)} />}
+      </AnimatePresence>
+
+      <AnimatePresence>
+        {detailsExp && <ExperienceDetailsModal exp={detailsExp} onClose={() => setDetailsExp(null)} />}
       </AnimatePresence>
 
       <PortfolioLightbox

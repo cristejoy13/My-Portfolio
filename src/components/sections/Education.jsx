@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ScrollReveal from '../ui/ScrollReveal'
@@ -8,6 +8,30 @@ import FloralDivider from '../../assets/svgs/FloralDivider'
 import { education } from '../../data/educationData'
 
 const BASE = import.meta.env.BASE_URL
+
+function useModalFocus(onClose) {
+  const dialogRef = useRef(null)
+
+  useEffect(() => {
+    const previouslyFocused = document.activeElement
+    const previousOverflow = document.body.style.overflow
+    const handleEscape = event => {
+      if (event.key === 'Escape') onClose()
+    }
+
+    document.body.style.overflow = 'hidden'
+    dialogRef.current?.focus()
+    document.addEventListener('keydown', handleEscape)
+
+    return () => {
+      document.removeEventListener('keydown', handleEscape)
+      document.body.style.overflow = previousOverflow
+      previouslyFocused?.focus?.()
+    }
+  }, [onClose])
+
+  return dialogRef
+}
 
 const informaticsCerts = [
   {
@@ -93,6 +117,7 @@ function InformaticsCertModal({ onClose }) {
   const [tab, setTab]                   = useState('edited')
   const [lightboxOpen, setLightboxOpen] = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
+  const dialogRef = useModalFocus(onClose)
 
   const slides = informaticsCerts.map(c => ({
     src: tab === 'edited' ? c.edited : c.original,
@@ -107,6 +132,12 @@ function InformaticsCertModal({ onClose }) {
         onClick={onClose}
       >
         <motion.div
+          ref={dialogRef}
+          tabIndex={-1}
+          role="dialog"
+          aria-modal="true"
+          aria-label="Informatics College Cebu certificates"
+          onKeyDown={event => { if (event.key === 'Escape') onClose() }}
           className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl"
           initial={{ scale: 0.88, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 26 }}
@@ -117,7 +148,7 @@ function InformaticsCertModal({ onClose }) {
               <h3 className="font-display italic text-white text-xl font-bold">Informatics College Cebu</h3>
               <p className="text-rose-200 text-xs mt-0.5">Senior High School · 2020–2022</p>
             </div>
-            <button onClick={onClose} className="w-8 h-8 bg-white/15 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-colors">✕</button>
+            <button onClick={onClose} aria-label="Close Informatics certificates" className="w-11 h-11 bg-white/15 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-colors">✕</button>
           </div>
 
           <div className="flex border-b border-rose-100">
@@ -153,6 +184,7 @@ function InformaticsCertModal({ onClose }) {
 function UCCertsModal({ onClose }) {
   const [lightboxOpen, setLightboxOpen]   = useState(false)
   const [lightboxIndex, setLightboxIndex] = useState(0)
+  const dialogRef = useModalFocus(onClose)
 
   const slides = ucDocs.map(d => ({ src: d.src, alt: d.title }))
 
@@ -164,6 +196,12 @@ function UCCertsModal({ onClose }) {
         onClick={onClose}
       >
         <motion.div
+          ref={dialogRef}
+          tabIndex={-1}
+          role="dialog"
+          aria-modal="true"
+          aria-label="University of Cebu Dean's List documents"
+          onKeyDown={event => { if (event.key === 'Escape') onClose() }}
           className="bg-white rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl"
           initial={{ scale: 0.88, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 26 }}
@@ -174,7 +212,7 @@ function UCCertsModal({ onClose }) {
               <h3 className="font-display italic text-white text-xl font-bold">University of Cebu – Banilad</h3>
               <p className="text-purple-200 text-xs mt-0.5">Dean's List · First Semester 2025–2026</p>
             </div>
-            <button onClick={onClose} className="w-8 h-8 bg-white/15 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-colors">✕</button>
+            <button onClick={onClose} aria-label="Close University of Cebu documents" className="w-11 h-11 bg-white/15 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-colors">✕</button>
           </div>
 
           <div className="p-5">

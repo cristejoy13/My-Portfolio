@@ -17,14 +17,16 @@ function createPetals(count) {
 }
 
 export default function FloatingPetals() {
+  const [petals] = useState(() => {
+    const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
+    return createPetals(isMobile ? 6 : 12)
+  })
+
   const prefersReduced =
     typeof window !== 'undefined' &&
     window.matchMedia('(prefers-reduced-motion: reduce)').matches
 
   if (prefersReduced) return null
-
-  const isMobile = typeof window !== 'undefined' && window.innerWidth < 768
-  const [petals] = useState(() => createPetals(isMobile ? 6 : 12))
 
   return (
     <div className="fixed inset-0 pointer-events-none z-0 overflow-hidden" aria-hidden="true">

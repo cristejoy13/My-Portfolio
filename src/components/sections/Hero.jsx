@@ -53,9 +53,9 @@ export default function Hero() {
           </div>
 
           {/* Eyebrow */}
-          <p className="font-body text-xs font-semibold text-rose-400 mb-3 flex items-center gap-2">
+          <p className="font-body text-sm font-semibold text-rose-600 mb-3 flex items-center gap-2">
             <span className="inline-block w-8 h-px bg-rose-400 flex-shrink-0" />
-            Freelance Digital Designer &nbsp;|&nbsp; Web Designer &nbsp;|&nbsp; Social Media Content Support
+            Freelance Digital Designer &nbsp;|&nbsp; Web Designer &nbsp;|&nbsp; Social Media Content &amp; Management Support
           </p>
 
           {/* Name */}

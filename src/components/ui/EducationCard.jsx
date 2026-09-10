@@ -14,11 +14,20 @@ const cardVariants = {
 }
 
 export default function EducationCard({ school, level, period, location, description, onClick }) {
+  const Card = onClick ? motion.button : motion.article
+  const actionProps = onClick
+    ? {
+        type: 'button',
+        onClick,
+        'aria-label': `View certificates for ${school}`,
+      }
+    : {}
+
   return (
-    <motion.div
+    <Card
+      {...actionProps}
       variants={cardVariants}
-      className={`glass-card p-6 relative overflow-hidden transition-shadow duration-300 group ${onClick ? 'cursor-pointer hover:shadow-gold' : 'hover:shadow-glass-md'}`}
-      onClick={onClick}
+      className={`glass-card w-full p-6 relative overflow-hidden transition-shadow duration-300 group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${onClick ? 'cursor-pointer hover:shadow-gold' : 'hover:shadow-glass-md'}`}
     >
       {/* Decorative corner */}
       <div className="absolute -top-4 -right-4 opacity-20 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none">
@@ -68,6 +77,6 @@ export default function EducationCard({ school, level, period, location, descrip
           </span>
         </div>
       )}
-    </motion.div>
+    </Card>
   )
 }

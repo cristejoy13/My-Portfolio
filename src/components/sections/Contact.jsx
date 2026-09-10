@@ -205,7 +205,7 @@ export default function Contact() {
                       </div>
                       <div>
                         <label htmlFor="contact-email" className="block font-body text-xs font-semibold text-rose-600 mb-1.5">Email</label>
-                        <input id="contact-email" type="email" name="email" value={form.email} onChange={handleChange} autoComplete="email" placeholder="you@example.com" className={inputClass} required />
+                        <input id="contact-email" type="email" name="email" value={form.email} onChange={handleChange} autoComplete="email" placeholder="Your email" className={inputClass} required />
                       </div>
                     </div>
 

@@ -4,6 +4,7 @@ import ScrollReveal from '../ui/ScrollReveal'
 import PortfolioLightbox from '../ui/PortfolioLightbox'
 import FloralDivider from '../../assets/svgs/FloralDivider'
 import { experiences } from '../../data/experienceData'
+import { recruitmentGraphics } from '../../data/graphicDesignData'
 
 function useModalFocus(onClose) {
   const dialogRef = useRef(null)
@@ -30,13 +31,18 @@ function useModalFocus(onClose) {
 }
 
 /* ── Video Gallery Modal ─────────────────────────────────────── */
-function VideoModal({ videos, siteLink, onClose }) {
+function VideoModal({ exp, onClose }) {
   const [active, setActive] = useState(null)
+  const [showAll, setShowAll] = useState(false)
   const dialogRef = useModalFocus(onClose)
+  const { videos, link: siteLink } = exp
+  const featuredVideoCount = 3
+  const visibleVideos = showAll ? videos : videos.slice(0, featuredVideoCount)
+  const remainingVideoCount = videos.length - featuredVideoCount
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center px-4 pb-4 pt-20 bg-black/80 backdrop-blur-sm"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -45,7 +51,7 @@ function VideoModal({ videos, siteLink, onClose }) {
       <motion.div
         ref={dialogRef}
         tabIndex={-1}
-        className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl"
+        className="bg-white rounded-3xl w-full max-w-2xl max-h-[calc(100vh-6rem)] overflow-hidden shadow-2xl flex flex-col"
         role="dialog"
         aria-modal="true"
         aria-label="Best of Cebu video work"
@@ -56,7 +62,7 @@ function VideoModal({ videos, siteLink, onClose }) {
         transition={{ type: 'spring', stiffness: 300, damping: 26 }}
         onClick={e => e.stopPropagation()}
       >
-        <div className="flex items-center justify-between px-5 py-4 border-b border-rose-100">
+        <div className="flex items-center justify-between px-5 py-4 border-b border-rose-100 flex-shrink-0">
           <div className="flex items-center gap-3">
             {active && (
               <button
@@ -72,7 +78,7 @@ function VideoModal({ videos, siteLink, onClose }) {
                 {active ? 'Now Playing' : 'Best of Cebu — Video Work'}
               </h3>
               {!active && (
-                <p className="text-rose-400 text-xs mt-0.5">5 videos · tap to play</p>
+                <p className="text-rose-400 text-xs mt-0.5">{videos.length} videos · tap to play</p>
               )}
             </div>
           </div>
@@ -98,7 +104,7 @@ function VideoModal({ videos, siteLink, onClose }) {
           </div>
         </div>
 
-        <div className="p-5">
+        <div className="p-5 overflow-y-auto">
           <AnimatePresence mode="wait">
             {active ? (
               <motion.div
@@ -123,34 +129,63 @@ function VideoModal({ videos, siteLink, onClose }) {
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                className="grid grid-cols-2 sm:grid-cols-3 gap-3"
               >
-                {videos.map((id, i) => (
-                  <motion.button
-                    key={id}
-                    className="relative rounded-xl overflow-hidden group cursor-pointer"
-                    style={{ aspectRatio: '16/9' }}
-                    whileHover={{ scale: 1.04 }}
-                    transition={{ duration: 0.2 }}
-                    onClick={() => setActive(id)}
-                  >
-                    <img
-                      src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
-                      alt={`Video ${i + 1}`}
-                      className="w-full h-full object-cover"
-                    />
-                    <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
-                      <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
-                        <svg className="w-4 h-4 text-rose-600 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
-                          <path d="M8 5v14l11-7z" />
-                        </svg>
+                <div className="mb-5 rounded-2xl border border-rose-100 bg-rose-50/70 p-4">
+                  <p className="font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
+                  <ul className="mt-3 space-y-2">
+                    {exp.responsibilities.map(responsibility => (
+                      <li key={responsibility} className="flex gap-2 font-body text-xs leading-relaxed text-rose-600">
+                        <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-rose-400" aria-hidden="true" />
+                        <span>{responsibility}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+
+                <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+                  {visibleVideos.map((id, i) => (
+                    <motion.button
+                      key={id}
+                      type="button"
+                      className="relative rounded-xl overflow-hidden group cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+                      style={{ aspectRatio: '16/9' }}
+                      whileHover={{ scale: 1.04 }}
+                      transition={{ duration: 0.2 }}
+                      onClick={() => setActive(id)}
+                      aria-label={`Play Best of Cebu video ${i + 1}`}
+                    >
+                      <img
+                        src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
+                        alt=""
+                        className="w-full h-full object-cover"
+                        loading="lazy"
+                      />
+                      <div className="absolute inset-0 bg-black/30 group-hover:bg-black/50 transition-colors flex items-center justify-center">
+                        <div className="w-10 h-10 bg-white/90 rounded-full flex items-center justify-center shadow-lg group-hover:scale-110 transition-transform">
+                          <svg className="w-4 h-4 text-rose-600 ml-0.5" fill="currentColor" viewBox="0 0 24 24">
+                            <path d="M8 5v14l11-7z" />
+                          </svg>
+                        </div>
                       </div>
-                    </div>
-                    <div className="absolute bottom-1.5 left-2 text-white text-[10px] font-semibold opacity-80">
-                      #{i + 1}
-                    </div>
-                  </motion.button>
-                ))}
+                      <div className="absolute bottom-1.5 left-2 text-white text-[10px] font-semibold opacity-80">
+                        #{i + 1}
+                      </div>
+                    </motion.button>
+                  ))}
+                </div>
+
+                {remainingVideoCount > 0 && (
+                  <div className="mt-5 text-center">
+                    <button
+                      type="button"
+                      onClick={() => setShowAll(current => !current)}
+                      className="btn-outline text-sm px-5 py-2.5"
+                      aria-expanded={showAll}
+                    >
+                      {showAll ? 'Show Featured Videos' : `View ${remainingVideoCount} More Videos`}
+                    </button>
+                  </div>
+                )}
               </motion.div>
             )}
           </AnimatePresence>
@@ -161,12 +196,12 @@ function VideoModal({ videos, siteLink, onClose }) {
 }
 
 /* ── COE Certificate Modal ───────────────────────────────────── */
-function COECertificate({ onClose }) {
+function COECertificate({ exp, onClose }) {
   const coeSrc = `${import.meta.env.BASE_URL}certificates/vcustomer-coe.jpg`
   const dialogRef = useModalFocus(onClose)
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/85 backdrop-blur-sm overflow-y-auto"
+      className="fixed inset-0 z-[100] flex items-center justify-center px-4 pb-4 pt-20 bg-black/85 backdrop-blur-sm overflow-y-auto"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -175,7 +210,7 @@ function COECertificate({ onClose }) {
       <motion.div
         ref={dialogRef}
         tabIndex={-1}
-        className="relative w-full max-w-2xl my-4"
+        className="relative w-full max-w-2xl max-h-[calc(100vh-6rem)] my-4 overflow-y-auto rounded-3xl bg-white shadow-2xl"
         role="dialog"
         aria-modal="true"
         aria-label="vCUSTOMER Philippines certificate of employment"
@@ -189,14 +224,19 @@ function COECertificate({ onClose }) {
         <button
           onClick={onClose}
           aria-label="Close certificate"
-          className="absolute -top-3 -right-3 z-10 w-11 h-11 bg-white hover:bg-rose-50 rounded-full flex items-center justify-center text-slate-600 text-sm shadow-lg transition-colors"
+          className="absolute top-3 right-3 z-10 w-11 h-11 bg-rose-100 hover:bg-rose-200 rounded-full flex items-center justify-center text-rose-600 text-sm shadow-md transition-colors"
         >
           ✕
         </button>
+        <div className="px-6 pb-5 pt-6 pr-16">
+          <p className="font-body text-xs font-semibold uppercase tracking-widest text-rose-400">Customer Support Experience</p>
+          <h3 className="mt-1 font-display text-xl font-bold italic text-rose-800">vCUSTOMER Philippines</h3>
+          <p className="mt-2 font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
+        </div>
         <img
           src={coeSrc}
           alt="Certificate of Employment – vCustomer Philippines"
-          className="w-full rounded-2xl shadow-2xl"
+          className="w-full border-t border-rose-100"
         />
       </motion.div>
     </motion.div>
@@ -208,7 +248,7 @@ function ExternalPreviewModal({ exp, onClose }) {
   const dialogRef = useModalFocus(onClose)
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -268,7 +308,7 @@ function ExperienceDetailsModal({ exp, onClose }) {
 
   return (
     <motion.div
-      className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
+      className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       exit={{ opacity: 0 }}
@@ -392,9 +432,11 @@ function ExperienceCard({ exp, onClick }) {
         <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full border border-white/25 leading-none">
           {exp.badge}
         </span>
-        <span className="bg-black/30 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full leading-none">
-          {exp.period}
-        </span>
+        {!exp.hidePeriod && (
+          <span className="bg-black/30 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full leading-none">
+            {exp.period}
+          </span>
+        )}
       </div>
 
       <div className="absolute bottom-0 left-0 right-0 p-4">
@@ -413,11 +455,12 @@ function ExperienceCard({ exp, onClick }) {
 
 /* ── Combined Work & Skills Section ─────────────────────────── */
 export default function WorkAndSkills() {
-  const [coeOpen, setCoeOpen]           = useState(false)
+  const [coeExp, setCoeExp]             = useState(null)
   const [videoExp, setVideoExp]         = useState(null)
   const [previewExp, setPreviewExp]     = useState(null)
   const [detailsExp, setDetailsExp]     = useState(null)
   const [lightboxOpen, setLightboxOpen] = useState(false)
+  const [lightboxIndex, setLightboxIndex] = useState(0)
   const [lightboxSlides, setLightboxSlides] = useState([])
   const workExperience = experiences.filter(exp => exp.linkType !== 'external')
   const webApplications = experiences.filter(exp => exp.linkType === 'external')
@@ -428,13 +471,20 @@ export default function WorkAndSkills() {
     } else if (exp.linkType === 'videos') {
       setVideoExp(exp)
     } else if (exp.linkType === 'coe') {
-      setCoeOpen(true)
+      setCoeExp(exp)
     } else if (exp.linkType === 'details') {
       setDetailsExp(exp)
     } else if (exp.linkType === 'gallery' && exp.gallery) {
       setLightboxSlides(exp.gallery)
+      setLightboxIndex(0)
       setLightboxOpen(true)
     }
+  }
+
+  function openGraphicDesign(index) {
+    setLightboxSlides(recruitmentGraphics)
+    setLightboxIndex(index)
+    setLightboxOpen(true)
   }
 
   return (
@@ -472,6 +522,46 @@ export default function WorkAndSkills() {
             </ScrollReveal>
           ))}
         </div>
+
+        <SubLabel>Graphic Design</SubLabel>
+        <ScrollReveal>
+          <div className="max-w-5xl mx-auto mb-12">
+            <div className="text-center mb-5">
+              <h3 className="font-display text-xl font-semibold italic text-rose-700">
+                AI-Assisted Recruitment Campaign Graphics
+              </h3>
+              <p className="font-body text-xs text-rose-500 mt-1">
+                Created for Remote Imaging Consultants
+              </p>
+            </div>
+
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+              {recruitmentGraphics.map((graphic, index) => (
+                <motion.button
+                  key={graphic.id}
+                  type="button"
+                  onClick={() => openGraphicDesign(index)}
+                  aria-label={`View full-size ${graphic.alt}`}
+                  className="group rounded-xl border border-rose-100 bg-white/80 p-2 shadow-glass focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+                  whileHover={{ y: -3 }}
+                  transition={{ duration: 0.2 }}
+                >
+                  <span className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-lg bg-rose-50">
+                    <img
+                      src={graphic.src}
+                      alt={graphic.alt}
+                      className="h-full w-full object-contain"
+                      loading="lazy"
+                    />
+                  </span>
+                  <span className="mt-2 block font-body text-[10px] font-semibold uppercase tracking-wide text-rose-500">
+                    Recruitment Design {index + 1}
+                  </span>
+                </motion.button>
+              ))}
+            </div>
+          </div>
+        </ScrollReveal>
 
         {/* ── Skills & Expertise pills ── */}
         <SubLabel>Tools &amp; Strengths</SubLabel>
@@ -516,15 +606,14 @@ export default function WorkAndSkills() {
       <AnimatePresence>
         {videoExp && (
           <VideoModal
-            videos={videoExp.videos}
-            siteLink={videoExp.link}
+            exp={videoExp}
             onClose={() => setVideoExp(null)}
           />
         )}
       </AnimatePresence>
 
       <AnimatePresence>
-        {coeOpen && <COECertificate onClose={() => setCoeOpen(false)} />}
+        {coeExp && <COECertificate exp={coeExp} onClose={() => setCoeExp(null)} />}
       </AnimatePresence>
 
       <AnimatePresence>
@@ -538,7 +627,7 @@ export default function WorkAndSkills() {
       <PortfolioLightbox
         open={lightboxOpen}
         onClose={() => setLightboxOpen(false)}
-        index={0}
+        index={lightboxIndex}
         slides={lightboxSlides}
       />
     </section>

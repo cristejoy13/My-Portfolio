@@ -52,12 +52,6 @@ export default function Hero() {
             🌸 Creative Freelancer 🌸
           </div>
 
-          {/* Eyebrow */}
-          <p className="font-body text-sm font-semibold text-rose-600 mb-3 flex items-center gap-2">
-            <span className="inline-block w-8 h-px bg-rose-400 flex-shrink-0" />
-            Graphic &amp; Web Design &nbsp;·&nbsp; Social Media Management &nbsp;·&nbsp; Administrative Support
-          </p>
-
           {/* Name */}
           <h1 className="font-display text-5xl md:text-6xl font-bold leading-tight mb-2 text-rose-900">
             Criste Joy

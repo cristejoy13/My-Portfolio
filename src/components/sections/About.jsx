@@ -5,7 +5,7 @@ import aboutPhoto from '../../assets/criste-about.jpg'
 
 const services = [
   'Graphic & Web Design',
-  'Website Design & Web Support',
+  'Web Support',
   'Social Media Management',
   'Administrative & Virtual Assistance',
   'Basic Video Editing',

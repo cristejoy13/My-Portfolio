@@ -22,3 +22,4 @@ Default behavior:
 - Treat this as a personal portfolio site: edits should protect warmth, credibility, accessibility, and polish.
 - Run `npm run build` before handing off code changes whenever possible.
 - Never overwrite user content, portfolio copy, or assets without calling it out.
+- Avoid repeating the same message or service across multiple sections. If a proposed addition seems redundant or weakens the portfolio, explain the tradeoff and ask the user before including it.

@@ -1,37 +1,14 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import { useInView } from 'react-intersection-observer'
 import ScrollReveal from '../ui/ScrollReveal'
 import EducationCard from '../ui/EducationCard'
 import PortfolioLightbox from '../ui/PortfolioLightbox'
 import FloralDivider from '../../assets/svgs/FloralDivider'
+import useModalFocus from '../../hooks/useModalFocus'
 import { education } from '../../data/educationData'
 
 const BASE = import.meta.env.BASE_URL
-
-function useModalFocus(onClose) {
-  const dialogRef = useRef(null)
-
-  useEffect(() => {
-    const previouslyFocused = document.activeElement
-    const previousOverflow = document.body.style.overflow
-    const handleEscape = event => {
-      if (event.key === 'Escape') onClose()
-    }
-
-    document.body.style.overflow = 'hidden'
-    dialogRef.current?.focus()
-    document.addEventListener('keydown', handleEscape)
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = previousOverflow
-      previouslyFocused?.focus?.()
-    }
-  }, [onClose])
-
-  return dialogRef
-}
 
 const informaticsCerts = [
   {
@@ -39,30 +16,40 @@ const informaticsCerts = [
     note: 'Humanities & Social Sciences · July 2022',
     edited: `${BASE}certificates/informatics-diploma.jpg`,
     original: `${BASE}certificates/informatics-diploma-orig.jpg`,
+    editedThumb: `${BASE}certificates/thumbs/informatics-diploma.jpg`,
+    originalThumb: `${BASE}certificates/thumbs/informatics-diploma-orig.jpg`,
   },
   {
     title: 'With High Honors',
     note: 'GWA 95 · Academic Year 2021–2022',
     edited: `${BASE}certificates/informatics-high-honors.jpg`,
     original: `${BASE}certificates/informatics-high-honors-orig.jpg`,
+    editedThumb: `${BASE}certificates/thumbs/informatics-high-honors.jpg`,
+    originalThumb: `${BASE}certificates/thumbs/informatics-high-honors-orig.jpg`,
   },
   {
     title: 'Academic Excellence Award',
     note: 'Academic Achiever with Honors · 2020–2021',
     edited: `${BASE}certificates/informatics-academic-excellence.jpg`,
     original: `${BASE}certificates/informatics-academic-excellence-orig.jpg`,
+    editedThumb: `${BASE}certificates/thumbs/informatics-academic-excellence.jpg`,
+    originalThumb: `${BASE}certificates/thumbs/informatics-academic-excellence-orig.jpg`,
   },
   {
     title: 'Best in Empowerment Technologies',
     note: '2nd Semester · 2020–2021',
     edited: `${BASE}certificates/informatics-empowerment-tech.jpg`,
     original: `${BASE}certificates/informatics-empowerment-tech-orig.jpg`,
+    editedThumb: `${BASE}certificates/thumbs/informatics-empowerment-tech.jpg`,
+    originalThumb: `${BASE}certificates/thumbs/informatics-empowerment-tech-orig.jpg`,
   },
   {
     title: 'Best in English',
     note: 'Academic & Professional Purposes · 2020–2021',
     edited: `${BASE}certificates/informatics-best-english.jpg`,
     original: `${BASE}certificates/informatics-best-english-orig.jpg`,
+    editedThumb: `${BASE}certificates/thumbs/informatics-best-english.jpg`,
+    originalThumb: `${BASE}certificates/thumbs/informatics-best-english-orig.jpg`,
   },
 ]
 
@@ -71,11 +58,13 @@ const ucDocs = [
     title: "Dean's List — Official",
     note: 'First Semester 2025–2026 · BSBA',
     src: `${BASE}certificates/uc-deans-list-official.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/uc-deans-list-official.jpg`,
   },
   {
     title: "Dean's List — Printed",
     note: 'All Sections · #185 Calosor, Criste Joy Q.',
     src: `${BASE}certificates/uc-deans-list-printed.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/uc-deans-list-printed.jpg`,
   },
 ]
 
@@ -84,41 +73,49 @@ const allCertificates = [
     title: "Dean's List",
     note: 'University of Cebu · First Semester 2025–2026',
     src: `${BASE}certificates/uc-deans-list-official.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/uc-deans-list-official.jpg`,
   },
   {
     title: 'With High Honors',
     note: 'GWA 95 · Academic Year 2021–2022',
     src: `${BASE}certificates/informatics-high-honors.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/informatics-high-honors.jpg`,
   },
   {
     title: 'Best in English',
     note: 'Academic & Professional Purposes · 2020–2021',
     src: `${BASE}certificates/informatics-best-english.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/informatics-best-english.jpg`,
   },
   {
     title: 'Academic Excellence Award',
     note: 'Academic Achiever with Honors · 2020–2021',
     src: `${BASE}certificates/informatics-academic-excellence.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/informatics-academic-excellence.jpg`,
   },
   {
     title: 'Best in Empowerment Technologies',
     note: '2nd Semester · 2020–2021',
     src: `${BASE}certificates/informatics-empowerment-tech.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/informatics-empowerment-tech.jpg`,
   },
   {
     title: 'Senior High School Diploma',
     note: 'Humanities & Social Sciences · July 2022',
     src: `${BASE}certificates/informatics-diploma.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/informatics-diploma.jpg`,
   },
   {
     title: "Dean's List — Printed Record",
     note: 'University of Cebu · First Semester 2025–2026',
     src: `${BASE}certificates/uc-deans-list-printed.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/uc-deans-list-printed.jpg`,
   },
   {
     title: 'Certificate of Employment',
     note: 'vCUSTOMER Philippines · Customer Support Experience',
     src: `${BASE}certificates/vcustomer-coe.jpg`,
+    thumbnail: `${BASE}certificates/thumbs/vcustomer-coe.jpg`,
   },
 ]
 
@@ -136,7 +133,7 @@ function CertGrid({ items, srcKey, onOpen }) {
         >
           <div className="aspect-[4/3] bg-rose-50 border border-rose-100 rounded-xl overflow-hidden">
             <img
-              src={srcKey ? cert[srcKey] : cert.src}
+              src={srcKey ? cert[srcKey] : cert.thumbnail}
               alt={cert.title}
               className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
               loading="lazy"
@@ -144,7 +141,7 @@ function CertGrid({ items, srcKey, onOpen }) {
           </div>
           <div className="mt-1.5 px-0.5">
             <p className="font-body text-rose-700 text-[11px] font-semibold leading-tight">{cert.title}</p>
-            <p className="font-body text-rose-400 text-[10px] leading-tight">{cert.note}</p>
+            <p className="font-body text-rose-700 text-[10px] leading-tight">{cert.note}</p>
           </div>
           <div className="absolute top-1 right-1 opacity-0 group-hover:opacity-100 transition-opacity bg-rose-600 text-white text-[9px] font-semibold px-2 py-0.5 rounded-full">
             View
@@ -180,7 +177,6 @@ function InformaticsCertModal({ onClose }) {
           role="dialog"
           aria-modal="true"
           aria-label="Informatics College Cebu certificates"
-          onKeyDown={event => { if (event.key === 'Escape') onClose() }}
           className="bg-white rounded-3xl w-full max-w-2xl overflow-hidden shadow-2xl"
           initial={{ scale: 0.88, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 26 }}
@@ -200,7 +196,7 @@ function InformaticsCertModal({ onClose }) {
                 key={t}
                 onClick={() => setTab(t)}
                 className={`flex-1 py-3 font-body text-sm font-semibold transition-colors ${
-                  tab === t ? 'text-rose-700 border-b-2 border-rose-500 bg-rose-50' : 'text-rose-400 hover:text-rose-600'
+                  tab === t ? 'text-rose-700 border-b-2 border-rose-500 bg-rose-50' : 'text-rose-600 hover:text-rose-800'
                 }`}
               >
                 {t === 'edited' ? '🌸 Edited Copies' : '📄 Original Documents'}
@@ -211,7 +207,7 @@ function InformaticsCertModal({ onClose }) {
           <div className="p-5 max-h-[55vh] overflow-y-auto">
             <CertGrid
               items={informaticsCerts}
-              srcKey={tab === 'edited' ? 'edited' : 'original'}
+              srcKey={tab === 'edited' ? 'editedThumb' : 'originalThumb'}
               onOpen={i => { setLightboxIndex(i); setLightboxOpen(true) }}
             />
           </div>
@@ -244,7 +240,6 @@ function UCCertsModal({ onClose }) {
           role="dialog"
           aria-modal="true"
           aria-label="University of Cebu Dean's List documents"
-          onKeyDown={event => { if (event.key === 'Escape') onClose() }}
           className="bg-white rounded-3xl w-full max-w-xl overflow-hidden shadow-2xl"
           initial={{ scale: 0.88, y: 20 }} animate={{ scale: 1, y: 0 }} exit={{ scale: 0.88, y: 20 }}
           transition={{ type: 'spring', stiffness: 300, damping: 26 }}
@@ -297,7 +292,7 @@ export default function Education() {
 
       <div className="section-wrapper">
         <ScrollReveal className="text-center mb-12">
-          <p className="font-body text-xs font-semibold tracking-[0.25em] uppercase text-amber-500 mb-2">
+          <p className="font-body text-xs font-semibold tracking-[0.25em] uppercase text-amber-700 mb-2">
             🌸 &nbsp;My academic path&nbsp; 🌸
           </p>
           <h2 className="section-title mb-3">Education</h2>
@@ -355,7 +350,7 @@ export default function Education() {
                   >
                     <span className="block aspect-[4/3] overflow-hidden rounded-xl border border-rose-100 bg-rose-50">
                       <img
-                        src={certificate.src}
+                        src={certificate.thumbnail}
                         alt={certificate.title}
                         className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
                         loading="lazy"
@@ -364,7 +359,7 @@ export default function Education() {
                     <span className="mt-2 block font-body text-xs font-semibold leading-snug text-rose-700">
                       {certificate.title}
                     </span>
-                    <span className="mt-0.5 block font-body text-[10px] leading-snug text-rose-500">
+                    <span className="mt-0.5 block font-body text-[10px] leading-snug text-rose-700">
                       {certificate.note}
                     </span>
                   </motion.button>

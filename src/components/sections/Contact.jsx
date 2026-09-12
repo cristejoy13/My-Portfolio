@@ -44,7 +44,7 @@ const contactInfo = [
 
 const inputClass =
   'w-full border border-rose-200 rounded-xl px-4 py-3 font-body text-sm text-rose-900 ' +
-  'placeholder:text-rose-400 bg-white focus:border-rose-500 focus:ring-2 focus:ring-rose-100 ' +
+  'placeholder:text-rose-600 bg-white focus:border-rose-500 focus:ring-2 focus:ring-rose-100 ' +
   'focus:outline-none transition-colors duration-200'
 
 const initialForm = { name: '', email: '', subject: '', message: '' }
@@ -194,7 +194,7 @@ export default function Contact() {
                     className="space-y-4"
                   >
                     <div>
-                      <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-rose-500 mb-2">Project inquiry</p>
+                      <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-rose-700 mb-2">Project inquiry</p>
                       <h3 className="font-display text-2xl italic font-semibold text-rose-800">Tell me how I can help</h3>
                     </div>
 
@@ -217,7 +217,7 @@ export default function Contact() {
                     <div>
                       <div className="flex items-center justify-between gap-3 mb-1.5">
                         <label htmlFor="contact-message" className="font-body text-xs font-semibold text-rose-600">Message</label>
-                        <span className="font-body text-[11px] text-rose-400">{form.message.length}/2000</span>
+                        <span className="font-body text-[11px] text-rose-600">{form.message.length}/2000</span>
                       </div>
                       <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} placeholder="Share the project, timeline, and support you need." rows={6} minLength={10} maxLength={2000} className={`${inputClass} resize-y min-h-36`} required />
                     </div>
@@ -234,7 +234,7 @@ export default function Contact() {
                           {status === 'error' ? 'The message could not be sent. Please try again or email me directly.' : 'The contact form is temporarily unavailable.'}
                         </p>
                       )}
-                      <p className="font-body text-xs text-rose-500">
+                      <p className="font-body text-xs text-rose-600">
                         Prefer email?{' '}
                         <a href={EMAIL_HREF} className="font-semibold underline underline-offset-2 hover:text-rose-700 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-400 rounded-sm">{EMAIL}</a>
                       </p>

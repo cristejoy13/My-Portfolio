@@ -39,19 +39,14 @@ export default function About() {
 
         {/* Bio */}
         <ScrollReveal direction="right" delay={0.12}>
-          <p className="font-body text-xs font-semibold tracking-[0.25em] uppercase text-amber-500 mb-2">
-            🌸 &nbsp;Nice to meet you&nbsp; 🌸
+          <p className="font-body text-xs font-semibold tracking-[0.25em] uppercase text-amber-700 mb-2">
+            🌸 &nbsp;Services&nbsp; 🌸
           </p>
-          <h2 className="section-title mb-3">Hi, I'm Criste Joy!</h2>
+          <h2 className="section-title mb-3">Ways I Can Help</h2>
           <FloralDivider className="mb-5" />
-
-          <blockquote className="border-l-4 border-rose-300 pl-4 mb-6 italic font-display text-rose-500 text-sm leading-relaxed">
-            "Creative support for brands that need beauty, clarity, and consistency."
-          </blockquote>
 
           {/* Services */}
           <div>
-            <p className="font-body text-xs font-semibold text-rose-400 uppercase tracking-wider mb-3">Services</p>
             <div className="grid sm:grid-cols-2 gap-3">
               {services.map((service, index) => (
                 <div
@@ -59,7 +54,7 @@ export default function About() {
                   className="min-h-20 rounded-2xl border border-rose-100 bg-gradient-to-br from-white to-blush-50 p-4 shadow-sm flex items-center gap-3"
                 >
                   <span
-                    className="w-9 h-9 rounded-full bg-rose-100 text-rose-500 flex items-center justify-center text-xs font-semibold flex-shrink-0"
+                    className="w-9 h-9 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-semibold flex-shrink-0"
                     aria-hidden="true"
                   >
                     {String(index + 1).padStart(2, '0')}

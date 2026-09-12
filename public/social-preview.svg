@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Criste Joy Calosor — Creative Freelancer</title>
+  <desc id="description">A polished blush and rose social preview for Criste Joy Calosor's portfolio.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fdf2f6"/>
+      <stop offset="0.55" stop-color="#fef9ee"/>
+      <stop offset="1" stop-color="#fff1f3"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#e11d48"/>
+      <stop offset="1" stop-color="#f59e0b"/>
+    </linearGradient>
+  </defs>
+  <rect width="1200" height="630" fill="url(#background)"/>
+  <circle cx="1080" cy="90" r="210" fill="#fbcfe8" opacity="0.45"/>
+  <circle cx="110" cy="560" r="170" fill="#fde68a" opacity="0.25"/>
+  <rect x="72" y="70" width="1056" height="490" rx="42" fill="#ffffff" opacity="0.82" stroke="#fecdd3" stroke-width="3"/>
+  <text x="130" y="155" fill="#9f1239" font-family="Georgia, serif" font-size="32" font-style="italic">CJC</text>
+  <rect x="130" y="195" width="310" height="48" rx="24" fill="#ffe4e6"/>
+  <text x="285" y="227" text-anchor="middle" fill="#9f1239" font-family="Arial, sans-serif" font-size="21" font-weight="700">CREATIVE FREELANCER</text>
+  <text x="130" y="350" fill="#881337" font-family="Georgia, serif" font-size="74" font-weight="700">Criste Joy</text>
+  <text x="130" y="425" fill="#e11d48" font-family="Georgia, serif" font-size="74" font-weight="700" font-style="italic">Calosor</text>
+  <rect x="130" y="470" width="520" height="7" rx="3.5" fill="url(#accent)"/>
+  <text x="130" y="520" fill="#9f1239" font-family="Arial, sans-serif" font-size="22">Design · Social Media · Web &amp; Administrative Support</text>
+  <circle cx="975" cy="315" r="112" fill="#fff1f2" stroke="#fda4af" stroke-width="4"/>
+  <text x="975" y="303" text-anchor="middle" fill="#881337" font-family="Georgia, serif" font-size="30" font-weight="700">Reliable</text>
+  <text x="975" y="344" text-anchor="middle" fill="#be123c" font-family="Arial, sans-serif" font-size="20" font-weight="700">CREATIVE SUPPORT</text>
+</svg>

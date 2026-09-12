@@ -1,34 +1,11 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ScrollReveal from '../ui/ScrollReveal'
 import PortfolioLightbox from '../ui/PortfolioLightbox'
 import FloralDivider from '../../assets/svgs/FloralDivider'
+import useModalFocus from '../../hooks/useModalFocus'
 import { experiences } from '../../data/experienceData'
 import { recruitmentGraphics } from '../../data/graphicDesignData'
-
-function useModalFocus(onClose) {
-  const dialogRef = useRef(null)
-
-  useEffect(() => {
-    const previouslyFocused = document.activeElement
-    const previousOverflow = document.body.style.overflow
-    const handleEscape = event => {
-      if (event.key === 'Escape') onClose()
-    }
-
-    document.body.style.overflow = 'hidden'
-    dialogRef.current?.focus()
-    document.addEventListener('keydown', handleEscape)
-
-    return () => {
-      document.removeEventListener('keydown', handleEscape)
-      document.body.style.overflow = previousOverflow
-      previouslyFocused?.focus?.()
-    }
-  }, [onClose])
-
-  return dialogRef
-}
 
 /* ── Video Gallery Modal ─────────────────────────────────────── */
 function VideoModal({ exp, onClose }) {
@@ -55,7 +32,6 @@ function VideoModal({ exp, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label="Best of Cebu video work"
-        onKeyDown={event => { if (event.key === 'Escape') onClose() }}
         initial={{ scale: 0.88, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.88, y: 20 }}
@@ -78,7 +54,7 @@ function VideoModal({ exp, onClose }) {
                 {active ? 'Now Playing' : 'Best of Cebu — Video Work'}
               </h3>
               {!active && (
-                <p className="text-rose-400 text-xs mt-0.5">{videos.length} videos · tap to play</p>
+                <p className="text-rose-600 text-xs mt-0.5">{videos.length} videos · tap to play</p>
               )}
             </div>
           </div>
@@ -97,7 +73,7 @@ function VideoModal({ exp, onClose }) {
             <button
               onClick={onClose}
               aria-label="Close video gallery"
-              className="w-11 h-11 bg-rose-100 hover:bg-rose-200 rounded-full flex items-center justify-center text-rose-500 text-sm transition-colors"
+              className="w-11 h-11 bg-rose-100 hover:bg-rose-200 rounded-full flex items-center justify-center text-rose-700 text-sm transition-colors"
             >
               ✕
             </button>
@@ -214,7 +190,6 @@ function COECertificate({ exp, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label="vCUSTOMER Philippines certificate of employment"
-        onKeyDown={event => { if (event.key === 'Escape') onClose() }}
         initial={{ scale: 0.9, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.9, y: 20 }}
@@ -229,7 +204,7 @@ function COECertificate({ exp, onClose }) {
           ✕
         </button>
         <div className="px-6 pb-5 pt-6 pr-16">
-          <p className="font-body text-xs font-semibold uppercase tracking-widest text-rose-400">Customer Support Experience</p>
+          <p className="font-body text-xs font-semibold uppercase tracking-widest text-rose-600">Customer Support Experience</p>
           <h3 className="mt-1 font-display text-xl font-bold italic text-rose-800">vCUSTOMER Philippines</h3>
           <p className="mt-2 font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
         </div>
@@ -261,7 +236,6 @@ function ExternalPreviewModal({ exp, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label={`${exp.company} project preview`}
-        onKeyDown={event => { if (event.key === 'Escape') onClose() }}
         initial={{ scale: 0.88, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.88, y: 20 }}
@@ -286,7 +260,7 @@ function ExternalPreviewModal({ exp, onClose }) {
           </button>
         </div>
         <div className="p-5">
-          <p className="font-body text-rose-400 text-xs uppercase tracking-wider font-semibold mb-1">{exp.role} · {exp.period}</p>
+          <p className="font-body text-rose-600 text-xs uppercase tracking-wider font-semibold mb-1">{exp.role} · {exp.period}</p>
           <p className="font-body text-rose-700 text-sm leading-relaxed mb-5">{exp.description}</p>
           <a
             href={exp.link}
@@ -321,7 +295,6 @@ function ExperienceDetailsModal({ exp, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label={`${exp.company} responsibilities`}
-        onKeyDown={event => { if (event.key === 'Escape') onClose() }}
         initial={{ scale: 0.88, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.88, y: 20 }}
@@ -369,7 +342,7 @@ function SubLabel({ children }) {
   return (
     <div className="flex items-center gap-3 mb-4">
       <div className="flex-1 h-px bg-gradient-to-r from-transparent via-rose-200 to-transparent" />
-      <span className="font-body text-xs font-semibold tracking-[0.22em] uppercase text-rose-400 whitespace-nowrap">
+      <span className="font-body text-xs font-semibold tracking-[0.22em] uppercase text-rose-600 whitespace-nowrap">
         🌸 &nbsp;{children}&nbsp; 🌸
       </span>
       <div className="flex-1 h-px bg-gradient-to-r from-transparent via-rose-200 to-transparent" />
@@ -487,7 +460,7 @@ export default function WorkAndSkills() {
       <div className="section-wrapper">
         {/* Section header */}
         <ScrollReveal className="text-center mb-10">
-          <p className="font-body text-xs font-semibold tracking-[0.25em] uppercase text-amber-500 mb-2">
+          <p className="font-body text-xs font-semibold tracking-[0.25em] uppercase text-amber-700 mb-2">
             🌸 &nbsp;My Journey&nbsp; 🌸
           </p>
           <h2 className="section-title mb-3">Skills &amp; Experience</h2>
@@ -523,7 +496,7 @@ export default function WorkAndSkills() {
               <h3 className="font-display text-xl font-semibold italic text-rose-700">
                 AI-Assisted Recruitment Campaign Graphics
               </h3>
-              <p className="font-body text-xs text-rose-500 mt-1">
+              <p className="font-body text-xs text-rose-600 mt-1">
                 Created for Remote Imaging Consultants
               </p>
             </div>
@@ -547,7 +520,7 @@ export default function WorkAndSkills() {
                       loading="lazy"
                     />
                   </span>
-                  <span className="mt-2 block font-body text-[10px] font-semibold uppercase tracking-wide text-rose-500">
+                  <span className="mt-2 block font-body text-[10px] font-semibold uppercase tracking-wide text-rose-700">
                     {graphic.title}
                   </span>
                 </motion.button>
@@ -564,11 +537,11 @@ export default function WorkAndSkills() {
 
               {/* Tools — left */}
               <div className="flex-[1.35] text-center px-4 pb-6 md:pb-0">
-                <p className="font-body text-xs font-semibold text-rose-400 uppercase tracking-widest mb-4">🛠 Tools &amp; Software</p>
+                <p className="font-body text-xs font-semibold text-rose-600 uppercase tracking-widest mb-4">🛠 Tools &amp; Software</p>
                 <div className="grid grid-cols-2 gap-x-4 gap-y-4 text-left">
                   {toolGroups.map(group => (
                     <div key={group.label}>
-                      <p className="mb-2 font-body text-[10px] font-semibold uppercase tracking-wider text-rose-500">
+                      <p className="mb-2 font-body text-[10px] font-semibold uppercase tracking-wider text-rose-700">
                         {group.label}
                       </p>
                       <div className="flex flex-wrap gap-1.5">
@@ -589,7 +562,7 @@ export default function WorkAndSkills() {
 
               {/* Strengths — right */}
               <div className="flex-1 text-center px-4">
-                <p className="font-body text-xs font-semibold text-rose-400 uppercase tracking-widest mb-4">🌸 Strengths</p>
+                <p className="font-body text-xs font-semibold text-rose-600 uppercase tracking-widest mb-4">🌸 Strengths</p>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {strengths.map(s => (
                     <span key={s} className="bg-gradient-to-r from-blush-100 to-rose-100 text-rose-700 border border-rose-200 text-xs font-medium px-3 py-1.5 rounded-full font-body">

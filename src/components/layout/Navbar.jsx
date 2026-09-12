@@ -4,7 +4,7 @@ import RoseBud from '../../assets/svgs/RoseBud'
 
 const navLinks = [
   { href: '#home',       label: 'Home' },
-  { href: '#about',      label: 'About' },
+  { href: '#about',      label: 'Services' },
   { href: '#experience', label: 'Work & Skills' },
   { href: '#education',  label: 'Education' },
   { href: '#contact',    label: 'Contact' },
@@ -66,7 +66,7 @@ export default function Navbar() {
                 href={link.href}
                 aria-current={isActive ? 'page' : undefined}
                 className={`relative font-body text-sm font-medium pb-1 transition-colors duration-200 ${
-                  isActive ? 'text-rose-600' : 'text-rose-400 hover:text-rose-600'
+                  isActive ? 'text-rose-700' : 'text-rose-600 hover:text-rose-800'
                 }`}
               >
                 {link.label}
@@ -129,7 +129,7 @@ export default function Navbar() {
                   className={`flex items-center gap-2 px-6 py-3.5 font-body text-sm font-medium border-b border-rose-50 transition-colors ${
                     isActive
                       ? 'text-rose-600 bg-blush-50'
-                      : 'text-rose-500 hover:bg-blush-50'
+                      : 'text-rose-700 hover:bg-blush-50'
                   }`}
                   aria-current={isActive ? 'page' : undefined}
                 >

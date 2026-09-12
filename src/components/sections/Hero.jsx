@@ -60,7 +60,7 @@ export default function Hero() {
           </h1>
 
           {/* Tagline */}
-          <p className="font-display italic text-lg text-rose-400 mb-5 leading-relaxed">
+          <p className="font-display italic text-lg text-rose-600 mb-5 leading-relaxed">
             "Your ideas, your content, your daily tasks.<br className="hidden md:block" />
             Beautifully handled."
           </p>
@@ -123,9 +123,9 @@ export default function Hero() {
               <img src={headshot} alt="Criste Joy Calosor" className="w-full h-full object-cover object-top" />
             </div>
             <div className="absolute -bottom-4 -right-4 bg-gradient-to-br from-blush-200 to-amber-100 rounded-2xl px-4 py-3 shadow-gold text-center border border-rose-100">
-              <span className="font-display font-black text-3xl text-rose-900 block leading-none">2+</span>
-              <span className="font-body text-xs font-semibold uppercase tracking-wider text-rose-500 leading-tight">
-                Years of<br />Experience
+              <span className="font-display font-bold text-xl text-rose-900 block leading-none">Reliable</span>
+              <span className="font-body text-[10px] font-semibold uppercase tracking-wider text-rose-700 leading-tight">
+                Creative<br />Support
               </span>
             </div>
           </div>

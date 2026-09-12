@@ -206,6 +206,7 @@ function COECertificate({ exp, onClose }) {
         <div className="px-6 pb-5 pt-6 pr-16">
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-rose-600">Customer Support Experience</p>
           <h3 className="mt-1 font-display text-xl font-bold italic text-rose-800">vCUSTOMER Philippines</h3>
+          <p className="mt-1 font-body text-xs font-semibold text-rose-600">{exp.role} · {exp.period}</p>
           <p className="mt-2 font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
         </div>
         <img
@@ -220,7 +221,12 @@ function COECertificate({ exp, onClose }) {
 
 /* ── External Site Preview Modal ────────────────────────────── */
 function ExternalPreviewModal({ exp, onClose }) {
+  const [activeImage, setActiveImage] = useState(0)
   const dialogRef = useModalFocus(onClose)
+  const screenshots = exp.gallery?.length
+    ? exp.gallery
+    : [{ src: exp.image, alt: `${exp.company} project preview` }]
+
   return (
     <motion.div
       className="fixed inset-0 z-[100] flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm"
@@ -232,7 +238,7 @@ function ExternalPreviewModal({ exp, onClose }) {
       <motion.div
         ref={dialogRef}
         tabIndex={-1}
-        className="bg-white rounded-3xl w-full max-w-sm overflow-hidden shadow-2xl"
+        className="bg-white rounded-3xl w-full max-w-3xl max-h-[calc(100vh-2rem)] overflow-y-auto shadow-2xl"
         role="dialog"
         aria-modal="true"
         aria-label={`${exp.company} project preview`}
@@ -242,34 +248,63 @@ function ExternalPreviewModal({ exp, onClose }) {
         transition={{ type: 'spring', stiffness: 300, damping: 26 }}
         onClick={e => e.stopPropagation()}
       >
-        <div className="relative h-36 overflow-hidden">
-          <img src={exp.image} alt={exp.company} className="w-full h-full object-cover" />
-          <div className={`absolute inset-0 bg-gradient-to-t ${exp.gradient}`} />
-          <div className="absolute bottom-3 left-4">
-            <span className="bg-white/20 backdrop-blur-sm text-white text-[10px] font-semibold px-2.5 py-1 rounded-full border border-white/30">
-              {exp.badge}
-            </span>
-            <h3 className="font-display text-white text-xl italic font-bold mt-1">{exp.company}</h3>
-          </div>
+        <div className="relative aspect-video bg-rose-950">
+          <img
+            src={screenshots[activeImage].src}
+            alt={screenshots[activeImage].alt}
+            className="h-full w-full object-contain"
+          />
           <button
             onClick={onClose}
             aria-label={`Close ${exp.company} preview`}
-            className="absolute top-3 right-3 w-11 h-11 bg-white/15 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-colors backdrop-blur-sm"
+            className="absolute top-3 right-3 w-11 h-11 bg-black/45 hover:bg-black/65 rounded-full flex items-center justify-center text-white text-sm transition-colors backdrop-blur-sm"
           >
             ✕
           </button>
         </div>
-        <div className="p-5">
-          <p className="font-body text-rose-600 text-xs uppercase tracking-wider font-semibold mb-1">{exp.role} · {exp.period}</p>
-          <p className="font-body text-rose-700 text-sm leading-relaxed mb-5">{exp.description}</p>
-          <a
-            href={exp.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-2 bg-rose-500 hover:bg-rose-600 text-white text-sm font-semibold px-5 py-2.5 rounded-full transition-colors"
-          >
-            Visit site →
-          </a>
+        <div className="p-5 sm:p-6">
+          <div className="flex flex-col gap-5 sm:flex-row sm:items-end sm:justify-between">
+            <div>
+              <span className="inline-flex rounded-full border border-rose-200 bg-rose-50 px-3 py-1 font-body text-[10px] font-semibold text-rose-700">
+                {exp.badge}
+              </span>
+              <h3 className="mt-2 font-display text-2xl font-bold italic text-rose-800">{exp.company}</h3>
+              <p className="mt-1 font-body text-xs font-semibold uppercase tracking-wider text-rose-600">{exp.role} · {exp.period}</p>
+              <p className="mt-3 max-w-xl font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
+            </div>
+            <a
+              href={exp.link}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex min-h-11 flex-shrink-0 items-center justify-center gap-2 rounded-full bg-rose-500 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-rose-600 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+            >
+              Visit live app →
+            </a>
+          </div>
+
+          {screenshots.length > 1 && (
+            <div className="mt-5">
+              <p className="mb-2 font-body text-[10px] font-semibold uppercase tracking-widest text-rose-600">
+                App screenshots · {activeImage + 1} of {screenshots.length}
+              </p>
+              <div className="grid max-w-md grid-cols-3 gap-2">
+                {screenshots.map((screenshot, index) => (
+                  <button
+                    key={screenshot.src}
+                    type="button"
+                    onClick={() => setActiveImage(index)}
+                    aria-label={`Show ${exp.company} screenshot ${index + 1}`}
+                    aria-pressed={activeImage === index}
+                    className={`aspect-video overflow-hidden rounded-xl border-2 bg-rose-50 p-1 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${
+                      activeImage === index ? 'border-rose-500' : 'border-rose-100 hover:border-rose-300'
+                    }`}
+                  >
+                    <img src={screenshot.thumbnail || screenshot.src} alt="" className="h-full w-full rounded-lg object-contain" loading="lazy" />
+                  </button>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </motion.div>
     </motion.div>
@@ -367,6 +402,7 @@ const strengths = [
 
 function ExperienceCard({ exp, onClick }) {
   const isInteractive = Boolean(exp.linkType)
+  const isWebApp = exp.linkType === 'external'
   const Card = isInteractive ? motion.button : motion.article
   const actionProps = isInteractive
     ? {
@@ -375,6 +411,35 @@ function ExperienceCard({ exp, onClick }) {
         'aria-label': `${exp.cta?.replace(' →', '') || 'Open details'} for ${exp.company}`,
       }
     : {}
+
+  if (isWebApp) {
+    return (
+      <Card
+        {...actionProps}
+        className="group grid aspect-square w-full grid-rows-[minmax(0,3fr)_minmax(0,2fr)] overflow-hidden rounded-2xl border border-rose-100 bg-white text-left shadow-glass transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+        whileHover={{ y: -5, scale: 1.02 }}
+        transition={{ duration: 0.25 }}
+      >
+        <span className="relative flex min-h-0 items-center justify-center overflow-hidden bg-rose-50 p-3">
+          <img
+            src={exp.thumbnail || exp.image}
+            alt={`${exp.company} application screenshot`}
+            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
+            loading="lazy"
+          />
+          <span className="absolute left-3 top-3 rounded-full border border-white/70 bg-white/90 px-2.5 py-1 text-[10px] font-semibold leading-none text-rose-700 shadow-sm">
+            {exp.badge}
+          </span>
+        </span>
+        <span className="flex min-h-0 flex-col px-4 py-3">
+          <span className="font-display text-lg font-bold leading-tight text-rose-800">{exp.company}</span>
+          <span className="mt-1 font-body text-[10px] font-semibold uppercase tracking-wide text-rose-600">{exp.role}</span>
+          <span className="mt-2 line-clamp-2 font-body text-xs leading-relaxed text-rose-700">{exp.description}</span>
+          <span className="mt-auto pt-2 font-body text-xs font-semibold text-rose-600">{exp.cta}</span>
+        </span>
+      </Card>
+    )
+  }
 
   return (
     <Card

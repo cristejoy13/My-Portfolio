@@ -101,7 +101,6 @@ Purpose: Accurate source material for future resume planning. This is not a fini
 - Role: **Video Editor & Content Creator**
 - Period: **2025 – Present**
 - Website classification: **Startup**
-- Note: **Trademark application in progress**
 - Website: **https://bestofcebu.com/**
 - Portfolio evidence: **5 videos · tap to play**
 - Video IDs shown in the source data:
@@ -275,7 +274,6 @@ These appear to be two pieces of evidence for the same Dean's List recognition, 
 ### Unclear
 
 - Whether Best of Cebu is employment, freelance/client work, a personal business, or a startup founded/co-founded by Criste Joy.
-- What **Trademark application in progress** refers to and whether it belongs in a resume.
 - Whether **5 videos** represents all completed work or only selected portfolio samples.
 - Whether Goddess Plan and FruGal were built independently or with collaborators.
 - Whether **Web App Developer** represents a formal role or a portfolio label for personal projects.

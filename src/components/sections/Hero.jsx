@@ -73,9 +73,7 @@ export default function Hero() {
 
           {/* Description */}
           <p className="font-body text-rose-700 leading-relaxed mb-7 max-w-md text-sm md:text-base">
-            Creative and detail-oriented digital freelancer skilled in graphic design, basic video editing, website design and development, social media support, content scheduling, organization, and recruitment support.
-            <br /><br />
-            I help small businesses create clean visuals, organize online content, improve their web presence, and manage digital tasks — <strong className="font-semibold text-rose-600">efficiently and with care.</strong>
+            I help small businesses and professionals with visual content, websites, social media, and day-to-day digital support — combining creativity, organization, and reliable communication.
           </p>
 
           {/* CTAs */}

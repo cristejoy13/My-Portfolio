@@ -17,7 +17,7 @@
     scroll-behavior: smooth;
   }
   body {
-    @apply bg-blush-50 text-rose-950 font-body;
+    @apply bg-blush-50 text-rose-950 font-body overflow-x-hidden;
   }
   h1, h2, h3, h4 {
     font-family: 'Playfair Display', Georgia, serif;
@@ -44,6 +44,10 @@
   .btn-outline {
     @apply inline-block border-2 border-rose-400 text-rose-600 px-6 py-3 rounded-full
            font-body font-medium hover:bg-rose-50 transition-all duration-300 cursor-pointer;
+  }
+  .btn-primary:focus-visible,
+  .btn-outline:focus-visible {
+    @apply outline-none ring-2 ring-rose-500 ring-offset-2;
   }
   .section-wrapper {
     @apply max-w-6xl mx-auto px-6 py-20;

@@ -64,6 +64,7 @@ export default function Navbar() {
               <a
                 key={link.href}
                 href={link.href}
+                aria-current={isActive ? 'page' : undefined}
                 className={`relative font-body text-sm font-medium pb-1 transition-colors duration-200 ${
                   isActive ? 'text-rose-600' : 'text-rose-400 hover:text-rose-600'
                 }`}

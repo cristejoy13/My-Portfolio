@@ -79,6 +79,49 @@ const ucDocs = [
   },
 ]
 
+const allCertificates = [
+  {
+    title: "Dean's List",
+    note: 'University of Cebu · First Semester 2025–2026',
+    src: `${BASE}certificates/uc-deans-list-official.jpg`,
+  },
+  {
+    title: 'With High Honors',
+    note: 'GWA 95 · Academic Year 2021–2022',
+    src: `${BASE}certificates/informatics-high-honors.jpg`,
+  },
+  {
+    title: 'Best in English',
+    note: 'Academic & Professional Purposes · 2020–2021',
+    src: `${BASE}certificates/informatics-best-english.jpg`,
+  },
+  {
+    title: 'Academic Excellence Award',
+    note: 'Academic Achiever with Honors · 2020–2021',
+    src: `${BASE}certificates/informatics-academic-excellence.jpg`,
+  },
+  {
+    title: 'Best in Empowerment Technologies',
+    note: '2nd Semester · 2020–2021',
+    src: `${BASE}certificates/informatics-empowerment-tech.jpg`,
+  },
+  {
+    title: 'Senior High School Diploma',
+    note: 'Humanities & Social Sciences · July 2022',
+    src: `${BASE}certificates/informatics-diploma.jpg`,
+  },
+  {
+    title: "Dean's List — Printed Record",
+    note: 'University of Cebu · First Semester 2025–2026',
+    src: `${BASE}certificates/uc-deans-list-printed.jpg`,
+  },
+  {
+    title: 'Certificate of Employment',
+    note: 'vCUSTOMER Philippines · Customer Support Experience',
+    src: `${BASE}certificates/vcustomer-coe.jpg`,
+  },
+]
+
 /* ── Reusable cert thumbnail grid ────────────────────────────── */
 function CertGrid({ items, srcKey, onOpen }) {
   return (
@@ -239,6 +282,14 @@ const containerVariants = {
 export default function Education() {
   const { ref, inView } = useInView({ triggerOnce: true, threshold: 0.1 })
   const [openModal, setOpenModal] = useState(null)
+  const [showAllCertificates, setShowAllCertificates] = useState(false)
+  const [certificateLightboxOpen, setCertificateLightboxOpen] = useState(false)
+  const [certificateIndex, setCertificateIndex] = useState(0)
+  const visibleCertificates = showAllCertificates ? allCertificates : allCertificates.slice(0, 3)
+  const certificateSlides = allCertificates.map(certificate => ({
+    src: certificate.src,
+    alt: certificate.title,
+  }))
 
   return (
     <section id="education" className="bg-rose-50 relative">
@@ -272,6 +323,67 @@ export default function Education() {
             />
           ))}
         </motion.div>
+
+        <ScrollReveal className="mt-12">
+          <div className="max-w-5xl mx-auto rounded-3xl border border-rose-100 bg-white/75 p-5 sm:p-6 shadow-glass">
+            <div className="text-center mb-5">
+              <p className="font-body text-[11px] font-semibold uppercase tracking-[0.2em] text-amber-600">
+                Verified recognition
+              </p>
+              <h3 className="mt-1 font-display text-xl font-semibold italic text-rose-700">
+                Selected Awards &amp; Certifications
+              </h3>
+            </div>
+
+            <div className={`grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 ${
+              showAllCertificates ? '' : 'lg:[&>*:first-child]:col-start-2'
+            }`}>
+              {visibleCertificates.map(certificate => {
+                const originalIndex = allCertificates.findIndex(item => item.title === certificate.title)
+                return (
+                  <motion.button
+                    key={certificate.title}
+                    type="button"
+                    onClick={() => {
+                      setCertificateIndex(originalIndex)
+                      setCertificateLightboxOpen(true)
+                    }}
+                    aria-label={`View ${certificate.title}`}
+                    className="group min-w-0 rounded-xl text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+                    whileHover={{ y: -3 }}
+                    transition={{ duration: 0.18 }}
+                  >
+                    <span className="block aspect-[4/3] overflow-hidden rounded-xl border border-rose-100 bg-rose-50">
+                      <img
+                        src={certificate.src}
+                        alt={certificate.title}
+                        className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+                        loading="lazy"
+                      />
+                    </span>
+                    <span className="mt-2 block font-body text-xs font-semibold leading-snug text-rose-700">
+                      {certificate.title}
+                    </span>
+                    <span className="mt-0.5 block font-body text-[10px] leading-snug text-rose-500">
+                      {certificate.note}
+                    </span>
+                  </motion.button>
+                )
+              })}
+            </div>
+
+            <div className="mt-5 text-center">
+              <button
+                type="button"
+                onClick={() => setShowAllCertificates(current => !current)}
+                className="btn-outline px-5 py-2.5 text-sm"
+                aria-expanded={showAllCertificates}
+              >
+                {showAllCertificates ? 'Show Featured Certificates' : 'View All Certificates'}
+              </button>
+            </div>
+          </div>
+        </ScrollReveal>
       </div>
 
       <AnimatePresence>
@@ -280,6 +392,12 @@ export default function Education() {
       <AnimatePresence>
         {openModal === 'uc' && <UCCertsModal onClose={() => setOpenModal(null)} />}
       </AnimatePresence>
+      <PortfolioLightbox
+        open={certificateLightboxOpen}
+        onClose={() => setCertificateLightboxOpen(false)}
+        index={certificateIndex}
+        slides={certificateSlides}
+      />
     </section>
   )
 }

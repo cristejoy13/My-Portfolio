@@ -106,7 +106,7 @@ export default function Contact() {
           <h2 className="section-title mb-3">Let&apos;s Connect</h2>
           <FloralDivider className="mx-auto mb-4" />
           <p className="font-body text-rose-600 text-sm max-w-lg mx-auto">
-            Share what you need, your preferred timeline, and the best way to reach you.
+            Need creative or administrative support? Tell me what you need and your preferred timeline.
           </p>
         </ScrollReveal>
 
@@ -225,7 +225,7 @@ export default function Contact() {
                     <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
                     <button type="submit" disabled={status === 'sending' || !FORM_READY} className="btn-primary w-full text-center disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none">
-                      {status === 'sending' ? 'Sending…' : 'Send Message'}
+                      {status === 'sending' ? 'Sending…' : 'Send Project Inquiry'}
                     </button>
 
                     <div className="min-h-10 text-center" aria-live="polite">

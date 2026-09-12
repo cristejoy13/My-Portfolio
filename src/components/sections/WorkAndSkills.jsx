@@ -120,7 +120,7 @@ function VideoModal({ exp, onClose }) {
                   className="w-full h-full"
                   allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
                   allowFullScreen
-                  title="Best of Cebu video"
+                  title={`Best of Cebu portfolio video ${videos.indexOf(active) + 1}`}
                 />
               </motion.div>
             ) : (
@@ -377,18 +377,11 @@ function SubLabel({ children }) {
   )
 }
 
-const tools = [
-  'Canva',
-  'CapCut',
-  'ChatGPT',
-  'Claude',
-  'VS Code',
-  'Codex',
-  'Google Sheets / Excel',
-  'Facebook',
-  'Instagram',
-  'TikTok',
-  'YouTube',
+const toolGroups = [
+  { label: 'Design & Content', tools: ['Canva', 'CapCut'] },
+  { label: 'AI & Web', tools: ['ChatGPT', 'Claude', 'Codex', 'VS Code'] },
+  { label: 'Productivity', tools: ['Google Sheets', 'Excel'] },
+  { label: 'Social Media', tools: ['Facebook', 'Instagram', 'TikTok', 'YouTube'] },
 ]
 
 const strengths = [
@@ -535,13 +528,13 @@ export default function WorkAndSkills() {
               </p>
             </div>
 
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3">
+            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl mx-auto">
               {recruitmentGraphics.map((graphic, index) => (
                 <motion.button
                   key={graphic.id}
                   type="button"
                   onClick={() => openGraphicDesign(index)}
-                  aria-label={`View full-size ${graphic.alt}`}
+                  aria-label={`View full-size ${graphic.title}`}
                   className="group rounded-xl border border-rose-100 bg-white/80 p-2 shadow-glass focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
                   whileHover={{ y: -3 }}
                   transition={{ duration: 0.2 }}
@@ -555,7 +548,7 @@ export default function WorkAndSkills() {
                     />
                   </span>
                   <span className="mt-2 block font-body text-[10px] font-semibold uppercase tracking-wide text-rose-500">
-                    Recruitment Design {index + 1}
+                    {graphic.title}
                   </span>
                 </motion.button>
               ))}
@@ -570,13 +563,22 @@ export default function WorkAndSkills() {
             <div className="flex flex-col md:flex-row gap-0">
 
               {/* Tools — left */}
-              <div className="flex-1 text-center px-4 pb-6 md:pb-0">
+              <div className="flex-[1.35] text-center px-4 pb-6 md:pb-0">
                 <p className="font-body text-xs font-semibold text-rose-400 uppercase tracking-widest mb-4">🛠 Tools &amp; Software</p>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {tools.map(tool => (
-                    <span key={tool} className="bg-gradient-to-r from-blush-100 to-rose-100 text-rose-700 border border-rose-200 text-xs font-medium px-3 py-1.5 rounded-full font-body">
-                      {tool}
-                    </span>
+                <div className="grid grid-cols-2 gap-x-4 gap-y-4 text-left">
+                  {toolGroups.map(group => (
+                    <div key={group.label}>
+                      <p className="mb-2 font-body text-[10px] font-semibold uppercase tracking-wider text-rose-500">
+                        {group.label}
+                      </p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {group.tools.map(tool => (
+                          <span key={tool} className="bg-gradient-to-r from-blush-100 to-rose-100 text-rose-700 border border-rose-200 text-[11px] font-medium px-2.5 py-1.5 rounded-full font-body">
+                            {tool}
+                          </span>
+                        ))}
+                      </div>
+                    </div>
                   ))}
                 </div>
               </div>

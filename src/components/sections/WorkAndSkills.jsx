@@ -5,7 +5,6 @@ import PortfolioLightbox from '../ui/PortfolioLightbox'
 import FloralDivider from '../../assets/svgs/FloralDivider'
 import useModalFocus from '../../hooks/useModalFocus'
 import { experiences } from '../../data/experienceData'
-import { recruitmentGraphics } from '../../data/graphicDesignData'
 
 /* ── Video Gallery Modal ─────────────────────────────────────── */
 function VideoModal({ exp, onClose }) {
@@ -326,10 +325,10 @@ function ExperienceDetailsModal({ exp, onClose }) {
       <motion.div
         ref={dialogRef}
         tabIndex={-1}
-        className="bg-white rounded-3xl w-full max-w-lg overflow-hidden shadow-2xl"
+        className="bg-white rounded-3xl w-full max-w-2xl max-h-[85dvh] overflow-y-auto shadow-2xl"
         role="dialog"
         aria-modal="true"
-        aria-label={`${exp.company} responsibilities`}
+        aria-label={`${exp.company} recruitment work`}
         initial={{ scale: 0.88, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.88, y: 20 }}
@@ -349,7 +348,7 @@ function ExperienceDetailsModal({ exp, onClose }) {
           <button
             type="button"
             onClick={onClose}
-            aria-label={`Close ${exp.company} responsibilities`}
+            aria-label={`Close ${exp.company} recruitment work`}
             className="absolute top-3 right-3 w-11 h-11 bg-white/20 hover:bg-white/30 rounded-full flex items-center justify-center text-white text-sm transition-colors backdrop-blur-sm"
           >
             ✕
@@ -358,14 +357,41 @@ function ExperienceDetailsModal({ exp, onClose }) {
 
         <div className="p-6">
           <p className="font-body text-rose-700 text-sm leading-relaxed mb-5">{exp.description}</p>
-          <ul className="space-y-3">
-            {exp.responsibilities.map(responsibility => (
-              <li key={responsibility} className="flex gap-3 font-body text-sm leading-relaxed text-rose-700">
-                <span className="mt-2 w-1.5 h-1.5 rounded-full bg-rose-400 flex-shrink-0" aria-hidden="true" />
-                <span>{responsibility}</span>
-              </li>
+          <h4 className="font-display text-xl font-semibold text-rose-800">Recruitment Work Samples</h4>
+          <p className="mt-2 mb-4 font-body text-sm leading-relaxed text-rose-700">
+            Hiring advertisements used to support the CFO candidate search. Select an image to view it full-size in a new tab.
+          </p>
+          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+            {exp.gallery.map(sample => (
+              <a
+                key={sample.id}
+                href={sample.src}
+                target="_blank"
+                rel="noopener noreferrer"
+                aria-label={`View full-size ${sample.title} (opens in a new tab)`}
+                className="rounded-xl border border-rose-100 bg-rose-50/50 p-2 hover:bg-rose-100/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+              >
+                <img src={sample.src} alt={sample.alt} className="aspect-[4/3] w-full object-contain rounded-lg bg-white" loading="lazy" />
+                <span className="mt-2 block font-body text-xs font-semibold text-rose-700">{sample.title}</span>
+              </a>
             ))}
-          </ul>
+          </div>
+          {exp.paymentProof?.length > 0 && (
+            <section className="mt-8 border-t border-rose-100 pt-6" aria-label="Finder’s fee payment proof">
+              <h4 className="font-display text-xl font-semibold text-rose-800">Finder’s Fee Payment Proof</h4>
+              <p className="mt-2 mb-4 font-body text-sm leading-relaxed text-rose-700">
+                Finder’s fee payments received for successful CFO recruitment.
+              </p>
+              <div className="grid grid-cols-2 gap-3 max-w-lg">
+                {exp.paymentProof.map(receipt => (
+                  <figure key={receipt.id} className="min-w-0 rounded-xl border border-rose-100 bg-rose-50/50 p-2">
+                    <img src={receipt.src} alt={receipt.alt} className="w-full h-auto rounded-lg" loading="lazy" />
+                    <figcaption className="mt-2 font-body text-xs font-semibold text-rose-700">{receipt.title}</figcaption>
+                  </figure>
+                ))}
+              </div>
+            </section>
+          )}
         </div>
       </motion.div>
     </motion.div>
@@ -512,11 +538,6 @@ export default function WorkAndSkills() {
     }
   }
 
-  function openGraphicDesign(index) {
-    setLightboxSlides(recruitmentGraphics)
-    setLightboxIndex(index)
-    setLightboxOpen(true)
-  }
 
   return (
     <section id="experience" className="bg-hero-gradient relative">
@@ -553,46 +574,6 @@ export default function WorkAndSkills() {
             </ScrollReveal>
           ))}
         </div>
-
-        <SubLabel>Graphic Design</SubLabel>
-        <ScrollReveal>
-          <div className="max-w-5xl mx-auto mb-12">
-            <div className="text-center mb-5">
-              <h3 className="font-display text-xl font-semibold italic text-rose-700">
-                AI-Assisted Recruitment Campaign Graphics
-              </h3>
-              <p className="font-body text-xs text-rose-600 mt-1">
-                Created for Remote Imaging Consultants
-              </p>
-            </div>
-
-            <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-3 max-w-5xl mx-auto">
-              {recruitmentGraphics.map((graphic, index) => (
-                <motion.button
-                  key={graphic.id}
-                  type="button"
-                  onClick={() => openGraphicDesign(index)}
-                  aria-label={`View full-size ${graphic.title}`}
-                  className="group rounded-xl border border-rose-100 bg-white/80 p-2 shadow-glass focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
-                  whileHover={{ y: -3 }}
-                  transition={{ duration: 0.2 }}
-                >
-                  <span className="flex aspect-[4/3] items-center justify-center overflow-hidden rounded-lg bg-rose-50">
-                    <img
-                      src={graphic.src}
-                      alt={graphic.alt}
-                      className="h-full w-full object-contain"
-                      loading="lazy"
-                    />
-                  </span>
-                  <span className="mt-2 block font-body text-[10px] font-semibold uppercase tracking-wide text-rose-700">
-                    {graphic.title}
-                  </span>
-                </motion.button>
-              ))}
-            </div>
-          </div>
-        </ScrollReveal>
 
         {/* ── Skills & Expertise pills ── */}
         <SubLabel>Tools &amp; Strengths</SubLabel>

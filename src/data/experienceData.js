@@ -1,3 +1,4 @@
+import { recruitmentSamples, recruitmentPayments } from './recruitmentData'
 import bestOfCebuImg from '../assets/best-of-cebu.jpg'
 
 export const experiences = [
@@ -74,6 +75,26 @@ export const experiences = [
         thumbnail: '/portfolio/apps/thumbs/goddess-plan-routine.jpg',
         alt: 'The Goddess Plan routines and reminders screen',
       },
+      {
+        src: '/portfolio/apps/goddess-plan-home-overview.webp',
+        thumbnail: '/portfolio/apps/thumbs/goddess-plan-home-overview.jpg',
+        alt: 'The Goddess Plan home screen and daily plan',
+      },
+      {
+        src: '/portfolio/apps/goddess-plan-meal-calendar.webp',
+        thumbnail: '/portfolio/apps/thumbs/goddess-plan-meal-calendar.jpg',
+        alt: 'The Goddess Plan meal tracking calendar',
+      },
+      {
+        src: '/portfolio/apps/goddess-plan-meal-log.webp',
+        thumbnail: '/portfolio/apps/thumbs/goddess-plan-meal-log.jpg',
+        alt: 'The Goddess Plan meal log and daily tracking',
+      },
+      {
+        src: '/portfolio/apps/goddess-plan-body-care.webp',
+        thumbnail: '/portfolio/apps/thumbs/goddess-plan-body-care.jpg',
+        alt: 'The Goddess Plan body care categories',
+      },
     ],
     gradient: 'from-purple-950/90 via-purple-800/40 to-transparent',
     badge: '💻 Web App',
@@ -101,6 +122,26 @@ export const experiences = [
         thumbnail: '/portfolio/apps/thumbs/frugal-insights.jpg',
         alt: 'FruGal savings goals and spending insights',
       },
+      {
+        src: '/portfolio/apps/frugal-overview-light.webp',
+        thumbnail: '/portfolio/apps/thumbs/frugal-overview-light.jpg',
+        alt: 'FruGal light theme dashboard with net worth and spending summary',
+      },
+      {
+        src: '/portfolio/apps/frugal-insights-light.webp',
+        thumbnail: '/portfolio/apps/thumbs/frugal-insights-light.jpg',
+        alt: 'FruGal light theme savings goals and category spending',
+      },
+      {
+        src: '/portfolio/apps/frugal-overview-dark.webp',
+        thumbnail: '/portfolio/apps/thumbs/frugal-overview-dark.jpg',
+        alt: 'FruGal dark theme dashboard with net worth and spending summary',
+      },
+      {
+        src: '/portfolio/apps/frugal-insights-dark.webp',
+        thumbnail: '/portfolio/apps/thumbs/frugal-insights-dark.jpg',
+        alt: 'FruGal dark theme savings goals and category spending',
+      },
     ],
     gradient: 'from-emerald-950/90 via-emerald-800/40 to-transparent',
     badge: '💰 Finance App',
@@ -113,21 +154,17 @@ export const experiences = [
   {
     id: 2,
     company: 'Remote Imaging Consultants',
-    role: 'Virtual & Administrative Assistant',
+    role: 'Recruitment Support',
     period: '2025',
     image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=600&fit=crop&q=80',
     gradient: 'from-pink-950/90 via-pink-800/40 to-transparent',
-    badge: '🏥 Healthcare VA',
-    note: 'Scheduling · Hiring · Payment Tracking',
+    badge: '🏥 Recruitment',
+    note: 'CFO Recruitment',
     link: null,
     linkType: 'details',
-    cta: 'View responsibilities →',
-    description: 'Provided day-to-day administrative support by keeping the employer’s schedule, tasks, team records, and payment information organized.',
-    responsibilities: [
-      'Organized the employer’s daily schedule, tasks, and reminders.',
-      'Supported the recruitment and hiring of a Filipino CPA, including candidate coordination and participation in interviews.',
-      'Tracked the team’s day and night shifts and calculated the amounts due for payment.',
-      'Prepared organized payment summaries showing team members and amounts due.',
-    ],
+    cta: 'View recruitment work →',
+    description: 'Helped Remote Imaging Consultants find and interview candidates for a Chief Financial Officer (CFO) role. Participated in interviews, asked candidates questions, and supported the selection process until we found the right CFO.',
+    gallery: recruitmentSamples,
+    paymentProof: recruitmentPayments,
   },
 ]

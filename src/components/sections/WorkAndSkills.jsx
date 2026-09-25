@@ -480,18 +480,18 @@ function ExperienceCard({ exp, onClick }) {
       <img
         src={exp.image}
         alt=""
-        className={`w-full h-full object-cover transition-transform duration-500 ${isInteractive ? 'group-hover:scale-105' : ''}`}
+        className={`w-full h-full ${exp.imageFit === 'contain' ? 'object-contain bg-rose-50' : 'object-cover'} transition-transform duration-500 ${isInteractive ? 'group-hover:scale-105' : ''}`}
         loading="lazy"
       />
       <div className={`absolute inset-0 bg-gradient-to-t ${exp.gradient}`} />
 
       <div className="absolute top-3 left-3 right-3 flex items-start justify-between gap-2">
-        <span className="bg-white/20 backdrop-blur-sm text-white text-xs font-semibold px-2.5 py-1 rounded-full border border-white/25 leading-none">
+        <span className={`${exp.imageFit === 'contain' ? 'bg-rose-800' : 'bg-white/20 backdrop-blur-sm border border-white/25'} text-white text-xs font-semibold px-2.5 py-1 rounded-full leading-none`}>
           {exp.badge}
         </span>
         {!exp.hidePeriod && (
           <span className="bg-black/30 backdrop-blur-sm text-white text-xs px-2 py-1 rounded-full leading-none">
-            {exp.period}
+            {exp.cardPeriod || exp.period}
           </span>
         )}
       </div>

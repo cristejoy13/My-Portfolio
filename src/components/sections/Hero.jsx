@@ -67,7 +67,7 @@ export default function Hero() {
 
           {/* Description */}
           <p className="font-body text-rose-700 leading-relaxed mb-7 max-w-md text-sm md:text-base">
-            I help small businesses and professionals with visual content, websites, social media, and day-to-day digital support — combining creativity, organization, and reliable communication.
+            I help small businesses and professionals with visual content, websites, and day-to-day digital support — combining creativity, organization, and reliable communication.
           </p>
 
           {/* CTAs */}

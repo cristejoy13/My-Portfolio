@@ -4,11 +4,10 @@ import FloralCorner from '../../assets/svgs/FloralCorner'
 import aboutPhoto from '../../assets/criste-about.jpg'
 
 const services = [
-  'Graphic & Web Design',
+  'Web Design',
   'Web Support',
-  'Social Media Management',
   'Administrative & Virtual Assistance',
-  'Basic Video Editing',
+  'Video Editing & Content Creation',
   'Recruitment Sourcing & Candidate Tracking',
 ]
 

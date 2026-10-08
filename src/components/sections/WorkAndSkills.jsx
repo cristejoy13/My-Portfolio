@@ -6,6 +6,14 @@ import FloralDivider from '../../assets/svgs/FloralDivider'
 import useModalFocus from '../../hooks/useModalFocus'
 import { experiences } from '../../data/experienceData'
 
+function ResponsibilityList({ items }) {
+  return (
+    <ul className="mt-4 list-disc space-y-2 pl-5 font-body text-sm leading-relaxed text-rose-700 marker:text-rose-400">
+      {items.map(item => <li key={item} className="pl-1">{item}</li>)}
+    </ul>
+  )
+}
+
 /* ── Video Gallery Modal ─────────────────────────────────────── */
 function VideoModal({ exp, onClose }) {
   const [active, setActive] = useState(null)
@@ -107,16 +115,10 @@ function VideoModal({ exp, onClose }) {
               >
                 <div className="mb-5 rounded-2xl border border-rose-100 bg-rose-50/70 p-4">
                   <p className="font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
-                  <ul className="mt-3 space-y-2">
-                    {exp.responsibilities.map(responsibility => (
-                      <li key={responsibility} className="flex gap-2 font-body text-xs leading-relaxed text-rose-600">
-                        <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-rose-400" aria-hidden="true" />
-                        <span>{responsibility}</span>
-                      </li>
-                    ))}
-                  </ul>
+                  <ResponsibilityList items={exp.responsibilities} />
                 </div>
 
+                <h4 className="mb-3 font-display text-lg font-semibold text-rose-800">Video Work</h4>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {visibleVideos.map((id, i) => (
                     <motion.button
@@ -207,7 +209,9 @@ function COECertificate({ exp, onClose }) {
           <h3 className="mt-1 font-display text-xl font-bold italic text-rose-800">vCUSTOMER Philippines</h3>
           <p className="mt-1 font-body text-xs font-semibold text-rose-600">{exp.role} · {exp.period}</p>
           <p className="mt-2 font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
+          <ResponsibilityList items={exp.responsibilities} />
         </div>
+        <p className="border-t border-rose-100 px-6 py-3 font-body text-xs font-semibold uppercase tracking-wider text-rose-600">Certificate of Employment</p>
         <img
           src={coeSrc}
           alt="Certificate of Employment – vCustomer Philippines"
@@ -356,25 +360,28 @@ function ExperienceDetailsModal({ exp, onClose }) {
         </div>
 
         <div className="p-6">
-          <p className="font-body text-rose-700 text-sm leading-relaxed mb-5">{exp.description}</p>
-          <h4 className="font-display text-xl font-semibold text-rose-800">Recruitment Work Samples</h4>
-          <p className="mt-2 mb-4 font-body text-sm leading-relaxed text-rose-700">
-            Hiring advertisements used to support the CFO candidate search. Select an image to view it full-size in a new tab.
-          </p>
-          <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
-            {exp.gallery.map(sample => (
-              <a
-                key={sample.id}
-                href={sample.src}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={`View full-size ${sample.title} (opens in a new tab)`}
-                className="rounded-xl border border-rose-100 bg-rose-50/50 p-2 hover:bg-rose-100/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
-              >
-                <img src={sample.src} alt={sample.alt} className="aspect-[4/3] w-full object-contain rounded-lg bg-white" loading="lazy" />
-                <span className="mt-2 block font-body text-xs font-semibold text-rose-700">{sample.title}</span>
-              </a>
-            ))}
+          <p className="font-body text-rose-700 text-sm leading-relaxed">{exp.description}</p>
+          <ResponsibilityList items={exp.responsibilities} />
+          <div className="mt-6 border-t border-rose-100 pt-5">
+            <h4 className="font-display text-xl font-semibold text-rose-800">Recruitment Work Samples</h4>
+            <p className="mt-2 mb-4 font-body text-sm leading-relaxed text-rose-700">
+              Hiring advertisements used to support the CFO candidate search. Select an image to view it full-size in a new tab.
+            </p>
+            <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
+              {exp.gallery.map(sample => (
+                <a
+                  key={sample.id}
+                  href={sample.src}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`View full-size ${sample.title} (opens in a new tab)`}
+                  className="rounded-xl border border-rose-100 bg-rose-50/50 p-2 hover:bg-rose-100/60 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+                >
+                  <img src={sample.src} alt={sample.alt} className="aspect-[4/3] w-full object-contain rounded-lg bg-white" loading="lazy" />
+                  <span className="mt-2 block font-body text-xs font-semibold text-rose-700">{sample.title}</span>
+                </a>
+              ))}
+            </div>
           </div>
           {exp.paymentProof?.length > 0 && (
             <section className="mt-8 border-t border-rose-100 pt-6" aria-label="Finder’s fee payment proof">
@@ -499,6 +506,9 @@ function ExperienceCard({ exp, onClick }) {
       <div className="absolute bottom-0 left-0 right-0 p-4">
         <h3 className="font-display text-white text-lg font-bold leading-tight">{exp.company}</h3>
         <p className="text-white/80 text-xs mt-1 leading-snug">{exp.role}</p>
+        {exp.cardSummary && (
+          <p className="mt-2 font-body text-xs leading-snug text-white/90">{exp.cardSummary}</p>
+        )}
         {exp.note && (
           <p className="text-amber-200 text-xs italic mt-1">{exp.note}</p>
         )}

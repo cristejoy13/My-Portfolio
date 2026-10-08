@@ -285,6 +285,8 @@ function ExternalPreviewModal({ exp, onClose }) {
             </a>
           </div>
 
+          <ResponsibilityList items={exp.responsibilities} />
+
           {screenshots.length > 1 && (
             <div className="mt-5">
               <p className="mb-2 font-body text-[10px] font-semibold uppercase tracking-widest text-rose-600">

@@ -4,10 +4,10 @@ import FloralCorner from '../../assets/svgs/FloralCorner'
 import aboutPhoto from '../../assets/criste-about.jpg'
 
 const services = [
-  'Website layouts and visual hierarchy',
-  'Website content updates',
-  'Navigation, links, forms, and mobile checks',
-  'Research and creative content support',
+  { title: 'Page layout planning and visual design improvements', description: 'I organize pages so visitors can find information and understand what matters most.' },
+  { title: 'Updating text, images, and page content', description: 'I keep website information clear, current, and consistent with the brand.' },
+  { title: 'Website quality checks and mobile usability testing', description: 'I check links, forms, navigation, and layouts on smaller screens.' },
+  { title: 'Content research, Canva design, and digital asset organization', description: 'I gather details and prepare organized visuals and files for content work.' },
 ]
 
 export default function About() {
@@ -48,8 +48,8 @@ export default function About() {
             <div className="grid sm:grid-cols-2 gap-3">
               {services.map((service, index) => (
                 <div
-                  key={service}
-                  className="min-h-20 rounded-2xl border border-rose-100 bg-gradient-to-br from-white to-blush-50 p-4 shadow-sm flex items-center gap-3"
+                  key={service.title}
+                  className="min-h-28 rounded-2xl border border-rose-100 bg-gradient-to-br from-white to-blush-50 p-4 shadow-sm flex items-start gap-3"
                 >
                   <span
                     className="w-9 h-9 rounded-full bg-rose-100 text-rose-700 flex items-center justify-center text-xs font-semibold flex-shrink-0"
@@ -57,8 +57,9 @@ export default function About() {
                   >
                     {String(index + 1).padStart(2, '0')}
                   </span>
-                  <span className="font-body text-sm font-medium leading-snug text-rose-700">
-                    {service}
+                  <span className="font-body leading-snug text-rose-700">
+                    <span className="block text-sm font-semibold">{service.title}</span>
+                    <span className="mt-1.5 block text-xs leading-relaxed">{service.description}</span>
                   </span>
                 </div>
               ))}

@@ -7,11 +7,15 @@ const studies = {
     intro: 'A clearer picture of money, in one place.',
     summary: 'CashBelle helps a person record income and expenses and see how those choices affect cash, investments, debts, and net worth. I built it first for my own use and designed it so others can create an account with their email address.',
     live: 'https://cashbelle.vercel.app/',
+    cover: '/portfolio/covers/cashbelle.jpg',
     accent: 'emerald',
     problem: 'Money information can end up scattered across notes, accounts, and mental calculations. I wanted a personal view that connects everyday transactions with savings goals, investments, money lent or borrowed, and an overall net-worth picture.',
     audience: 'People who want to keep track of their own finances in one app. I currently use CashBelle myself; it is designed to allow other people to sign up with email. I have not documented feedback from outside users.',
     role: 'I conceived the app, decided what it should help users track, planned its pages and financial summaries, chose the forms, navigation, and visual direction, and reviewed the visible results. I tested interactions and mobile layouts, requested changes, approved updates, and deployed it.',
-    ai: 'AI generated and modified the application code from my instructions. I directed the implementation and checked the app through its interface; I do not independently write or review the source code.',
+    ai: 'AI generated and modified the application code from my instructions. I directed the implementation, reviewed the visible output, and requested changes.',
+    process: 'I mapped the financial information and key screens, chose the layout and navigation, directed AI-generated implementation, then reviewed the interface and requested revisions. I tested selected interactions and mobile layouts before deploying updates.',
+    tools: 'AI-assisted coding tools, VS Code, browser-based interface checks, and Vercel hosting.',
+    outcome: 'A live personal finance app that I use to view income, expenses, investments, debts, net worth, and goals. Email sign-up is available for others; independent user feedback and a second-account test are still to be documented.',
     features: [
       { title: 'Income & expenses', text: 'Record transactions, categorize spending, review a transaction list, and compare money coming in and going out.' },
       { title: 'Dashboard & goals', text: 'See cash, spending by category, monthly and yearly summaries, and progress toward a savings goal.' },
@@ -38,11 +42,15 @@ const studies = {
     intro: 'One welcoming space for plans, progress, and reflection.',
     summary: 'Goddess Plan brings routines, workout planning, meals, goals, and personal notes together. I designed it for people who want to build healthier habits, plan their days, and have a private-feeling place to reflect without judgment.',
     live: 'https://goddess-plan.vercel.app/',
+    cover: '/portfolio/covers/goddess-plan.jpg',
     accent: 'purple',
     problem: 'Daily plans, workouts, food notes, and life goals are often kept in different places. I wanted a flexible home for practical checklists and progress tracking, with room for reflection as well.',
     audience: 'People working toward weight or activity goals, planning routines, and following goals in other parts of life. The diary is intended to feel welcoming; that is a design intention, not a privacy or medical guarantee.',
     role: 'I conceived the idea, planned the features and information, designed the dashboard, page structure, layouts, navigation, and visual direction, and instructed AI to implement them. I reviewed the app’s visible behavior, tested interactions and mobile layouts, requested fixes, approved updates, and deployed it.',
-    ai: 'AI generated and modified the application code from my instructions. I directed the implementation and checked the visible results; I do not independently write or review the source code.',
+    ai: 'AI generated and modified the application code from my instructions. I directed the implementation, reviewed the visible output, and requested changes.',
+    process: 'I planned the routines, wellness features, diary, and navigation; set the page and visual direction; then directed AI-generated implementation. I checked the visible flows, requested fixes, and reviewed updated layouts and interactions.',
+    tools: 'AI-assisted coding tools, VS Code, browser-based interface checks, and Vercel hosting.',
+    outcome: 'A live personal planning app with routines, workouts, meal tracking, goals, and notes. I report that the selected features work; formal calculation examples and broader user feedback are still to be documented.',
     features: [
       { title: 'Daily routines', text: 'Use a daily dashboard and checklists to plan tasks and build a more structured day.' },
       { title: 'Workout planning', text: 'Review a weekly plan with workout and recovery days. The live schedule was updated in October 2026.' },
@@ -101,8 +109,8 @@ export default function CaseStudyPage({ slug }) {
               </div>
             </div>
             <figure className="overflow-hidden rounded-[2rem] border border-rose-100 bg-white p-3 shadow-xl shadow-rose-100/70">
-              <img src={study.screenshots[0].src} alt={study.screenshots[0].alt} className="aspect-[4/3] w-full rounded-3xl object-contain" />
-              <figcaption className="px-3 pb-2 pt-3 text-xs leading-relaxed text-rose-700">{isCash ? 'CashBelle dashboard from my personal use.' : 'Goddess Plan dashboard from an earlier version of the app.'}</figcaption>
+              <img src={study.cover} alt={`${study.title} promotional project cover`} className="aspect-[4/3] w-full rounded-3xl object-cover" />
+              <figcaption className="px-3 pb-2 pt-3 text-xs leading-relaxed text-rose-700">Promotional cover artwork. Actual interface screenshots appear below.</figcaption>
             </figure>
           </div>
         </section>
@@ -121,6 +129,14 @@ export default function CaseStudyPage({ slug }) {
               <StoryCard label="AI's role" title="Code generation" text={study.ai} />
             </div>
             <p className="mt-4 text-sm font-semibold text-rose-700">Independent personal project using AI-assisted development.</p>
+          </section>
+
+          <section aria-labelledby="process-title">
+            <SectionHeading kicker="From idea to launch" title="Process and tools" id="process-title" />
+            <div className="grid gap-5 md:grid-cols-2">
+              <StoryCard label="Process" title="How I worked" text={study.process} />
+              <StoryCard label="Tools used" title="What supported the work" text={study.tools} />
+            </div>
           </section>
 
           <section aria-labelledby="features-title">
@@ -145,6 +161,11 @@ export default function CaseStudyPage({ slug }) {
               <EvidenceCard label="Reported by me" text={study.reported} />
               <EvidenceCard label="Still to verify" text={study.unverified} />
             </div>
+          </section>
+
+          <section aria-labelledby="outcome-title">
+            <SectionHeading kicker="The result" title="Outcome" id="outcome-title" />
+            <StoryCard label="Current state" title="Live personal project" text={study.outcome} />
           </section>
 
           <section aria-labelledby="next-title">

@@ -13,7 +13,7 @@ export default function Footer({ className = '' }) {
           <RoseBud size={16} className="opacity-80" />
         </div>
         <p className="font-body text-rose-200 text-sm mb-5 italic">
-          <span className="whitespace-nowrap">Junior Web Designer</span> 🌸 <span className="whitespace-nowrap">Website &amp; Content Support</span>
+          <span className="whitespace-nowrap">Junior Web Designer</span> | <span className="whitespace-nowrap">Website &amp; Content Support</span>
         </p>
 
         <div className="flex flex-wrap justify-center gap-x-5 gap-y-3 mb-6">

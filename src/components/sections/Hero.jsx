@@ -7,7 +7,7 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="min-h-screen bg-hero-gradient flex items-center relative overflow-hidden"
+      className="min-h-screen lg:min-h-[86svh] bg-hero-gradient flex items-center relative overflow-hidden"
     >
       {/* Decorative corners */}
       <div className="absolute top-0 right-0 opacity-25 pointer-events-none">
@@ -40,7 +40,7 @@ export default function Hero() {
         }}
       />
 
-      <div className="max-w-6xl mx-auto px-6 pt-24 pb-16 grid md:grid-cols-2 gap-12 items-center w-full">
+      <div className="max-w-6xl mx-auto px-6 pt-24 pb-12 lg:pt-28 lg:pb-10 grid md:grid-cols-2 gap-12 items-center w-full">
         {/* — Text column — */}
         <motion.div
           initial={{ opacity: 0, y: 36 }}
@@ -49,7 +49,7 @@ export default function Hero() {
         >
           {/* AI badge */}
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blush-200 to-rose-200 px-4 py-1.5 rounded-full text-sm font-semibold text-rose-800 mb-4 shadow-sm border border-rose-200">
-            🌸 Junior Web Designer · Website Assistant 🌸
+            Junior Web Designer · Website &amp; Content Support
           </div>
 
           {/* Name */}

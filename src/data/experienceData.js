@@ -1,4 +1,4 @@
-import { recruitmentSamples } from './recruitmentData'
+import { recruitmentSamples, recruitmentEvidence } from './recruitmentData'
 import bestOfCebuImg from '../assets/best-of-cebu.jpg'
 
 const appScreenshot = (name, alt) => ({
@@ -20,16 +20,16 @@ export const experiences = [
     link: 'https://bestofcebu.com/',
     linkType: 'videos',
     cta: 'Watch videos →',
-    cardSummary: 'I photograph local places, create videos, and gather details for features.',
+    cardSummary: 'Video production · Content creation · Business research. Created and organized restaurant photography, videos, and feature materials.',
     description: 'I research local places, photograph food and restaurants, create videos, interview owners, and organize details for Best of Cebu features.',
     responsibilities: [
-      'Photograph food and restaurant spaces.',
-      'Record and edit videos for businesses.',
-      'Gather business information for articles.',
-      'Research restaurants and places to review.',
-      'Interview business owners about their businesses.',
-      'Organize photos, videos, receipts, and information by date and place.',
-      'Meet with the CEO to discuss content and tasks for the following week.',
+      'Photographed food and restaurant spaces.',
+      'Recorded and edited videos for businesses.',
+      'Gathered business information for articles.',
+      'Researched restaurants and places to review.',
+      'Interviewed business owners about their businesses.',
+      'Organized photos, videos, receipts, and feature details by date and location.',
+      'Met with the CEO to discuss content plans and next steps.',
     ],
     videos: [
       'Re9dgluG50Q',
@@ -60,13 +60,14 @@ export const experiences = [
     link: null,
     linkType: 'coe',
     cta: 'View certificate →',
-    description: 'I helped customers with online orders, returns, refunds, account details, and delivery questions.',
+    cardSummary: 'Helped customers with orders, returns, refunds, account updates, and delivery concerns.',
+    description: 'I supported customers with online orders, returns, refunds, account updates, and delivery-related concerns.',
     responsibilities: [
-      'Helped customers place online orders using the company’s computer system.',
-      'Helped customers request refunds and returns.',
-      'Updated customers’ email addresses and contact information in the company app.',
+      'Helped customers place online orders using the company’s internal system.',
+      'Assisted with return and refund requests.',
+      'Updated email addresses and contact details.',
       'Helped upset customers feel heard and calmly explained order issues and relevant policies.',
-      'Advised customers about delivery and expected waiting times.',
+      'Informed customers about delivery status and expected waiting times.',
     ],
   },
   {
@@ -76,6 +77,7 @@ export const experiences = [
     role: 'AI-Assisted Web App Creator',
     period: '2026 – Present',
     image: '/portfolio/apps/goddess-home-light.webp',
+    cover: '/portfolio/covers/goddess-plan.jpg',
     thumbnail: '/portfolio/apps/thumbs/goddess-home-light.jpg',
     gallery: [
       appScreenshot('goddess-home-light', 'Goddess Plan daily dashboard in light theme'),
@@ -97,7 +99,7 @@ export const experiences = [
     link: 'https://goddess-plan.vercel.app/',
     linkType: 'external',
     cta: 'Try the app →',
-    description: 'Plan workouts and routines, track meals and calories, follow life goals, and write diary notes. A personal app I designed with AI-generated implementation.',
+    description: 'I planned the flows, features, and visual design for routines, workouts, meals, goals, and diary notes, then directed and tested AI-generated implementation.',
     responsibilities: [
       'Independent personal project developed with AI-generated code under my direction.',
       'I planned the daily flow, dashboard, page structure, navigation, and visual direction.',
@@ -112,6 +114,7 @@ export const experiences = [
     role: 'AI-Assisted Web App Creator',
     period: '2026 – Present',
     image: '/portfolio/apps/cashbelle-dashboard-light.webp',
+    cover: '/portfolio/covers/cashbelle.jpg',
     thumbnail: '/portfolio/apps/thumbs/cashbelle-dashboard-light.jpg',
     gallery: [
       appScreenshot('cashbelle-dashboard-light', 'CashBelle dashboard with net worth and cash in light theme'),
@@ -133,7 +136,7 @@ export const experiences = [
     link: 'https://cashbelle.vercel.app/',
     linkType: 'external',
     cta: 'Try the app →',
-    description: 'Track income, expenses, investments, debts, net worth, and goals. A personal finance app I planned and use, with AI-generated implementation I directed.',
+    description: 'I planned the flows, features, and layout for tracking income, expenses, investments, debts, and net worth, then directed and tested AI-generated implementation.',
     responsibilities: [
       'Independent personal project developed with AI-generated code under my direction.',
       'I planned the finance information, page structure, forms, navigation, and visual direction.',
@@ -149,19 +152,21 @@ export const experiences = [
     image: 'https://images.unsplash.com/photo-1626785774573-4b799315345d?w=800&h=600&fit=crop&q=80',
     gradient: 'from-pink-950/90 via-pink-800/40 to-transparent',
     badge: '🏥 Recruitment',
-    note: 'CFO Recruitment',
+    note: 'CFO Successfully Hired',
     link: null,
     linkType: 'details',
     cta: 'View recruitment work →',
-    description: 'I supported the search for a Chief Financial Officer (CFO), from creating hiring posts to taking part in interviews.',
+    cardSummary: 'Supported CFO recruitment from job posts through outreach, shortlisting, and interviews. The role was filled ahead of the one-month target.',
+    description: 'I supported the search for a Chief Financial Officer (CFO) from hiring posts and candidate outreach through shortlisting and interviews. The role was filled ahead of the planned one-month search target.',
     responsibilities: [
-      'Created simple graphics with hiring information.',
-      'Posted the job opening every day across pages and groups.',
-      'Messaged people who met the job requirements.',
-      'Shortlisted applicants who were best suited to the role.',
+      'Helped create graphics and posts with hiring information.',
+      'Posted the job opening across relevant pages and groups.',
+      'Messaged qualified candidates about the role.',
+      'Shortlisted applicants against the role requirements.',
       'Attended interviews and asked candidates questions.',
       'Identified the candidate within one week; the candidate was hired three days later, ahead of the planned one-month search target.',
     ],
     gallery: recruitmentSamples,
+    evidence: recruitmentEvidence,
   },
 ]

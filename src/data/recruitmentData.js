@@ -32,3 +32,11 @@ export const recruitmentSamples = [
     alt: 'Remote Imaging Consultants CFO and CPA recruitment graphic with an illustrated businesswoman',
   },
 ]
+
+// These files contain only reviewed redacted exports. Never place source screenshots in public/.
+export const recruitmentEvidence = [
+  { id: 'outreach', order: 1, category: 'Candidate Outreach', title: 'I introduced the role', caption: 'My first message described the CFO/Controller role and requirements.', src: `${BASE_URL}portfolio/recruitment/evidence/01-candidate-outreach.jpg`, alt: 'Redacted initial outreach message for the CFO and Controller role' },
+  { id: 'response', order: 2, category: 'Candidate Reply', title: 'We discussed her application', caption: 'The candidate asked to send her résumé. I shared where to send it, and she confirmed that she had emailed it. Names, profile photos, compensation, and email addresses are redacted.', src: `${BASE_URL}portfolio/recruitment/evidence/02-candidate-response.jpg`, alt: 'Redacted candidate reply and résumé exchange' },
+  { id: 'selection', order: 3, category: 'Candidate Selection', title: 'I invited her to the final interview', caption: 'My next message confirmed progression to the final interview with the CEO.', src: `${BASE_URL}portfolio/recruitment/evidence/03-final-interview.jpg`, alt: 'Redacted final interview invitation' },
+  { id: 'hire', order: 4, category: 'Successful Hire', title: 'I welcomed her to the team', caption: 'My congratulatory message followed after the candidate joined the team.', src: `${BASE_URL}portfolio/recruitment/evidence/04-welcome-message.jpg`, alt: 'Redacted post-hire welcome message' },
+]

@@ -106,13 +106,13 @@ export default function Contact() {
           <h2 className="section-title mb-3">Let&apos;s Connect</h2>
           <FloralDivider className="mx-auto mb-4" />
           <p className="font-body text-rose-600 text-sm max-w-lg mx-auto">
-            Need help with website layouts, content updates, or website checks? Tell me what you need and your timeline.
+            I welcome project inquiries, collaboration, work opportunities, and general messages. Tell me what you have in mind.
           </p>
         </ScrollReveal>
 
         <ScrollReveal delay={0.08}>
-          <div className="max-w-5xl mx-auto overflow-hidden rounded-[2rem] border border-rose-100 bg-white shadow-glass-md grid lg:grid-cols-[0.9fr_1.1fr]">
-            <div className="relative bg-gradient-to-br from-rose-900 via-rose-800 to-rose-700 text-white p-7 sm:p-9">
+          <div className="max-w-5xl mx-auto overflow-hidden rounded-[2rem] border border-rose-100 bg-white shadow-glass-md grid grid-cols-1 lg:grid-cols-[0.9fr_1.1fr]">
+            <div className="relative min-w-0 bg-gradient-to-br from-rose-900 via-rose-800 to-rose-700 text-white p-7 sm:p-9">
               <div className="absolute -top-12 -right-10 w-44 h-44 rounded-full bg-white/10 blur-2xl" aria-hidden="true" />
 
               <div className="relative">
@@ -120,7 +120,7 @@ export default function Contact() {
                   Start a conversation
                 </p>
                 <h3 className="font-display text-3xl italic font-semibold leading-tight mb-4">
-                  Have a project in mind?
+                  Let&apos;s start a conversation.
                 </h3>
                 <p className="font-body text-sm leading-relaxed text-rose-100 mb-7">
                   Send the details through the form, or contact me directly using the information below.
@@ -135,7 +135,7 @@ export default function Contact() {
                         </span>
                         <span className="min-w-0">
                           <span className="block text-[11px] uppercase tracking-wider text-rose-300 mb-0.5">{label}</span>
-                          <span className="block text-sm font-medium text-white break-words">{value}</span>
+                          <span className="block text-sm font-medium text-white break-all">{value}</span>
                         </span>
                       </>
                     )
@@ -155,10 +155,19 @@ export default function Contact() {
                     )
                   })}
                 </div>
+                <details className="group mt-6 rounded-2xl border border-white/20 bg-white/10 p-1">
+                  <summary className="flex min-h-11 cursor-pointer list-none items-center justify-between rounded-xl px-4 py-2 text-sm font-semibold text-white marker:hidden focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">
+                    Download Resume <span aria-hidden="true" className="transition-transform group-open:rotate-180">⌄</span>
+                  </summary>
+                  <div className="grid gap-1 border-t border-white/15 p-2">
+                    <a href="/resumes/Criste_Joy_Calosor_Web_Resume.pdf" target="_blank" rel="noopener noreferrer" className="rounded-xl px-3 py-2.5 text-sm text-white hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">Web Design &amp; Website Support Resume ↗</a>
+                    <a href="/resumes/Criste_Joy_Calosor_Admin_Resume.pdf" target="_blank" rel="noopener noreferrer" className="rounded-xl px-3 py-2.5 text-sm text-white hover:bg-white/15 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white">Admin &amp; Recruitment Resume ↗</a>
+                  </div>
+                </details>
               </div>
             </div>
 
-            <div className="p-7 sm:p-9">
+            <div className="min-w-0 p-7 sm:p-9">
               <AnimatePresence mode="wait">
                 {submitted ? (
                   <motion.div
@@ -194,7 +203,7 @@ export default function Contact() {
                     className="space-y-4"
                   >
                     <div>
-                      <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-rose-700 mb-2">Project inquiry</p>
+                      <p className="font-body text-xs font-semibold uppercase tracking-[0.18em] text-rose-700 mb-2">Your message</p>
                       <h3 className="font-display text-2xl italic font-semibold text-rose-800">Tell me how I can help</h3>
                     </div>
 
@@ -225,7 +234,7 @@ export default function Contact() {
                     <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />
 
                     <button type="submit" disabled={status === 'sending' || !FORM_READY} className="btn-primary w-full text-center disabled:opacity-60 disabled:cursor-not-allowed disabled:transform-none">
-                      {status === 'sending' ? 'Sending…' : 'Send Project Inquiry'}
+                      {status === 'sending' ? 'Sending…' : 'Send Message'}
                     </button>
 
                     <div className="min-h-10 text-center" aria-live="polite">

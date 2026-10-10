@@ -113,12 +113,8 @@ function VideoModal({ exp, onClose }) {
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
               >
-                <div className="mb-5 rounded-2xl border border-rose-100 bg-rose-50/70 p-4">
-                  <p className="font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
-                  <ResponsibilityList items={exp.responsibilities} />
-                </div>
-
-                <h4 className="mb-3 font-display text-lg font-semibold text-rose-800">Video Work</h4>
+                <h4 className="mb-1 font-display text-lg font-semibold text-rose-800">Selected video work</h4>
+                <p className="mb-3 text-xs leading-relaxed text-rose-700">A selection of local business and destination features.</p>
                 <div className="grid grid-cols-2 sm:grid-cols-3 gap-3">
                   {visibleVideos.map((id, i) => (
                     <motion.button
@@ -163,6 +159,18 @@ function VideoModal({ exp, onClose }) {
                     </button>
                   </div>
                 )}
+                <div className="mt-7 rounded-2xl border border-rose-100 bg-rose-50/70 p-5">
+                  <h4 className="font-display text-lg font-semibold text-rose-800">Overview</h4>
+                  <p className="mt-2 font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
+                  <h4 className="mt-5 font-display text-lg font-semibold text-rose-800">My responsibilities</h4>
+                  <ResponsibilityList items={exp.responsibilities} />
+                </div>
+                {exp.photography?.length > 0 && <div className="mt-7"><h4 className="font-display text-lg font-semibold text-rose-800">Photography portfolio</h4><div className="mt-3 grid grid-cols-2 gap-3">{exp.photography.map(photo => <figure key={photo.src}><img src={photo.src} alt={photo.alt} loading="lazy" className="w-full rounded-xl" /><figcaption className="mt-1 text-xs text-rose-700">{photo.caption}</figcaption></figure>)}</div></div>}
+                {exp.researchSamples?.length > 0 && <div className="mt-7"><h4 className="font-display text-lg font-semibold text-rose-800">Research &amp; content organization</h4><div className="mt-3 grid gap-3">{exp.researchSamples.map(sample => <a key={sample.src} href={sample.src} target="_blank" rel="noopener noreferrer" className="text-sm font-semibold text-rose-800 underline">{sample.title}</a>)}</div></div>}
+                <div className="mt-6 border-t border-rose-100 pt-5">
+                  <h4 className="font-display text-lg font-semibold text-rose-800">Tools &amp; skills demonstrated</h4>
+                  <p className="mt-2 text-sm leading-relaxed text-rose-700">Photography · Video editing · Business research · Content creation · Information organization · Business communication</p>
+                </div>
               </motion.div>
             )}
           </AnimatePresence>
@@ -363,9 +371,12 @@ function ExperienceDetailsModal({ exp, onClose }) {
 
         <div className="p-6">
           <p className="font-body text-rose-700 text-sm leading-relaxed">{exp.description}</p>
+          <div className="mt-4 rounded-2xl border border-rose-200 bg-rose-50 px-4 py-3 text-sm font-semibold leading-relaxed text-rose-900">
+            Candidate identified within one week; hired three days later, ahead of the planned one-month search target.
+          </div>
           <ResponsibilityList items={exp.responsibilities} />
           <div className="mt-6 border-t border-rose-100 pt-5">
-            <h4 className="font-display text-xl font-semibold text-rose-800">Recruitment Work Samples</h4>
+            <h4 className="font-display text-xl font-semibold text-rose-800">Hiring Advertisements &amp; Graphics</h4>
             <p className="mt-2 mb-4 font-body text-sm leading-relaxed text-rose-700">
               Hiring advertisements used to support the CFO candidate search. Select an image to view it full-size in a new tab.
             </p>
@@ -386,6 +397,20 @@ function ExperienceDetailsModal({ exp, onClose }) {
             </div>
           </div>
 
+          {exp.evidence?.length > 0 && <div className="mt-7 border-t border-rose-100 pt-6">
+            <h4 className="font-display text-xl font-semibold text-rose-800">Recruitment Process &amp; Hiring Evidence</h4>
+            <p className="mt-2 text-sm leading-relaxed text-rose-700">The messages below follow the conversation from my first outreach to the post-hire welcome. Open any image to read it at full size.</p>
+            <ol className="mt-5 space-y-5 border-l-2 border-rose-200 pl-6">
+              {[...exp.evidence].sort((a, b) => a.order - b.order).map(sample => <li key={sample.id} className="relative">
+                <span aria-hidden="true" className="absolute -left-[2.45rem] top-3 flex h-7 w-7 items-center justify-center rounded-full border-2 border-white bg-rose-700 text-xs font-bold text-white shadow-sm">{sample.order}</span>
+                <a href={sample.src} target="_blank" rel="noopener noreferrer" aria-label={`Enlarge step ${sample.order}: ${sample.title} (opens in a new tab)`} className="block overflow-hidden rounded-2xl border border-rose-100 bg-white shadow-sm transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2">
+                  <div className="flex max-h-80 items-center justify-center overflow-hidden bg-rose-50 p-3"><img src={sample.src} alt={sample.alt} loading="lazy" className="max-h-72 w-full object-contain" /></div>
+                  <div className="p-4"><p className="text-xs font-semibold uppercase tracking-wide text-rose-600">Step {sample.order} of {exp.evidence.length} · {sample.category}</p><h5 className="mt-1 font-display text-base font-semibold text-rose-900">{sample.title}</h5><p className="mt-1 text-xs leading-relaxed text-rose-700">{sample.caption}</p></div>
+                </a>
+              </li>)}
+            </ol>
+          </div>}
+
         </div>
       </motion.div>
     </motion.div>
@@ -398,7 +423,7 @@ function SubLabel({ children }) {
     <div className="flex items-center gap-3 mb-4">
       <div className="flex-1 h-px bg-gradient-to-r from-transparent via-rose-200 to-transparent" />
       <span className="font-body text-xs font-semibold tracking-[0.22em] uppercase text-rose-600 whitespace-nowrap">
-        🌸 &nbsp;{children}&nbsp; 🌸
+        {children}
       </span>
       <div className="flex-1 h-px bg-gradient-to-r from-transparent via-rose-200 to-transparent" />
     </div>
@@ -438,21 +463,14 @@ function ExperienceCard({ exp, onClick }) {
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ duration: 0.25 }}
       >
-        <div className="relative flex aspect-[4/3] min-h-0 items-center justify-center overflow-hidden bg-rose-50 p-3">
-          <img
-            src={exp.thumbnail || exp.image}
-            alt={`${exp.company} application screenshot`}
-            className="h-full w-full object-contain transition-transform duration-500 group-hover:scale-[1.02]"
-            loading="lazy"
-          />
-          <span className="absolute left-3 top-3 rounded-full border border-white/70 bg-white/90 px-2.5 py-1 text-[10px] font-semibold leading-none text-rose-700 shadow-sm">
-            {exp.badge}
-          </span>
+        <div className="relative aspect-[4/3] overflow-hidden bg-rose-50">
+          <img src={exp.cover} alt={`${exp.company} promotional cover artwork`} loading="lazy" className="h-full w-full object-cover" />
+          <span className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-rose-800 shadow-sm">Promotional cover · app screens in case study</span>
         </div>
         <div className="flex min-h-0 flex-col px-4 py-3">
           <h3 className="font-display text-lg font-bold leading-tight text-rose-800">{exp.company}</h3>
-          <p className="mt-1 font-body text-[10px] font-semibold uppercase tracking-wide text-rose-600">{exp.role}</p>
-          <p className="mt-2 line-clamp-2 font-body text-xs leading-relaxed text-rose-700">{exp.description}</p>
+          <p className="mt-1 font-body text-xs font-semibold uppercase tracking-wide text-rose-700">{exp.role}</p>
+          <p className="mt-2 font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
           <div className="mt-auto flex flex-wrap gap-2 pt-2 font-body text-[11px] font-semibold">
             <a href={exp.caseStudyHref} className="inline-flex min-h-10 items-center rounded-full border border-rose-300 px-3 text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">View Case Study</a>
             <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center rounded-full bg-rose-700 px-3 text-white hover:bg-rose-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">Open App ↗</a>
@@ -468,14 +486,14 @@ function ExperienceCard({ exp, onClick }) {
       className={`relative w-full rounded-2xl overflow-hidden group shadow-glass text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${
         isInteractive ? 'cursor-pointer' : 'cursor-default'
       }`}
-      style={{ aspectRatio: '4/3' }}
+      style={{ minHeight: '20rem' }}
       whileHover={isInteractive ? { y: -5, scale: 1.02 } : undefined}
       transition={{ duration: 0.25 }}
     >
       <img
         src={exp.image}
         alt=""
-        className={`w-full h-full ${exp.imageFit === 'contain' ? 'object-contain bg-rose-50' : 'object-cover'} transition-transform duration-500 ${isInteractive ? 'group-hover:scale-105' : ''}`}
+        className={`absolute inset-0 w-full h-full ${exp.imageFit === 'contain' ? 'object-contain bg-rose-50' : 'object-cover'} transition-transform duration-500 ${isInteractive ? 'group-hover:scale-105' : ''}`}
         loading="lazy"
       />
       <div className={`absolute inset-0 bg-gradient-to-t ${exp.gradient}`} />
@@ -572,6 +590,7 @@ export default function WorkAndSkills() {
             </ScrollReveal>
           ))}
         </div>
+
 
         {/* ── Skills & Expertise pills ── */}
         <SubLabel>Skills &amp; Tools</SubLabel>

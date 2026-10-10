@@ -5,7 +5,7 @@ export const education = [
     level: 'College',
     period: '2023 – 2026',
     location: 'Banilad, Cebu City',
-    description: 'BS Business Administration · Major in Financial Management · Completed Second Year · Dean\'s Lister',
+    description: 'BS Business Administration, Financial Management coursework · Completed second year in 2026 · Dean\'s List',
     hasCerts: true,
     certType: 'uc',
   },

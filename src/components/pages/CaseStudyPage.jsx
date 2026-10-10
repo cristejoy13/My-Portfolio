@@ -28,7 +28,7 @@ const studies = {
     observed: 'In a read-only review of the signed-in live app, the dashboard displayed income, expenses, net worth, spending categories, and savings progress. The transactions screen showed records and entry controls; the wallet showed loan and repayment controls. The investments screen showed portfolio, capital, and profit-or-loss summaries with individual investment cards and charts.',
     reported: 'I report that the selected features work. I have tested forms, calculations, interactions, and mobile layouts and checked requested fixes. The specific calculation examples, device and browser list, and before-and-after bug examples are still being documented.',
     unverified: 'This review did not create or change financial records, recalculate totals by hand, test a second account, or verify recovery and synchronization across devices.',
-    limitation: 'The account separation, recovery, and share-link behavior still need a documented test with fictional data before I can describe them as verified for other users. Existing screenshots also contain personal financial entries and should be replaced before a public release.',
+    limitation: 'The account separation, recovery, and share-link behavior still need a documented test with fictional data before I can describe them as verified for other users. Future screenshots could use a demo account to avoid showing personal financial entries.',
     lesson: 'A useful finance dashboard needs more than a clear layout: sample transactions, totals, and recovery steps should be checked and explained before relying on it with other people’s data.',
     next: 'Create a fictional-data demo account, check core totals against hand-calculated examples, test a second account and recovery, and capture privacy-safe screenshots.',
   },
@@ -102,7 +102,7 @@ export default function CaseStudyPage({ slug }) {
             </div>
             <figure className="overflow-hidden rounded-[2rem] border border-rose-100 bg-white p-3 shadow-xl shadow-rose-100/70">
               <img src={study.screenshots[0].src} alt={study.screenshots[0].alt} className="aspect-[4/3] w-full rounded-3xl object-contain" />
-              <figcaption className="px-3 pb-2 pt-3 text-xs leading-relaxed text-rose-700">Existing portfolio screenshot. Personal entries are visible in this preview; replacement with fictional data is planned before public release.</figcaption>
+              <figcaption className="px-3 pb-2 pt-3 text-xs leading-relaxed text-rose-700">{isCash ? 'CashBelle dashboard from my personal use.' : 'Goddess Plan dashboard from an earlier version of the app.'}</figcaption>
             </figure>
           </div>
         </section>
@@ -132,7 +132,7 @@ export default function CaseStudyPage({ slug }) {
 
           <section aria-labelledby="screens-title">
             <SectionHeading kicker="Screens from the app" title="A closer look" id="screens-title" />
-            <p className="mb-5 max-w-3xl text-sm leading-7 text-rose-800">These are existing portfolio images. Some contain personal entries and the Goddess Plan workout image shows an earlier schedule. New fictional-data captures are planned before publication.</p>
+            <p className="mb-5 max-w-3xl text-sm leading-7 text-rose-800">{isCash ? 'Screenshots of the dashboard, transactions, investments, and wallet from my use of CashBelle.' : 'These screenshots document an earlier build. The live weekly workout schedule has since been updated.'}</p>
             <div className="grid gap-5 sm:grid-cols-2">
               {study.screenshots.map((shot, index) => <button key={shot.src} type="button" onClick={() => setActiveImage(index)} aria-label={`Enlarge ${shot.title} screenshot`} className="overflow-hidden rounded-3xl border border-rose-100 bg-white p-3 text-left shadow-sm transition-shadow hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"><img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-contain" /><span className="block px-3 py-2 font-display text-lg font-semibold text-rose-800">{shot.title} ↗</span></button>)}
             </div>
@@ -151,8 +151,8 @@ export default function CaseStudyPage({ slug }) {
             <SectionHeading kicker="What comes next" title="Limits, lesson, and next step" id="next-title" />
             <div className="grid gap-4 lg:grid-cols-3">
               <EvidenceCard label="Current limitation" text={study.limitation} />
-              <EvidenceCard label="Draft lesson for review" text={study.lesson} />
-              <EvidenceCard label="Suggested next improvement" text={study.next} />
+              <EvidenceCard label="Lesson from the process" text={study.lesson} />
+              <EvidenceCard label="Next improvement" text={study.next} />
             </div>
           </section>
 

@@ -65,7 +65,7 @@ export const experiences = [
       'Helped customers place online orders using the company’s computer system.',
       'Helped customers request refunds and returns.',
       'Updated customers’ email addresses and contact information in the company app.',
-      'Explained company policies on orders and delivery.',
+      'Helped upset customers feel heard and calmly explained order issues and relevant policies.',
       'Advised customers about delivery and expected waiting times.',
     ],
   },

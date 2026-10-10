@@ -385,22 +385,7 @@ function ExperienceDetailsModal({ exp, onClose }) {
               ))}
             </div>
           </div>
-          {exp.paymentProof?.length > 0 && (
-            <section className="mt-8 border-t border-rose-100 pt-6" aria-label="Finder’s fee payment proof">
-              <h4 className="font-display text-xl font-semibold text-rose-800">Finder’s Fee Payment Proof</h4>
-              <p className="mt-2 mb-4 font-body text-sm leading-relaxed text-rose-700">
-                Finder’s fee payments received for successful CFO recruitment.
-              </p>
-              <div className="grid grid-cols-2 gap-3 max-w-lg">
-                {exp.paymentProof.map(receipt => (
-                  <figure key={receipt.id} className="min-w-0 rounded-xl border border-rose-100 bg-rose-50/50 p-2">
-                    <img src={receipt.src} alt={receipt.alt} className="w-full h-auto rounded-lg" loading="lazy" />
-                    <figcaption className="mt-2 font-body text-xs font-semibold text-rose-700">{receipt.title}</figcaption>
-                  </figure>
-                ))}
-              </div>
-            </section>
-          )}
+
         </div>
       </motion.div>
     </motion.div>
@@ -422,17 +407,16 @@ function SubLabel({ children }) {
 
 const toolGroups = [
   { label: 'Design & Content', tools: ['Canva', 'CapCut'] },
-  { label: 'AI & Web', tools: ['ChatGPT', 'Claude', 'Codex', 'VS Code'] },
-  { label: 'Productivity', tools: ['Google Sheets', 'Excel'] },
+  { label: 'AI-assisted implementation', tools: ['ChatGPT', 'Claude', 'Codex', 'VS Code'] },
   { label: 'Social Media', tools: ['Facebook', 'Instagram', 'TikTok', 'YouTube'] },
 ]
 
 const strengths = [
-  'Creative Thinking',
-  'Client Communication',
-  'Organized',
-  'Active Listening',
-  'Adaptability',
+  'Page layout and visual hierarchy',
+  'Website content updates',
+  'Navigation and form checks',
+  'Mobile layout checks',
+  'Research and content organization',
 ]
 
 function ExperienceCard({ exp, onClick }) {
@@ -449,13 +433,12 @@ function ExperienceCard({ exp, onClick }) {
 
   if (isWebApp) {
     return (
-      <Card
-        {...actionProps}
-        className="group grid aspect-square w-full grid-rows-[minmax(0,3fr)_minmax(0,2fr)] overflow-hidden rounded-2xl border border-rose-100 bg-white text-left shadow-glass transition-shadow focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2"
+      <motion.article
+        className="group grid w-full grid-rows-[auto_1fr] overflow-hidden rounded-2xl border border-rose-100 bg-white text-left shadow-glass transition-shadow"
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ duration: 0.25 }}
       >
-        <span className="relative flex min-h-0 items-center justify-center overflow-hidden bg-rose-50 p-3">
+        <div className="relative flex aspect-[4/3] min-h-0 items-center justify-center overflow-hidden bg-rose-50 p-3">
           <img
             src={exp.thumbnail || exp.image}
             alt={`${exp.company} application screenshot`}
@@ -465,14 +448,17 @@ function ExperienceCard({ exp, onClick }) {
           <span className="absolute left-3 top-3 rounded-full border border-white/70 bg-white/90 px-2.5 py-1 text-[10px] font-semibold leading-none text-rose-700 shadow-sm">
             {exp.badge}
           </span>
-        </span>
-        <span className="flex min-h-0 flex-col px-4 py-3">
-          <span className="font-display text-lg font-bold leading-tight text-rose-800">{exp.company}</span>
-          <span className="mt-1 font-body text-[10px] font-semibold uppercase tracking-wide text-rose-600">{exp.role}</span>
-          <span className="mt-2 line-clamp-2 font-body text-xs leading-relaxed text-rose-700">{exp.description}</span>
-          <span className="mt-auto pt-2 font-body text-xs font-semibold text-rose-600">{exp.cta}</span>
-        </span>
-      </Card>
+        </div>
+        <div className="flex min-h-0 flex-col px-4 py-3">
+          <h3 className="font-display text-lg font-bold leading-tight text-rose-800">{exp.company}</h3>
+          <p className="mt-1 font-body text-[10px] font-semibold uppercase tracking-wide text-rose-600">{exp.role}</p>
+          <p className="mt-2 line-clamp-2 font-body text-xs leading-relaxed text-rose-700">{exp.description}</p>
+          <div className="mt-auto flex flex-wrap gap-2 pt-2 font-body text-[11px] font-semibold">
+            <a href={exp.caseStudyHref} className="inline-flex min-h-10 items-center rounded-full border border-rose-300 px-3 text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">View Case Study</a>
+            <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center rounded-full bg-rose-700 px-3 text-white hover:bg-rose-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">Open App ↗</a>
+          </div>
+        </div>
+      </motion.article>
     )
   }
 
@@ -579,7 +565,7 @@ export default function WorkAndSkills() {
         </div>
 
         <SubLabel>Web Applications</SubLabel>
-        <div className="grid sm:grid-cols-2 gap-4 mb-12 max-w-2xl mx-auto">
+        <div id="web-applications" className="grid sm:grid-cols-2 gap-4 mb-12 max-w-2xl mx-auto scroll-mt-24">
           {webApplications.map((exp, i) => (
             <ScrollReveal key={exp.id} delay={i * 0.08}>
               <ExperienceCard exp={exp} onClick={() => handleExpClick(exp)} />
@@ -588,7 +574,7 @@ export default function WorkAndSkills() {
         </div>
 
         {/* ── Skills & Expertise pills ── */}
-        <SubLabel>Tools &amp; Strengths</SubLabel>
+        <SubLabel>Skills &amp; Tools</SubLabel>
         <ScrollReveal>
           <div className="bg-white/70 backdrop-blur-sm border border-rose-100 rounded-3xl shadow-glass p-6 max-w-3xl mx-auto">
             <div className="flex flex-col md:flex-row gap-0">
@@ -620,7 +606,7 @@ export default function WorkAndSkills() {
 
               {/* Strengths — right */}
               <div className="flex-1 text-center px-4">
-                <p className="font-body text-xs font-semibold text-rose-600 uppercase tracking-widest mb-4">🌸 Strengths</p>
+                <p className="font-body text-xs font-semibold text-rose-600 uppercase tracking-widest mb-4">🌸 Demonstrated skills</p>
                 <div className="flex flex-wrap gap-2 justify-center">
                   {strengths.map(s => (
                     <span key={s} className="bg-gradient-to-r from-blush-100 to-rose-100 text-rose-700 border border-rose-200 text-xs font-medium px-3 py-1.5 rounded-full font-body">

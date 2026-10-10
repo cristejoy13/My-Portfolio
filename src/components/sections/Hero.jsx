@@ -49,7 +49,7 @@ export default function Hero() {
         >
           {/* AI badge */}
           <div className="inline-flex items-center gap-2 bg-gradient-to-r from-blush-200 to-rose-200 px-4 py-1.5 rounded-full text-sm font-semibold text-rose-800 mb-4 shadow-sm border border-rose-200">
-            🌸 Creative Freelancer 🌸
+            🌸 Junior Web Designer · Website Assistant 🌸
           </div>
 
           {/* Name */}
@@ -61,22 +61,22 @@ export default function Hero() {
 
           {/* Tagline */}
           <p className="font-display italic text-lg text-rose-600 mb-5 leading-relaxed">
-            "Your ideas, your content, your daily tasks.<br className="hidden md:block" />
-            Beautifully handled."
+            Website Design &amp; Content Support<br className="hidden md:block" />
+            for Small Businesses
           </p>
 
           {/* Description */}
           <p className="font-body text-rose-700 leading-relaxed mb-7 max-w-md text-sm md:text-base">
-            I help small businesses and professionals with visual content, websites, and day-to-day digital support — combining creativity, organization, and reliable communication.
+            I help small businesses improve page layouts, update website content, and check everyday website interactions.
           </p>
 
           {/* CTAs */}
           <div className="flex flex-wrap gap-3 mb-6">
-            <a href="#experience" className="btn-primary">
-              🌸 View My Work
+            <a href="#web-applications" className="btn-primary">
+              See Website Projects
             </a>
             <a href="#contact" className="btn-outline">
-              Get in Touch
+              Discuss a Project
             </a>
           </div>
 

@@ -4,11 +4,10 @@ import FloralCorner from '../../assets/svgs/FloralCorner'
 import aboutPhoto from '../../assets/criste-about.jpg'
 
 const services = [
-  'Web Design',
-  'Web Support',
-  'Administrative & Virtual Assistance',
-  'Video Editing & Content Creation',
-  'Recruitment Sourcing & Candidate Tracking',
+  'Website layouts and visual hierarchy',
+  'Website content updates',
+  'Navigation, links, forms, and mobile checks',
+  'Research and creative content support',
 ]
 
 export default function About() {
@@ -41,7 +40,7 @@ export default function About() {
           <p className="font-body text-xs font-semibold tracking-[0.25em] uppercase text-amber-700 mb-2">
             🌸 &nbsp;Services&nbsp; 🌸
           </p>
-          <h2 className="section-title mb-3">Ways I Can Help</h2>
+          <h2 className="section-title mb-3">Website &amp; Content Support</h2>
           <FloralDivider className="mb-5" />
 
           {/* Services */}

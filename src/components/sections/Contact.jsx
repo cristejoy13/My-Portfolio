@@ -106,7 +106,7 @@ export default function Contact() {
           <h2 className="section-title mb-3">Let&apos;s Connect</h2>
           <FloralDivider className="mx-auto mb-4" />
           <p className="font-body text-rose-600 text-sm max-w-lg mx-auto">
-            Need creative or administrative support? Tell me what you need and your preferred timeline.
+            Need help with website layouts, content updates, or website checks? Tell me what you need and your timeline.
           </p>
         </ScrollReveal>
 

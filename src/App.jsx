@@ -16,7 +16,7 @@ export default function App() {
     if (path) return
     const id = decodeURIComponent(window.location.hash.slice(1))
     if (!id) return
-    const frame = requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView())
+    const frame = requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'auto' }))
     return () => cancelAnimationFrame(frame)
   }, [path])
   if (path === '/case-studies/cashbelle') return <CaseStudyPage slug="cashbelle" />

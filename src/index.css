@@ -14,7 +14,7 @@
 
 @layer base {
   html {
-    scroll-behavior: smooth;
+    scroll-behavior: auto;
   }
   body {
     @apply bg-blush-50 text-rose-950 font-body overflow-x-hidden;

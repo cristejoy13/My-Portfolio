@@ -5,13 +5,17 @@ import ServiceIcon from '../ui/ServiceIcon'
 
 export default function About() {
   return <>
-    <section className="bg-white">
-      <div className="section-wrapper grid items-center gap-8 py-14 md:grid-cols-[16rem_1fr] md:gap-14">
-        <ScrollReveal><img src={aboutPhoto} alt="Criste Joy Calosor" className="mx-auto aspect-[4/5] w-48 rounded-2xl object-cover shadow-lg md:w-64" loading="lazy" /></ScrollReveal>
-        <ScrollReveal>
-          <p className="text-xs font-semibold uppercase tracking-[.25em] text-amber-700">About me</p>
-          <h2 className="mt-2 font-display text-3xl font-semibold text-rose-900 sm:text-4xl">Creative thinking, practical support.</h2>
-          <p className="mt-4 max-w-2xl text-base leading-8 text-rose-800">I plan and create content, direct digital projects, and help businesses keep their work organized. My portfolio shows the projects and experience behind each service.</p>
+    <section id="about-me" className="scroll-mt-20 bg-white" aria-labelledby="about-me-heading">
+      <div className="section-wrapper mx-auto grid max-w-5xl items-center gap-9 py-14 lg:grid-cols-[22rem_minmax(0,1fr)] lg:gap-12 lg:py-20">
+        <ScrollReveal><img src={aboutPhoto} alt="Criste Joy Calosor" className="mx-auto aspect-[3/4] w-64 rounded-2xl object-cover shadow-lg sm:w-72 lg:mx-0 lg:w-full" loading="lazy" /></ScrollReveal>
+        <ScrollReveal className="mx-auto w-full max-w-[38rem] lg:mx-0">
+          <h2 id="about-me-heading" className="font-display text-[2.625rem] font-semibold uppercase leading-[1.08] tracking-[.025em] text-rose-900 sm:text-[3.25rem]">About Me</h2>
+          <p className="mt-4 font-display text-2xl italic leading-snug text-rose-800 sm:text-[1.75rem]">I See Possibilities Where Others See Problems.</p>
+          <blockquote className="mt-7 space-y-5 text-left text-[.95rem] leading-[1.85] text-rose-800 sm:text-base">
+            <p className="text-pretty">“I'm someone who loves turning ideas into something <span className="box-decoration-clone whitespace-nowrap rounded-[.2em] bg-[#F3DEA5] px-[.12em]">meaningful and useful</span>. I enjoy being creative, exploring technology, learning new things, and finding better ways to get things done. I'm naturally curious and always excited to discover something new.</p>
+            <p className="text-pretty">I see <span className="box-decoration-clone whitespace-nowrap rounded-[.2em] bg-[#F3DEA5] px-[.12em]">problems as opportunities</span> to explore ideas and find practical solutions. Although I've gained experience in different fields, they all have one thing in common: I enjoy understanding how things work, organizing ideas, and finding ways to make things better.</p>
+            <p className="text-pretty">I'm also a visual thinker who loves expressing ideas through colors and visuals rather than words alone. I feel alive when I see colors, and I love <span className="box-decoration-clone whitespace-nowrap rounded-[.2em] bg-[#F3DEA5] px-[.12em]">bringing ideas to life</span>. I'd love to bring that same creativity and passion to your business, creating work that's not only useful, but meaningful and full of life.”</p>
+          </blockquote>
         </ScrollReveal>
       </div>
     </section>

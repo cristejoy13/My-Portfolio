@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import { motion, AnimatePresence } from 'framer-motion'
 import ScrollReveal from '../ui/ScrollReveal'
 import PortfolioLightbox from '../ui/PortfolioLightbox'
@@ -325,8 +325,18 @@ function ExternalPreviewModal({ exp, onClose }) {
 }
 
 /* ── Experience Details Modal ──────────────────────────────── */
-function ExperienceDetailsModal({ exp, onClose }) {
+function ExperienceDetailsModal({ exp, onClose, focusEvidence = false }) {
   const dialogRef = useModalFocus(onClose)
+
+  useEffect(() => {
+    if (!focusEvidence) return
+    const frame = requestAnimationFrame(() => {
+      const dialog = dialogRef.current
+      const evidence = dialog?.querySelector('[data-recruitment-evidence]')
+      if (dialog && evidence) dialog.scrollTop += evidence.getBoundingClientRect().top - dialog.getBoundingClientRect().top - 16
+    })
+    return () => cancelAnimationFrame(frame)
+  }, [dialogRef, focusEvidence])
 
   return (
     <motion.div
@@ -343,7 +353,7 @@ function ExperienceDetailsModal({ exp, onClose }) {
         role="dialog"
         aria-modal="true"
         aria-label={`${exp.company} recruitment work`}
-        initial={{ scale: 0.88, y: 20 }}
+        initial={focusEvidence ? false : { scale: 0.88, y: 20 }}
         animate={{ scale: 1, y: 0 }}
         exit={{ scale: 0.88, y: 20 }}
         transition={{ type: 'spring', stiffness: 300, damping: 26 }}
@@ -397,7 +407,7 @@ function ExperienceDetailsModal({ exp, onClose }) {
             </div>
           </div>
 
-          {exp.evidence?.length > 0 && <div className="mt-7 border-t border-rose-100 pt-6">
+          {exp.evidence?.length > 0 && <div data-recruitment-evidence className="mt-7 border-t border-rose-100 pt-6">
             <h4 className="font-display text-xl font-semibold text-rose-800">Recruitment Process &amp; Hiring Evidence</h4>
             <p className="mt-2 text-sm leading-relaxed text-rose-700">The messages below follow the conversation from my first outreach to the post-hire welcome. Open any image to read it at full size.</p>
             <ol className="mt-5 space-y-5 border-l-2 border-rose-200 pl-6">
@@ -524,6 +534,27 @@ export default function WorkAndSkills() {
   const workExperience = experiences.filter(exp => exp.linkType !== 'external')
   const webApplications = experiences.filter(exp => exp.linkType === 'external')
 
+  useEffect(() => {
+    function openLinkedWork() {
+      if (window.location.hash === '#best-of-cebu-video-work') {
+        setVideoExp(experiences.find(exp => exp.company === 'Best of Cebu'))
+      } else if (window.location.hash === '#recruitment-work') {
+        setDetailsExp(experiences.find(exp => exp.company === 'Remote Imaging Consultants'))
+      }
+    }
+    openLinkedWork()
+    window.addEventListener('hashchange', openLinkedWork)
+    return () => window.removeEventListener('hashchange', openLinkedWork)
+  }, [])
+
+  function closeLinkedWork(setOpen, hash) {
+    setOpen(null)
+    if (window.location.hash === hash) {
+      window.history.replaceState(null, '', '/#experience')
+      document.getElementById('experience')?.scrollIntoView({ behavior: 'auto' })
+    }
+  }
+
   function handleExpClick(exp) {
     if (exp.linkType === 'external') {
       setPreviewExp(exp)
@@ -591,7 +622,7 @@ export default function WorkAndSkills() {
         {videoExp && (
           <VideoModal
             exp={videoExp}
-            onClose={() => setVideoExp(null)}
+            onClose={() => closeLinkedWork(setVideoExp, '#best-of-cebu-video-work')}
           />
         )}
       </AnimatePresence>
@@ -605,7 +636,7 @@ export default function WorkAndSkills() {
       </AnimatePresence>
 
       <AnimatePresence>
-        {detailsExp && <ExperienceDetailsModal exp={detailsExp} onClose={() => setDetailsExp(null)} />}
+        {detailsExp && <ExperienceDetailsModal exp={detailsExp} focusEvidence={window.location.hash === '#recruitment-work'} onClose={() => closeLinkedWork(setDetailsExp, '#recruitment-work')} />}
       </AnimatePresence>
 
       <PortfolioLightbox

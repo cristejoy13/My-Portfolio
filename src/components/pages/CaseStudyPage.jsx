@@ -62,6 +62,7 @@ const studies = {
       { src: '/portfolio/apps/goddess-home-light.webp', title: 'Daily home', alt: 'Goddess Plan daily dashboard and routine cards' },
       { src: '/portfolio/apps/goddess-workout-light.webp', title: 'Workout planning', alt: 'Goddess Plan workout planning screen from an earlier version' },
       { src: '/portfolio/apps/goddess-meal-log-light.webp', title: 'Meal log', alt: 'Goddess Plan food and calorie logging screen' },
+      { src: '/portfolio/apps/goddess-body-care-light.webp', title: 'Body care', alt: 'Goddess Plan Body Care section with categories and a treatment schedule' },
     ],
     observed: 'In a read-only review of the updated live app, I saw daily plan cards, checklist controls, a revised weekly workout schedule, meal and calorie displays, and goal progress screens. I did not change personal entries.',
     reported: 'I report that the selected features work and that I have tested forms, calculations, interactions, and mobile layouts. The specific calculation examples, devices, browsers, and bug-fix examples are still being documented.',

@@ -214,12 +214,12 @@ function COECertificate({ exp, onClose }) {
         </button>
         <div className="px-6 pb-5 pt-6 pr-16">
           <p className="font-body text-xs font-semibold uppercase tracking-widest text-rose-600">Customer Support Experience</p>
-          <h3 className="mt-1 font-display text-xl font-bold italic text-rose-800">vCUSTOMER Philippines</h3>
+          <h3 className="mt-1 font-display text-xl font-bold italic text-rose-800">{exp.company}</h3>
           <p className="mt-1 font-body text-xs font-semibold text-rose-600">{exp.role} · {exp.period}</p>
           <p className="mt-2 font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
           <ResponsibilityList items={exp.responsibilities} />
         </div>
-        <p className="border-t border-rose-100 px-6 py-3 font-body text-xs font-semibold uppercase tracking-wider text-rose-600">Certificate of Employment</p>
+        <p className="border-t border-rose-100 px-6 py-3 font-body text-xs font-semibold uppercase tracking-wider text-rose-600">Certificate of Employment · issued by vCUSTOMER Philippines</p>
         <img
           src={coeSrc}
           alt="Certificate of Employment – vCustomer Philippines"
@@ -430,19 +430,7 @@ function SubLabel({ children }) {
   )
 }
 
-const toolGroups = [
-  { label: 'Design & Content', tools: ['Canva', 'CapCut'] },
-  { label: 'AI-assisted implementation', tools: ['ChatGPT', 'Claude', 'Codex', 'VS Code'] },
-  { label: 'Social Media', tools: ['Facebook', 'Instagram', 'TikTok', 'YouTube'] },
-]
-
-const strengths = [
-  'Page layout and visual hierarchy',
-  'Website content updates',
-  'Navigation and form checks',
-  'Mobile layout checks',
-  'Research and content organization',
-]
+const toolsUsed = ['CapCut', 'Facebook', 'Instagram', 'TikTok', 'YouTube', 'ChatGPT', 'Claude', 'Codex', 'VS Code', 'Salesforce']
 
 function ExperienceCard({ exp, onClick }) {
   const isInteractive = Boolean(exp.linkType)
@@ -465,15 +453,12 @@ function ExperienceCard({ exp, onClick }) {
       >
         <div className="relative aspect-[4/3] overflow-hidden bg-rose-50">
           <img src={exp.cover} alt={`${exp.company} promotional cover artwork`} loading="lazy" className="h-full w-full object-cover" />
-          <span className="absolute bottom-3 left-3 rounded-full bg-white/90 px-3 py-1 text-xs font-semibold text-rose-800 shadow-sm">Promotional cover · app screens in case study</span>
         </div>
         <div className="flex min-h-0 flex-col px-4 py-3">
-          <h3 className="font-display text-lg font-bold leading-tight text-rose-800">{exp.company}</h3>
-          <p className="mt-1 font-body text-xs font-semibold uppercase tracking-wide text-rose-700">{exp.role}</p>
           <p className="mt-2 font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
           <div className="mt-auto flex flex-wrap gap-2 pt-2 font-body text-[11px] font-semibold">
-            <a href={exp.caseStudyHref} className="inline-flex min-h-10 items-center rounded-full border border-rose-300 px-3 text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">View Case Study</a>
-            <a href={exp.link} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center rounded-full bg-rose-700 px-3 text-white hover:bg-rose-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">Open App ↗</a>
+            <a href={exp.caseStudyHref} aria-label={`View ${exp.company} case study`} className="inline-flex min-h-10 items-center rounded-full border border-rose-300 px-3 text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">View Case Study</a>
+            <a href={exp.link} aria-label={`Open ${exp.company} app`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center rounded-full bg-rose-700 px-3 text-white hover:bg-rose-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">Open App ↗</a>
           </div>
         </div>
       </motion.article>
@@ -483,7 +468,8 @@ function ExperienceCard({ exp, onClick }) {
   return (
     <Card
       {...actionProps}
-      className={`relative w-full rounded-2xl overflow-hidden group shadow-glass text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${
+      id={exp.company === 'Best of Cebu' ? 'best-of-cebu' : undefined}
+      className={`relative w-full scroll-mt-28 rounded-2xl overflow-hidden group shadow-glass text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${
         isInteractive ? 'cursor-pointer' : 'cursor-default'
       }`}
       style={{ minHeight: '20rem' }}
@@ -565,7 +551,7 @@ export default function WorkAndSkills() {
           <p className="font-body text-xs font-semibold tracking-[0.25em] uppercase text-amber-700 mb-2">
             🌸 &nbsp;My Journey&nbsp; 🌸
           </p>
-          <h2 className="section-title mb-3">Skills &amp; Experience</h2>
+          <h2 className="section-title mb-3">Portfolio</h2>
           <FloralDivider className="mx-auto mb-3" />
           <p className="font-body text-rose-600 text-sm">
             Explore selected work through videos, certificates, and live web applications.
@@ -573,7 +559,7 @@ export default function WorkAndSkills() {
         </ScrollReveal>
 
         {/* ── Experience cards ── */}
-        <SubLabel>Experience</SubLabel>
+        <SubLabel>Professional Experience</SubLabel>
         <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 max-w-4xl mx-auto">
           {workExperience.map((exp, i) => (
             <ScrollReveal key={exp.id} delay={i * 0.08}>
@@ -582,7 +568,7 @@ export default function WorkAndSkills() {
           ))}
         </div>
 
-        <SubLabel>Web Applications</SubLabel>
+        <SubLabel>Independent Digital Projects</SubLabel>
         <div id="web-applications" className="grid sm:grid-cols-2 gap-4 mb-12 max-w-2xl mx-auto scroll-mt-24">
           {webApplications.map((exp, i) => (
             <ScrollReveal key={exp.id} delay={i * 0.08}>
@@ -592,52 +578,12 @@ export default function WorkAndSkills() {
         </div>
 
 
-        {/* ── Skills & Expertise pills ── */}
-        <SubLabel>Skills &amp; Tools</SubLabel>
-        <ScrollReveal>
-          <div className="bg-white/70 backdrop-blur-sm border border-rose-100 rounded-3xl shadow-glass p-6 max-w-3xl mx-auto">
-            <div className="flex flex-col md:flex-row gap-0">
-
-              {/* Tools — left */}
-              <div className="flex-[1.35] text-center px-4 pb-6 md:pb-0">
-                <p className="font-body text-xs font-semibold text-rose-600 uppercase tracking-widest mb-4">🛠 Tools &amp; Software</p>
-                <div className="grid grid-cols-2 gap-x-4 gap-y-4 text-left">
-                  {toolGroups.map(group => (
-                    <div key={group.label}>
-                      <p className="mb-2 font-body text-[10px] font-semibold uppercase tracking-wider text-rose-700">
-                        {group.label}
-                      </p>
-                      <div className="flex flex-wrap gap-1.5">
-                        {group.tools.map(tool => (
-                          <span key={tool} className="bg-gradient-to-r from-blush-100 to-rose-100 text-rose-700 border border-rose-200 text-[11px] font-medium px-2.5 py-1.5 rounded-full font-body">
-                            {tool}
-                          </span>
-                        ))}
-                      </div>
-                    </div>
-                  ))}
-                </div>
-              </div>
-
-              {/* Divider */}
-              <div className="w-px bg-rose-100 self-stretch hidden md:block mx-2" />
-              <div className="h-px bg-rose-100 w-full md:hidden mb-6" />
-
-              {/* Strengths — right */}
-              <div className="flex-1 text-center px-4">
-                <p className="font-body text-xs font-semibold text-rose-600 uppercase tracking-widest mb-4">🌸 Demonstrated skills</p>
-                <div className="flex flex-wrap gap-2 justify-center">
-                  {strengths.map(s => (
-                    <span key={s} className="bg-gradient-to-r from-blush-100 to-rose-100 text-rose-700 border border-rose-200 text-xs font-medium px-3 py-1.5 rounded-full font-body">
-                      {s}
-                    </span>
-                  ))}
-                </div>
-              </div>
-
-            </div>
-          </div>
-        </ScrollReveal>
+        <section aria-labelledby="tools-heading" className="mx-auto max-w-4xl border-t border-rose-200 pt-8">
+          <h2 id="tools-heading" className="text-center font-display text-3xl font-semibold text-rose-900">Tools</h2>
+          <ul className="mt-6 grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-5">
+            {toolsUsed.map(tool => <li key={tool} className="flex items-center gap-2 text-sm text-rose-800"><span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-xs font-bold text-rose-700 shadow-sm">{tool.slice(0, 1)}</span>{tool}</li>)}
+          </ul>
+        </section>
       </div>
 
       {/* Modals */}

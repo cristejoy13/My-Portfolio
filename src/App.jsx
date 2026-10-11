@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import FloatingPetals from './components/ui/FloatingPetals'
 import Navbar        from './components/layout/Navbar'
 import Footer        from './components/layout/Footer'
@@ -7,11 +8,22 @@ import WorkAndSkills from './components/sections/WorkAndSkills'
 import Education     from './components/sections/Education'
 import Contact       from './components/sections/Contact'
 import CaseStudyPage from './components/pages/CaseStudyPage'
+import ServicePage from './components/pages/ServicePage'
 
 export default function App() {
   const path = window.location.pathname.replace(/\/$/, '')
+  useEffect(() => {
+    if (path) return
+    const id = decodeURIComponent(window.location.hash.slice(1))
+    if (!id) return
+    const frame = requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView())
+    return () => cancelAnimationFrame(frame)
+  }, [path])
   if (path === '/case-studies/cashbelle') return <CaseStudyPage slug="cashbelle" />
   if (path === '/case-studies/goddess-plan') return <CaseStudyPage slug="goddess-plan" />
+  if (path === '/services/creative') return <ServicePage slug="creative" />
+  if (path === '/services/digital') return <ServicePage slug="digital" />
+  if (path === '/services/business') return <ServicePage slug="business" />
 
   return (
     <div className="relative">

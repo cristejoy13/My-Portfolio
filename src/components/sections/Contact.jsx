@@ -93,7 +93,7 @@ export default function Contact() {
   }
 
   return (
-    <section id="contact" className="bg-blush-50 relative overflow-hidden">
+    <section id="contact" className="scroll-mt-20 bg-blush-50 relative overflow-hidden">
       <div className="absolute bottom-0 right-0 opacity-10 pointer-events-none" aria-hidden="true">
         <FloralCorner size={280} />
       </div>

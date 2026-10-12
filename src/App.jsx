@@ -15,7 +15,12 @@ export default function App() {
   useEffect(() => {
     if (path) return
     const id = decodeURIComponent(window.location.hash.slice(1))
-    if (!id) return
+    if (!id || id === 'home') {
+      if (id === 'home') window.history.replaceState(null, '', `${window.location.pathname}${window.location.search}`)
+      window.history.scrollRestoration = 'manual'
+      const frame = requestAnimationFrame(() => window.scrollTo({ top: 0, behavior: 'auto' }))
+      return () => cancelAnimationFrame(frame)
+    }
     const frame = requestAnimationFrame(() => document.getElementById(id)?.scrollIntoView({ behavior: 'auto' }))
     return () => cancelAnimationFrame(frame)
   }, [path])

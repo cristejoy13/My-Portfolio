@@ -3,7 +3,7 @@ import { motion, AnimatePresence } from 'framer-motion'
 import RoseBud from '../../assets/svgs/RoseBud'
 
 const navLinks = [
-  { href: '#home',       label: 'Home' },
+  { href: '/',           id: 'home', label: 'Home' },
   { href: '#about',      label: 'Services' },
   { href: '#experience', label: 'Portfolio' },
   { href: '#education',  label: 'Education' },
@@ -23,7 +23,7 @@ export default function Navbar() {
 
   useEffect(() => {
     const sections = navLinks
-      .map((l) => document.querySelector(l.href))
+      .map((l) => document.getElementById(l.id || l.href.slice(1)))
       .filter(Boolean)
 
     const observer = new IntersectionObserver(
@@ -49,7 +49,7 @@ export default function Navbar() {
       <div className="max-w-6xl mx-auto px-6 flex items-center justify-between">
         {/* Logo */}
         <a
-          href="#home"
+          href="/"
           className="flex items-center gap-2 font-display italic text-rose-700 text-xl font-semibold hover:text-rose-500 transition-colors"
         >
           <RoseBud size={18} />
@@ -59,7 +59,7 @@ export default function Navbar() {
         {/* Desktop nav */}
         <nav className="hidden md:flex items-center gap-7">
           {navLinks.map((link) => {
-            const isActive = activeSection === link.href.slice(1)
+            const isActive = activeSection === (link.id || link.href.slice(1))
             return (
               <a
                 key={link.href}
@@ -120,7 +120,7 @@ export default function Navbar() {
             className="md:hidden overflow-hidden bg-white/95 backdrop-blur-lg border-t border-rose-100"
           >
             {navLinks.map((link) => {
-              const isActive = activeSection === link.href.slice(1)
+              const isActive = activeSection === (link.id || link.href.slice(1))
               return (
                 <a
                   key={link.href}

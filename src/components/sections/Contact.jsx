@@ -7,6 +7,7 @@ import { PHONE_DISPLAY, PHONE_HREF, EMAIL, EMAIL_HREF, LOCATION } from '../../da
 
 const FORMSPREE_URL = import.meta.env.VITE_FORMSPREE_URL
 const FORM_READY = Boolean(FORMSPREE_URL)
+const MAX_MESSAGE_LENGTH = 10000
 
 const contactInfo = [
   {
@@ -226,9 +227,9 @@ export default function Contact() {
                     <div>
                       <div className="flex items-center justify-between gap-3 mb-1.5">
                         <label htmlFor="contact-message" className="font-body text-xs font-semibold text-rose-600">Message</label>
-                        <span className="font-body text-[11px] text-rose-600">{form.message.length}/2000</span>
+                        <span className="font-body text-[11px] text-rose-600">{form.message.length}/{MAX_MESSAGE_LENGTH.toLocaleString()}</span>
                       </div>
-                      <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} placeholder="Share the project, timeline, and support you need." rows={6} minLength={10} maxLength={2000} className={`${inputClass} resize-y min-h-36`} required />
+                      <textarea id="contact-message" name="message" value={form.message} onChange={handleChange} placeholder="Share the project, timeline, and support you need." rows={6} minLength={10} maxLength={MAX_MESSAGE_LENGTH} className={`${inputClass} resize-y min-h-36`} required />
                     </div>
 
                     <input type="text" name="_gotcha" className="hidden" tabIndex={-1} autoComplete="off" aria-hidden="true" />

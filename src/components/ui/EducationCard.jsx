@@ -27,7 +27,7 @@ export default function EducationCard({ school, level, period, location, descrip
     <Card
       {...actionProps}
       variants={cardVariants}
-      className={`glass-card w-full p-6 relative overflow-hidden transition-shadow duration-300 group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${onClick ? 'cursor-pointer hover:shadow-gold' : 'hover:shadow-glass-md'}`}
+      className={`glass-card flex h-full w-full flex-col items-start justify-start p-6 relative overflow-hidden transition-shadow duration-300 group text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${onClick ? 'cursor-pointer hover:shadow-gold' : 'hover:shadow-glass-md'}`}
     >
       {/* Decorative corner */}
       <div className="absolute -top-4 -right-4 opacity-20 group-hover:opacity-30 transition-opacity duration-300 pointer-events-none">
@@ -42,7 +42,7 @@ export default function EducationCard({ school, level, period, location, descrip
       </span>
 
       {/* School name */}
-      <h3 className="font-display text-xl font-semibold text-rose-800 italic leading-snug mb-2">
+      <h3 className="font-display text-xl font-semibold text-rose-800 italic leading-snug mb-2 sm:min-h-[3.5rem]">
         {school}
       </h3>
 

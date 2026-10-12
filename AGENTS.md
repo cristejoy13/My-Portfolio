@@ -23,3 +23,11 @@ Default behavior:
 - Run `npm run build` before handing off code changes whenever possible.
 - Never overwrite user content, portfolio copy, or assets without calling it out.
 - Avoid repeating the same message or service across multiple sections. If a proposed addition seems redundant or weakens the portfolio, explain the tradeoff and ask the user before including it.
+
+Change safety for every portfolio update:
+
+- Record the requested scope and current behavior before editing. Change only files needed for that request; do not rewrite unrelated sections, copy, assets, routes, or integrations.
+- Review the diff before release and remove unrelated edits. Keep existing user work and untracked files out of commits.
+- Verify the changed behavior in a local browser preview, then smoke-check the nearby behavior and the main navigation, portfolio links, and contact path that could be affected.
+- A successful build or HTTP response does not prove an outside service delivered its result. For contact forms, check the submission destination and notification inbox when access is available; state clearly when an end-to-end check is still missing.
+- Follow the preview-before-release approval gate: give the user a working preview, wait for explicit approval, then commit, push, or deploy. After release, check the live behavior and report any unverified part.

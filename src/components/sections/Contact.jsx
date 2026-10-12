@@ -185,9 +185,10 @@ export default function Contact() {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
                       </svg>
                     </div>
-                    <h3 className="font-display text-2xl italic text-rose-800 mb-2">Message sent</h3>
+                    <h3 className="font-display text-2xl italic text-rose-800 mb-2">Message submitted</h3>
                     <p className="font-body text-rose-600 text-sm leading-relaxed max-w-sm mb-6">
-                      Thank you for reaching out. I can reply directly to the email address you provided.
+                      Thank you for reaching out. Your message was accepted by the contact form. If you need to make sure it reaches me, please email me directly at{' '}
+                      <a href={EMAIL_HREF} className="font-semibold underline underline-offset-2">{EMAIL}</a>.
                     </p>
                     <button type="button" onClick={handleReset} className="btn-outline">
                       Send another message

@@ -440,7 +440,61 @@ function SubLabel({ children }) {
   )
 }
 
-const toolsUsed = ['CapCut', 'Facebook', 'Instagram', 'TikTok', 'YouTube', 'ChatGPT', 'Claude', 'Codex', 'VS Code', 'Salesforce']
+const toolGroups = [
+  { title: 'AI Tools', tools: ['ChatGPT', 'Claude', 'Codex'] },
+  { title: 'Content Creation', tools: ['CapCut', 'Facebook', 'Instagram', 'TikTok', 'YouTube'] },
+  { title: 'Development', tools: ['VS Code'] },
+  { title: 'CRM & Support', tools: ['Salesforce'] },
+]
+
+const toolLogos = {
+  ChatGPT: '/tool-logos/chatgpt.svg',
+  Claude: '/tool-logos/claude.svg',
+  Codex: '/tool-logos/codex.svg',
+  CapCut: '/tool-logos/capcut.svg',
+  Facebook: '/tool-logos/facebook.svg',
+  Instagram: '/tool-logos/instagram-gradient.svg',
+  TikTok: '/tool-logos/tiktok.svg',
+  YouTube: '/tool-logos/youtube.svg',
+  'VS Code': '/tool-logos/vscode.svg',
+  Salesforce: '/tool-logos/salesforce.svg',
+}
+
+function ToolGroup({ group }) {
+  return <div className="flex flex-col items-center">
+    <h3 className="font-body text-[9px] font-semibold uppercase tracking-[0.12em] text-rose-700">{group.title}</h3>
+    <ul className="mt-1 flex justify-center gap-1.5">
+      {group.tools.map(tool => (
+        <li key={tool} className="flex h-[52px] w-[46px] flex-col items-center justify-center rounded-lg border border-rose-100 bg-white">
+          <img src={toolLogos[tool]} alt="" loading="lazy" className="h-6 w-6 object-contain" />
+          <span className="mt-1 font-body text-[8px] leading-[10px] text-rose-800">{tool}</span>
+        </li>
+      ))}
+    </ul>
+  </div>
+}
+
+const businessSupportSamples = [
+  {
+    role: 'Administrative VA',
+    topic: 'Email Management and Inbox Organization',
+    cover: '/business-support/admin-va.png',
+    href: '/projects/admin-va-email-management/',
+  },
+  {
+    role: 'Marketing VA',
+    topic: 'Email Newsletter',
+    cover: '/business-support/marketing-va.png',
+    href: '/projects/email-newsletter/',
+  },
+]
+
+function BusinessSupportCard({ sample }) {
+  return <a href={sample.href} aria-label={`View ${sample.role} case study: ${sample.topic}`} className="group flex h-[193px] flex-col overflow-hidden rounded-xl border border-rose-100 bg-white shadow-sm transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-600 focus-visible:ring-offset-2">
+    <img src={sample.cover} alt={`${sample.role}: ${sample.topic}`} loading="lazy" className="h-[148px] w-full object-cover" />
+    <span aria-hidden="true" className="flex flex-1 items-center justify-center border-t border-rose-100 font-body text-[10px] font-semibold text-rose-800 group-hover:text-rose-600">View Case Study <span className="ml-1">→</span></span>
+  </a>
+}
 
 function ExperienceCard({ exp, onClick }) {
   const isInteractive = Boolean(exp.linkType)
@@ -457,18 +511,18 @@ function ExperienceCard({ exp, onClick }) {
   if (isWebApp) {
     return (
       <motion.article
-        className="group grid w-full grid-rows-[auto_1fr] overflow-hidden rounded-2xl border border-rose-100 bg-white text-left shadow-glass transition-shadow"
+        className="group grid h-[296px] w-full grid-rows-[auto_1fr] overflow-hidden rounded-2xl border border-rose-100 bg-white text-left shadow-glass transition-shadow"
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ duration: 0.25 }}
       >
-        <div className="relative aspect-[4/3] overflow-hidden bg-rose-50">
+        <div className="relative aspect-video overflow-hidden bg-rose-50">
           <img src={exp.cover} alt={`${exp.company} promotional cover artwork`} loading="lazy" className="h-full w-full object-cover" />
         </div>
-        <div className="flex min-h-0 flex-col px-4 py-3">
-          <p className="mt-2 font-body text-sm leading-relaxed text-rose-700">{exp.description}</p>
-          <div className="mt-auto flex flex-wrap gap-2 pt-2 font-body text-[11px] font-semibold">
-            <a href={exp.caseStudyHref} aria-label={`View ${exp.company} case study`} className="inline-flex min-h-10 items-center rounded-full border border-rose-300 px-3 text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">View Case Study</a>
-            <a href={exp.link} aria-label={`Open ${exp.company} app`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center rounded-full bg-rose-700 px-3 text-white hover:bg-rose-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">Open App ↗</a>
+        <div className="flex min-h-0 flex-col px-4 py-2">
+          <p className="mt-1 font-body text-xs leading-4 text-rose-700">{exp.description}</p>
+          <div className="mt-auto flex flex-wrap gap-1.5 pt-1 font-body text-[10px] font-semibold">
+            <a href={exp.caseStudyHref} aria-label={`View ${exp.company} case study`} className="inline-flex min-h-10 items-center whitespace-nowrap rounded-full border border-rose-300 px-2 text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">View Case Study</a>
+            <a href={exp.link} aria-label={`Open ${exp.company} app`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center whitespace-nowrap rounded-full bg-rose-700 px-2 text-white hover:bg-rose-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">Open App ↗</a>
           </div>
         </div>
       </motion.article>
@@ -479,10 +533,9 @@ function ExperienceCard({ exp, onClick }) {
     <Card
       {...actionProps}
       id={exp.company === 'Best of Cebu' ? 'best-of-cebu' : undefined}
-      className={`relative w-full scroll-mt-28 rounded-2xl overflow-hidden group shadow-glass text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${
+      className={`relative block h-[312px] w-full scroll-mt-28 overflow-hidden rounded-2xl border border-rose-100 bg-rose-50 text-left shadow-glass group focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500 focus-visible:ring-offset-2 ${
         isInteractive ? 'cursor-pointer' : 'cursor-default'
       }`}
-      style={{ minHeight: '20rem' }}
       whileHover={isInteractive ? { y: -5, scale: 1.02 } : undefined}
       transition={{ duration: 0.25 }}
     >
@@ -591,7 +644,7 @@ export default function WorkAndSkills() {
 
         {/* ── Experience cards ── */}
         <SubLabel>Professional Experience</SubLabel>
-        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-4 mb-10 max-w-4xl mx-auto">
+        <div className="mx-auto mb-10 grid max-w-[872px] gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {workExperience.map((exp, i) => (
             <ScrollReveal key={exp.id} delay={i * 0.08}>
               <ExperienceCard exp={exp} onClick={() => handleExpClick(exp)} />
@@ -600,20 +653,37 @@ export default function WorkAndSkills() {
         </div>
 
         <SubLabel>Independent Digital Projects</SubLabel>
-        <div id="web-applications" className="grid sm:grid-cols-2 gap-4 mb-12 max-w-2xl mx-auto scroll-mt-24">
+        <div id="web-applications" className="mx-auto mb-12 grid max-w-[496px] gap-4 scroll-mt-24 sm:grid-cols-2">
           {webApplications.map((exp, i) => (
-            <ScrollReveal key={exp.id} delay={i * 0.08}>
+            <ScrollReveal key={exp.id} delay={i * 0.08} className="mx-auto w-full max-w-[240px] sm:max-w-none">
               <ExperienceCard exp={exp} onClick={() => handleExpClick(exp)} />
             </ScrollReveal>
           ))}
         </div>
 
+        <section id="administrative-support-samples" aria-label="Business Support Samples" className="scroll-mt-32">
+          <SubLabel>Business Support Samples</SubLabel>
+          <p className="mb-4 text-center text-xs text-rose-700">Practical work samples demonstrating administrative and marketing support.</p>
+          <div className="mx-auto mb-12 grid max-w-[386px] gap-4 sm:grid-cols-2">
+            {businessSupportSamples.map(sample => <ScrollReveal key={sample.href} className="mx-auto w-full max-w-[185px]"><BusinessSupportCard sample={sample} /></ScrollReveal>)}
+          </div>
+        </section>
 
-        <section aria-labelledby="tools-heading" className="mx-auto max-w-4xl border-t border-rose-200 pt-8">
-          <h2 id="tools-heading" className="text-center font-display text-3xl font-semibold text-rose-900">Tools</h2>
-          <ul className="mt-6 grid grid-cols-2 gap-x-5 gap-y-4 sm:grid-cols-5">
-            {toolsUsed.map(tool => <li key={tool} className="flex items-center gap-2 text-sm text-rose-800"><span aria-hidden="true" className="flex h-7 w-7 shrink-0 items-center justify-center rounded-full bg-white text-xs font-bold text-rose-700 shadow-sm">{tool.slice(0, 1)}</span>{tool}</li>)}
-          </ul>
+
+        <section id="tools-platforms" aria-labelledby="tools-heading" className="mx-auto max-w-[1080px] scroll-mt-24 border-t border-rose-200 pt-8">
+          <h2 id="tools-heading" className="text-center font-display text-3xl font-semibold text-rose-900">Tools &amp; Platforms</h2>
+          <div className="mx-auto mt-5 w-fit max-w-full rounded-2xl border border-rose-200 bg-white/45 p-3">
+            <div className="space-y-3">
+              {toolGroups.slice(0, 2).map(group => (
+                <ToolGroup key={group.title} group={group} />
+              ))}
+              <div className="flex justify-center gap-8">
+                {toolGroups.slice(2).map(group => (
+                  <ToolGroup key={group.title} group={group} />
+                ))}
+              </div>
+            </div>
+          </div>
         </section>
       </div>
 

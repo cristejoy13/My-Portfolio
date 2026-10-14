@@ -63,6 +63,13 @@ export default function ServicePage({ slug }) {
             <div className="mt-7 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">{[recruitmentEvidence[0], recruitmentEvidence[2], recruitmentEvidence[3]].filter(Boolean).map(sample => <EvidenceImage key={sample.id} src={sample.src} alt={sample.alt} caption={sample.title} onOpen={setLightbox} />)}<EvidenceImage src="/certificates/vcustomer-coe.jpg" alt="vCUSTOMER Philippines certificate of employment" caption="Customer support employment certificate" onOpen={setLightbox} /></div>
             <p className="mt-6 max-w-3xl text-sm leading-7 text-rose-800">I also handled inbound customer calls, order concerns, refunds, escalations, and case notes for the Target retail account at Tech Mahindra (vCUSTOMER Philippines). My Best of Cebu work included research and organizing business information.</p>
             <a href="/#recruitment-work" className={`${linkClass} mt-5 border border-rose-300 text-rose-800 hover:bg-rose-50`}>View professional experience and recruitment samples →</a>
+            <div className="mt-10 border-t border-rose-200 pt-8">
+              <p className="text-xs font-semibold uppercase tracking-[.2em] text-amber-700">Relevant Work Samples</p>
+              <div className="mt-5 grid gap-4 sm:grid-cols-2">
+                <article className="rounded-xl border border-rose-100 bg-[#fffafc] p-5"><h3 className="font-display text-xl font-semibold text-rose-900">Email Management &amp; Inbox Organization</h3><p className="mt-2 text-sm leading-6 text-rose-800">Five simulated email scenarios and an inbox organization system.</p><a href="/projects/admin-va-email-management/" className={`${linkClass} mt-3 border border-rose-300 text-rose-800 hover:bg-white`}>View Work Sample →</a></article>
+                <article className="rounded-xl border border-rose-100 bg-[#fffafc] p-5"><h3 className="font-display text-xl font-semibold text-rose-900">Email Newsletter — New Service Announcement</h3><p className="mt-2 text-sm leading-6 text-rose-800">A simulated service newsletter with clear benefits and a consultation call to action.</p><a href="/projects/email-newsletter/" className={`${linkClass} mt-3 border border-rose-300 text-rose-800 hover:bg-white`}>View Work Sample →</a></article>
+              </div>
+            </div>
           </>}
         </div>
       </section>

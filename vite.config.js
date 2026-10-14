@@ -14,6 +14,8 @@ export default defineConfig({
         creativeServices: resolve(import.meta.dirname, 'services/creative/index.html'),
         digitalServices: resolve(import.meta.dirname, 'services/digital/index.html'),
         businessServices: resolve(import.meta.dirname, 'services/business/index.html'),
+        adminVaEmailManagement: resolve(import.meta.dirname, 'projects/admin-va-email-management/index.html'),
+        emailNewsletter: resolve(import.meta.dirname, 'projects/email-newsletter/index.html'),
       },
     },
   },

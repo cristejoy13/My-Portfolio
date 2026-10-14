@@ -9,6 +9,8 @@ import Education     from './components/sections/Education'
 import Contact       from './components/sections/Contact'
 import CaseStudyPage from './components/pages/CaseStudyPage'
 import ServicePage from './components/pages/ServicePage'
+import AdminVaCaseStudyPage from './components/pages/AdminVaCaseStudyPage'
+import EmailNewsletterCaseStudyPage from './components/pages/EmailNewsletterCaseStudyPage'
 
 export default function App() {
   const path = window.location.pathname.replace(/\/$/, '')
@@ -29,6 +31,8 @@ export default function App() {
   if (path === '/services/creative') return <ServicePage slug="creative" />
   if (path === '/services/digital') return <ServicePage slug="digital" />
   if (path === '/services/business') return <ServicePage slug="business" />
+  if (path === '/projects/admin-va-email-management') return <AdminVaCaseStudyPage />
+  if (path === '/projects/email-newsletter') return <EmailNewsletterCaseStudyPage />
 
   return (
     <div className="relative">

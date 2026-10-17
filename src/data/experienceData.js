@@ -81,7 +81,7 @@ export const experiences = [
     role: 'AI-Assisted Web App Creator',
     period: '2026 – Present',
     image: '/portfolio/apps/goddess-home-light.webp',
-    cover: '/portfolio/covers/goddess-plan-2026.jpg?v=20261018',
+    cover: '/portfolio/covers/goddess-plan-2026.jpg?v=20261018-2',
     thumbnail: '/portfolio/apps/thumbs/goddess-home-light.jpg',
     gallery: [
       appScreenshot('goddess-home-light', 'Goddessed daily dashboard in light theme'),

@@ -42,7 +42,7 @@ const studies = {
     intro: 'One welcoming space for plans, progress, and reflection.',
     summary: 'Goddessed brings routines, workout planning, meals, goals, and personal notes together. I designed it for people who want to build healthier habits, plan their days, and have a private-feeling place to reflect without judgment.',
     live: 'https://goddess-plan.vercel.app/',
-    cover: '/portfolio/covers/goddess-plan-2026.jpg?v=20261018',
+    cover: '/portfolio/covers/goddess-plan-2026.jpg?v=20261018-2',
     accent: 'purple',
     problem: 'Daily plans, workouts, food notes, and life goals are often kept in different places. I wanted a flexible home for practical checklists and progress tracking, with room for reflection as well.',
     audience: 'People working toward weight or activity goals, planning routines, and following goals in other parts of life. The diary is intended to feel welcoming; that is a design intention, not a privacy or medical guarantee.',
@@ -139,6 +139,21 @@ export default function CaseStudyPage({ slug }) {
               <StoryCard label="Tools used" title="What supported the work" text={study.tools} />
             </div>
           </section>
+
+          {!isCash && <section aria-labelledby="evolution-title">
+            <SectionHeading kicker="Then and now" title="From Goddess Plan to Goddessed" id="evolution-title" />
+            <p className="mb-6 max-w-3xl text-sm leading-7 text-rose-800">These promotional covers show how the project name and featured screens changed. They illustrate the visual direction; the app screenshots below document an earlier build.</p>
+            <div className="grid gap-5 md:grid-cols-2">
+              <figure className="overflow-hidden rounded-3xl border border-rose-100 bg-white p-3 shadow-sm">
+                <img src="/portfolio/covers/goddess-plan-before.jpg" alt="Earlier Goddess Plan promotional artwork with daily planning and a meals screen" loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover" />
+                <figcaption className="px-3 pb-3 pt-4"><h3 className="font-display text-2xl font-semibold text-rose-900">Before · Goddess Plan</h3><p className="mt-2 text-sm leading-7 text-rose-800">The earlier cover paired a daily planning view with meals and nutrition.</p></figcaption>
+              </figure>
+              <figure className="overflow-hidden rounded-3xl border border-rose-100 bg-white p-3 shadow-sm">
+                <img src={study.cover} alt="Updated Goddessed promotional artwork with a daily plan and Challenges screen" loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover" />
+                <figcaption className="px-3 pb-3 pt-4"><h3 className="font-display text-2xl font-semibold text-rose-900">Now · Goddessed</h3><p className="mt-2 text-sm leading-7 text-rose-800">The updated cover leads with the new name and highlights challenge cards for nutrition, movement, and meditation.</p></figcaption>
+              </figure>
+            </div>
+          </section>}
 
           <section aria-labelledby="features-title">
             <SectionHeading kicker="The experience" title="Selected features" id="features-title" />

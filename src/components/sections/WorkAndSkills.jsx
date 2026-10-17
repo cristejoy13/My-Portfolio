@@ -511,18 +511,19 @@ function ExperienceCard({ exp, onClick }) {
   if (isWebApp) {
     return (
       <motion.article
-        className="group grid h-[296px] w-full grid-rows-[auto_1fr] overflow-hidden rounded-2xl border border-rose-100 bg-white text-left shadow-glass transition-shadow"
+        className="group grid h-full w-full grid-rows-[auto_1fr] overflow-hidden rounded-2xl border border-rose-100 bg-white text-left shadow-glass transition-shadow"
         whileHover={{ y: -5, scale: 1.02 }}
         transition={{ duration: 0.25 }}
       >
-        <div className="relative aspect-video overflow-hidden bg-rose-50">
+        <div className="relative aspect-[4/3] overflow-hidden bg-rose-50">
           <img src={exp.cover} alt={`${exp.company} promotional cover artwork`} loading="lazy" className="h-full w-full object-cover" />
         </div>
-        <div className="flex min-h-0 flex-col px-4 py-2">
-          <p className="mt-1 font-body text-xs leading-4 text-rose-700">{exp.description}</p>
-          <div className="mt-auto flex flex-wrap gap-1.5 pt-1 font-body text-[10px] font-semibold">
-            <a href={exp.caseStudyHref} aria-label={`View ${exp.company} case study`} className="inline-flex min-h-10 items-center whitespace-nowrap rounded-full border border-rose-300 px-2 text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">View Case Study</a>
-            <a href={exp.link} aria-label={`Open ${exp.company} app`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center whitespace-nowrap rounded-full bg-rose-700 px-2 text-white hover:bg-rose-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">Open App ↗</a>
+        <div className="flex flex-col px-5 pb-5 pt-4">
+          <h3 className="font-display text-2xl font-semibold leading-tight text-rose-900">{exp.company}</h3>
+          <p className="mt-2 font-body text-sm leading-6 text-rose-700">{exp.description}</p>
+          <div className="mt-auto flex flex-wrap gap-2 pt-5 font-body text-xs font-semibold">
+            <a href={exp.caseStudyHref} aria-label={`View ${exp.company} case study`} className="inline-flex min-h-10 items-center whitespace-nowrap rounded-full border border-rose-300 px-3 text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">View Case Study</a>
+            <a href={exp.link} aria-label={`Open ${exp.company} app`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center whitespace-nowrap rounded-full bg-rose-700 px-3 text-white hover:bg-rose-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">Open App ↗</a>
           </div>
         </div>
       </motion.article>
@@ -653,9 +654,9 @@ export default function WorkAndSkills() {
         </div>
 
         <SubLabel>Independent Digital Projects</SubLabel>
-        <div id="web-applications" className="mx-auto mb-12 grid max-w-[496px] gap-4 scroll-mt-24 sm:grid-cols-2">
+        <div id="web-applications" className="mx-auto mb-12 grid max-w-[760px] gap-6 scroll-mt-24 sm:grid-cols-2">
           {webApplications.map((exp, i) => (
-            <ScrollReveal key={exp.id} delay={i * 0.08} className="mx-auto w-full max-w-[240px] sm:max-w-none">
+            <ScrollReveal key={exp.id} delay={i * 0.08} className="mx-auto w-full max-w-[360px] sm:max-w-none">
               <ExperienceCard exp={exp} onClick={() => handleExpClick(exp)} />
             </ScrollReveal>
           ))}

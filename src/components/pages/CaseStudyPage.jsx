@@ -7,7 +7,7 @@ const studies = {
     intro: 'A clearer picture of money, in one place.',
     summary: 'CashBelle helps a person record income and expenses and see how those choices affect cash, investments, debts, and net worth. I built it first for my own use and designed it so others can create an account with their email address.',
     live: 'https://cashbelle.vercel.app/',
-    cover: '/portfolio/covers/cashbelle-2026.jpg?v=20261017',
+    cover: '/portfolio/covers/cashbelle-2026.jpg?v=20261018',
     accent: 'emerald',
     problem: 'Money information can end up scattered across notes, accounts, and mental calculations. I wanted a personal view that connects everyday transactions with savings goals, investments, money lent or borrowed, and an overall net-worth picture.',
     audience: 'People who want to keep track of their own finances in one app. I currently use CashBelle myself; it is designed to allow other people to sign up with email. I have not documented feedback from outside users.',

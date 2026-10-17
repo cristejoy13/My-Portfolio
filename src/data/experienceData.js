@@ -119,7 +119,7 @@ export const experiences = [
     role: 'AI-Assisted Web App Creator',
     period: '2026 – Present',
     image: '/portfolio/apps/cashbelle-dashboard-light.webp',
-    cover: '/portfolio/covers/cashbelle-2026.jpg?v=20261017',
+    cover: '/portfolio/covers/cashbelle-2026.jpg?v=20261018',
     thumbnail: '/portfolio/apps/thumbs/cashbelle-dashboard-light.jpg',
     gallery: [
       appScreenshot('cashbelle-dashboard-light', 'CashBelle dashboard with net worth and cash in light theme'),

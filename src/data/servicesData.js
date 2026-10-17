@@ -22,7 +22,7 @@ export const serviceCategories = [
     homeSubtitle: 'Websites & Apps',
     subtitle: 'Websites & Online Projects',
     description: 'I help businesses plan, organize, update, and improve their websites and digital experiences.',
-    experience: 'Explore CashBelle and Goddess Plan to see how I plan and test AI-assisted projects.',
+    experience: 'Explore CashBelle and Goddessed to see how I plan and test AI-assisted projects.',
     experienceHref: '#web-applications',
     services: [
       { title: 'Website Design & Layout Planning', description: 'Planning page structures, layouts, and visual hierarchy.' },

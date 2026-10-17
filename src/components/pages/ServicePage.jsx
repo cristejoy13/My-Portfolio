@@ -25,7 +25,7 @@ export default function ServicePage({ slug }) {
   if (!category) return null
   const bestOfCebu = experiences.find(item => item.company === 'Best of Cebu')
   const cashbelle = experiences.find(item => item.company === 'CashBelle')
-  const goddess = experiences.find(item => item.company === 'Goddess Plan')
+  const goddess = experiences.find(item => item.company === 'Goddessed')
 
   return <div className="min-h-screen bg-[#fffafc] font-body text-rose-950">
     <header className="border-b border-rose-100 bg-white/90">

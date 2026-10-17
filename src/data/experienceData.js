@@ -81,7 +81,7 @@ export const experiences = [
     role: 'AI-Assisted Web App Creator',
     period: '2026 – Present',
     image: '/portfolio/apps/goddess-home-light.webp',
-    cover: '/portfolio/covers/goddess-plan-2026.jpg',
+    cover: '/portfolio/covers/goddess-plan-2026.jpg?v=20261017',
     thumbnail: '/portfolio/apps/thumbs/goddess-home-light.jpg',
     gallery: [
       appScreenshot('goddess-home-light', 'Goddess Plan daily dashboard in light theme'),
@@ -119,7 +119,7 @@ export const experiences = [
     role: 'AI-Assisted Web App Creator',
     period: '2026 – Present',
     image: '/portfolio/apps/cashbelle-dashboard-light.webp',
-    cover: '/portfolio/covers/cashbelle-2026.jpg',
+    cover: '/portfolio/covers/cashbelle-2026.jpg?v=20261017',
     thumbnail: '/portfolio/apps/thumbs/cashbelle-dashboard-light.jpg',
     gallery: [
       appScreenshot('cashbelle-dashboard-light', 'CashBelle dashboard with net worth and cash in light theme'),

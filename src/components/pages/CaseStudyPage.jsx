@@ -64,12 +64,24 @@ const studies = {
       { src: '/portfolio/apps/goddess-meal-log-light.webp', title: 'Meal log', alt: 'Earlier Goddess Plan food and calorie logging screen' },
       { src: '/portfolio/apps/goddess-body-care-light.webp', title: 'Body care', alt: 'Earlier Goddess Plan Body Care section with categories and a treatment schedule' },
     ],
+    nowScreenshots: [
+      { src: '/portfolio/apps/goddessed-home.webp', title: 'New home', alt: 'Goddessed home with updated identity, weekly dates, and a daily workout image' },
+      { src: '/portfolio/apps/goddessed-daily-plan.webp', title: 'Daily plan', alt: 'Goddessed daily checklist and progress display' },
+      { src: '/portfolio/apps/goddessed-home-badges.webp', title: 'Home details', alt: 'Goddessed home with three circular badges and closing message' },
+      { src: '/portfolio/apps/goddessed-food-guide.webp', title: 'Food guide', alt: 'Goddessed food guide displayed in an app dialog' },
+      { src: '/portfolio/apps/goddessed-meals-calendar.webp', title: 'Meals calendar', alt: 'Goddessed Meals calendar with daily entries' },
+      { src: '/portfolio/apps/goddessed-meal-log.webp', title: 'Meal log', alt: 'Goddessed meal entries with calories and nutrient summaries' },
+      { src: '/portfolio/apps/goddessed-goal-weight.webp', title: 'Goals and weight', alt: 'Goddessed weekly calorie goal, weight entry, and calorie summary' },
+      { src: '/portfolio/apps/goddessed-meal-ideas.webp', title: 'Breakfast', alt: 'Goddessed breakfast screen with a meal image and nutrition overview' },
+      { src: '/portfolio/apps/goddessed-nutrition.webp', title: 'Nutrition and meal ideas', alt: 'Goddessed breakfast nutrition chart and meal idea cards' },
+      { src: '/portfolio/apps/goddessed-body-care.webp', title: 'Body care', alt: 'Goddessed Body Care categories and morning treatment schedule' },
+    ],
     observed: 'In a read-only review of the updated live app, I saw daily plan cards, checklist controls, a revised weekly workout schedule, meal and calorie displays, and goal progress screens. I did not change personal entries.',
     reported: 'I report that the selected features work and that I have tested forms, calculations, interactions, and mobile layouts. The specific calculation examples, devices, browsers, and bug-fix examples are still being documented.',
     unverified: 'This review did not recalculate nutrition figures, test data recovery or multi-device sync, or verify privacy of diary entries. The workout screenshot below predates the latest schedule update.',
     limitation: 'Most entries are designed to live in this browser unless a sync option is used. Recovery and sync have not yet been demonstrated for this case study; clearing browser data could put unsynced entries at risk.',
     lesson: 'A calm interface can make a complex routine easier to follow, but personal tracking also needs clear explanations of where entries are saved and how they can be recovered.',
-    next: 'Test saving and recovery with fictional entries, verify selected calculations with hand-checked examples, and replace the older workout screenshot with one from the current version.',
+    next: 'Test saving and recovery with fictional entries, verify selected calculations with hand-checked examples, and document the current workout schedule alongside the earlier version.',
   },
 }
 
@@ -80,6 +92,7 @@ export default function CaseStudyPage({ slug }) {
   const [activeImage, setActiveImage] = useState(null)
   if (!study) return null
   const isCash = study.accent === 'emerald'
+  const galleryShots = [...study.screenshots, ...(study.nowScreenshots || [])]
   const wash = isCash ? 'from-emerald-50 via-white to-rose-50' : 'from-violet-50 via-white to-rose-50'
   const badge = isCash ? 'border-emerald-200 bg-emerald-50 text-emerald-900' : 'border-violet-200 bg-violet-50 text-violet-900'
 
@@ -148,13 +161,13 @@ export default function CaseStudyPage({ slug }) {
             </div>
           </section>
 
-          <section aria-labelledby="screens-title">
+          {isCash && <section aria-labelledby="screens-title">
             <SectionHeading kicker="Screens from the app" title="A closer look" id="screens-title" />
-            <p className="mb-5 max-w-3xl text-sm leading-7 text-rose-800">{isCash ? 'Screenshots of the dashboard, transactions, investments, and wallet from my use of CashBelle.' : 'These screenshots document an earlier build. The live weekly workout schedule has since been updated.'}</p>
+            <p className="mb-5 max-w-3xl text-sm leading-7 text-rose-800">Screenshots of the dashboard, transactions, investments, and wallet from my use of CashBelle.</p>
             <div className="grid gap-5 sm:grid-cols-2">
-              {study.screenshots.map((shot, index) => <button key={shot.src} type="button" onClick={() => setActiveImage(index)} aria-label={`Enlarge ${shot.title} screenshot`} className="overflow-hidden rounded-3xl border border-rose-100 bg-white p-3 text-left shadow-sm transition-shadow hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"><img src={shot.src} alt={shot.alt} loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-contain" /><span className="block px-3 py-2 font-display text-lg font-semibold text-rose-800">{shot.title} ↗</span></button>)}
+              {study.screenshots.map((shot, index) => <ScreenshotCard key={shot.src} shot={shot} onClick={() => setActiveImage(index)} />)}
             </div>
-          </section>
+          </section>}
 
           <section aria-labelledby="tests-title">
             <SectionHeading kicker="Evidence and scope" title="What has been tested" id="tests-title" />
@@ -180,17 +193,15 @@ export default function CaseStudyPage({ slug }) {
           </section>
 
           {!isCash && <section aria-labelledby="evolution-title">
-            <SectionHeading kicker="Then and now" title="From Goddess Plan to Goddessed" id="evolution-title" />
-            <p className="mb-6 max-w-3xl text-sm leading-7 text-rose-800">These promotional covers show how the project name and featured screens changed. They illustrate the visual direction; the app screenshots above document an earlier build.</p>
-            <div className="grid gap-5 md:grid-cols-2">
-              <figure className="overflow-hidden rounded-3xl border border-rose-100 bg-white p-3 shadow-sm">
-                <img src="/portfolio/covers/goddess-plan-before.jpg" alt="Earlier Goddess Plan promotional artwork with daily planning and a meals screen" loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover" />
-                <figcaption className="px-3 pb-3 pt-4"><h3 className="font-display text-2xl font-semibold text-rose-900">Before · Goddess Plan</h3><p className="mt-2 text-sm leading-7 text-rose-800">The earlier cover paired a daily planning view with meals and nutrition.</p></figcaption>
-              </figure>
-              <figure className="overflow-hidden rounded-3xl border border-rose-100 bg-white p-3 shadow-sm">
-                <img src={study.cover} alt="Updated Goddessed promotional artwork with a daily plan and Challenges screen" loading="lazy" className="aspect-[4/3] w-full rounded-2xl object-cover" />
-                <figcaption className="px-3 pb-3 pt-4"><h3 className="font-display text-2xl font-semibold text-rose-900">Now · Goddessed</h3><p className="mt-2 text-sm leading-7 text-rose-800">The updated cover leads with the new name and highlights challenge cards for nutrition, movement, and meditation.</p></figcaption>
-              </figure>
+            <SectionHeading kicker="Then and now · A closer look" title="From Goddess Plan to Goddessed" id="evolution-title" />
+            <p className="mb-8 max-w-3xl text-sm leading-7 text-rose-800">Goddess Plan began with daily planning, workouts, meals, and body care. Goddessed brings those screens into a refreshed design with a new name, daily checklist, meal and nutrition views, and an updated body-care page.</p>
+            <h3 className="mb-4 font-display text-2xl font-semibold text-rose-900">Then · Goddess Plan</h3>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {study.screenshots.map((shot, index) => <ScreenshotCard key={shot.src} shot={shot} onClick={() => setActiveImage(index)} />)}
+            </div>
+            <h3 className="mb-4 mt-10 font-display text-2xl font-semibold text-rose-900">Now · Goddessed</h3>
+            <div className="grid gap-5 sm:grid-cols-2">
+              {study.nowScreenshots.map((shot, index) => <ScreenshotCard key={shot.src} shot={shot} onClick={() => setActiveImage(study.screenshots.length + index)} />)}
             </div>
           </section>}
 
@@ -203,11 +214,12 @@ export default function CaseStudyPage({ slug }) {
       </main>
 
       <footer className="border-t border-rose-100 bg-white px-5 py-6 text-center text-xs text-rose-700">© Criste Joy Calosor · Independent personal project using AI-assisted development</footer>
-      {activeImage !== null && <div role="dialog" aria-modal="true" aria-label={`${study.screenshots[activeImage].title} screenshot`} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4" onClick={() => setActiveImage(null)}><div className="relative max-h-full max-w-5xl" onClick={event => event.stopPropagation()}><button type="button" onClick={() => setActiveImage(null)} aria-label="Close screenshot" className="absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-rose-900">✕</button><img src={study.screenshots[activeImage].src} alt={study.screenshots[activeImage].alt} className="max-h-[85vh] w-auto rounded-xl object-contain" /></div></div>}
+      {activeImage !== null && <div role="dialog" aria-modal="true" aria-label={`${galleryShots[activeImage].title} screenshot`} className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-4" onClick={() => setActiveImage(null)}><div className="relative max-h-full max-w-5xl" onClick={event => event.stopPropagation()}><button type="button" onClick={() => setActiveImage(null)} aria-label="Close screenshot" className="absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full bg-white text-rose-900">✕</button><img src={galleryShots[activeImage].src} alt={galleryShots[activeImage].alt} className="max-h-[85vh] w-auto rounded-xl object-contain" /></div></div>}
     </div>
   )
 }
 
 function SectionHeading({ kicker, title, id }) { return <div className="mb-6"><p className="text-xs font-semibold uppercase tracking-[.22em] text-rose-600">{kicker}</p><h2 id={id} className="mt-2 font-display text-3xl font-semibold italic text-rose-900 sm:text-4xl">{title}</h2></div> }
+function ScreenshotCard({ shot, onClick }) { return <button type="button" onClick={onClick} aria-label={`Enlarge ${shot.title} screenshot`} className="overflow-hidden rounded-3xl border border-rose-100 bg-white p-3 text-left shadow-sm transition-shadow hover:shadow-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500"><img src={shot.src} alt={shot.alt} loading="lazy" className={`${shot.src.includes('/goddessed-') ? 'aspect-[3/4]' : 'aspect-[4/3]'} w-full rounded-2xl object-contain`} /><span className="block px-3 py-2 font-display text-lg font-semibold text-rose-800">{shot.title} ↗</span></button> }
 function StoryCard({ label, title, text }) { return <article className="rounded-3xl border border-rose-100 bg-white p-7 shadow-sm"><p className="text-xs font-semibold uppercase tracking-[.18em] text-rose-600">{label}</p><h3 className="mt-3 text-2xl font-semibold text-rose-900">{title}</h3><p className="mt-4 text-sm leading-8 text-rose-800">{text}</p></article> }
 function EvidenceCard({ label, text }) { return <article className="rounded-3xl border border-rose-100 bg-rose-50/60 p-6"><h3 className="text-lg font-semibold text-rose-900">{label}</h3><p className="mt-3 text-sm leading-7 text-rose-800">{text}</p></article> }

@@ -519,8 +519,7 @@ function ExperienceCard({ exp, onClick }) {
           <img src={exp.cover} alt={`${exp.company} promotional cover artwork`} loading="lazy" className="h-full w-full object-cover" />
         </div>
         <div className="flex flex-col px-5 pb-5 pt-4">
-          <h3 className="font-display text-2xl font-semibold leading-tight text-rose-900">{exp.company}</h3>
-          <p className="mt-2 font-body text-sm leading-6 text-rose-700">{exp.description}</p>
+          <p className="font-body text-sm leading-6 text-rose-700">{exp.description}</p>
           <div className="mt-auto flex flex-wrap gap-2 pt-5 font-body text-xs font-semibold">
             <a href={exp.caseStudyHref} aria-label={`View ${exp.company} case study`} className="inline-flex min-h-10 items-center whitespace-nowrap rounded-full border border-rose-300 px-3 text-rose-800 hover:bg-rose-50 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">View Case Study</a>
             <a href={exp.link} aria-label={`Open ${exp.company} app`} target="_blank" rel="noopener noreferrer" className="inline-flex min-h-10 items-center whitespace-nowrap rounded-full bg-rose-700 px-3 text-white hover:bg-rose-800 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-rose-500">Open App ↗</a>
